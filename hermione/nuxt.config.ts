@@ -9,7 +9,8 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    'dayjs-nuxt'
   ], 
   tailwindcss: {
     configPath: 'tailwindchurro.config',
@@ -20,12 +21,13 @@ export default defineNuxtConfig({
     viewer: true,
   },
   ui: {
-    icons: ['fa6-solid']
+    icons: ['fa6-solid'],
   },
   css: [
     '@/assets/main.css',
   ],
   alias: {
-    '@ll-interfaces': path.resolve(__dirname, '../interfaces')
+    '@ll-interfaces': path.resolve(__dirname, '../interfaces'),
+    '@ll-fetchers': path.resolve(__dirname, '../fetchers'),
   },
 })

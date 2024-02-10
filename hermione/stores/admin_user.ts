@@ -1,42 +1,95 @@
 import { defineStore } from 'pinia'
-//import type { IProfileResponse } from '~/interfaces/IProfileResponse';
-//import type { ILLApiError } from '~/interfaces/ILLApiError';
-//import { apiFetcher } from "@/server/utils/llApiFetcher";
+import type { IApiResponse } from '@ll-interfaces/IApiResponses';
+import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
+import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
+import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
+import type { IUserInfo } from '@ll-interfaces/IUserInfo';
 //import type { IApiResponse } from '~/interfaces/IApiResponses';
 
-export const useProfileStore = defineStore('userStore', {
+export const userAdminStore = defineStore('userAdminStore', {
   state: () => ({
     count: 0 as number,
     error_code: null as number | null,
+    error_code_user: null as number | null,
     //profile: {} as IProfileResponse,
-    loaded: false as boolean,
+    is_working: false as boolean,
     is_subdomain: false as boolean,
     code: null as string | null,
+    token_verified: false as boolean,
+    token_confirmed: false as boolean,
   }),
   getters: {
-    
+    isWorking: (state) => {
+      return state.is_working;
+    },
+    isErrored: (state) => {
+      return state.error_code !== null;
+    },
+    lastError: (state) => {
+      return state.error_code;
+    },
+    lastUserError: (state) => {
+      return state.error_code_user;
+    },
   },
   actions: {
-    async fetch() {
+    async verifyUserToken() {
+      if (!this.token_verified) {
+        this.error_code_user = null;
+        try {
+          const response = await adminApiFetcher.get<IUserInfo>(`auth/user/info`);
+          
+          if (response.code) {
+            const error: ILLApiError<IApiResponse<IUserInfo>> = new Error(`${response.code}`);
+            error.response = response;
+            throw error;
+
+          }
+
+          this.token_confirmed = true;
+          
+        } catch (error: any) {
+          console.log('error', error.response);
+
+          if (error.response) {
+            this.error_code_user = error.response.code
+          } else {
+            this.error_code_user = 500
+          }
+
+          this.is_working = false
+        }
+        
+        this.token_verified = true
+        
+      }
+
+      return this.token_confirmed;
+    },
+    async login(email: string, password: string) {
       this.error_code = null
-      this.loaded = false
+      this.is_working = true
 
       try {
-        const response = await apiFetcher.get<IProfileResponse>(`profile/code/${this.code}`);
-
+        const response = await internalApiFetcher.post<ILoginResponse>(`auth/login`, {
+          email, 
+          password
+        });
+        
         if (response.code) {
-          const error: ILLApiError<IApiResponse<IProfileResponse>> = new Error(`${response.code}`);
+          const error: ILLApiError<IApiResponse<ILoginResponse>> = new Error(`${response.code}`);
           error.response = response;
           throw error;
 
         }
 
-        this.profile = response.data!;
-        this.loaded = true
-
+        this.is_working = false
+        this.token_verified = true
+        this.token_confirmed = true
+        
         return true
       } catch (error: any) {
-        console.log('error', error);
+        console.log('error', error.response);
 
         if (error.response) {
           this.error_code = error.response.code
@@ -44,8 +97,10 @@ export const useProfileStore = defineStore('userStore', {
           this.error_code = 500
         }
 
+        this.is_working = false
       }
+
       return false;
-    },
+    }
   },
 })

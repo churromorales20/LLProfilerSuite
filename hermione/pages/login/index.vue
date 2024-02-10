@@ -1,13 +1,13 @@
 <template>
- <div class="min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div>
-    <form>
-      <select v-model="locale">
-        <option value="en">en</option>
-        <option value="es">es</option>
-      </select>
-    </form>
-  </div>
+  <div class="min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <!--<div>
+      <form>
+        <select v-model="locale">
+          <option value="en">en</option>
+          <option value="es">es</option>
+        </select>
+      </form>
+    </div>-->
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img style="height:170px;" class="mx-auto w-auto" src="/logo.png" alt="Logo">
     </div>
@@ -19,7 +19,8 @@
               {{ $t('login.email') }}
             </label>
             <div class="mt-1">
-              <UInput color="primary" icon="i-fa6-solid-envelope" size="md" type="email" />
+              <UInput color="primary" v-model="userEmail" icon="i-fa6-solid-envelope" size="md" type="email" />
+              <p v-if="emailErrored" class="absolute font-medium text-sm text-red-500 mt-1">{{ emailErrored }}</p>
             </div>
           </div>
 
@@ -28,7 +29,8 @@
               {{ $t('login.pass') }}
             </label>
             <div class="mt-1">
-              <UInput color="primary" icon="i-fa6-solid-lock" size="md" type="password" />
+              <UInput color="primary" v-model="userPassword" icon="i-fa6-solid-lock" size="md" type="password" />
+              <p v-if="passwordErrored" class="absolute font-medium text-sm text-red-500 mt-1">{{ passwordErrored }}</p>
             </div>
           </div>
 
@@ -39,11 +41,19 @@
               </a>
             </div>
           </div>
-
           <div>
-            <UButton @click="goToDashboard" size="md" color="primary" variant="solid" block>
+            <UButton 
+              @click="validateAndSignIn" 
+              :loading="userStore.isWorking"
+              size="md" 
+              color="primary" 
+              variant="solid" 
+              block>
               {{ $t('login.sign_in') }}
             </UButton>
+          </div>
+          <div v-if="userStore.isErrored">
+            <p class="font-medium text-sm text-red-500 mt-1">{{ errorMessage }}</p>
           </div>
           <div>
             <p class="text-sm">{{ $t('login.terms_conditions') }}</p>
@@ -55,9 +65,7 @@
           </div>
 
           <div class="grid grid-cols-2 gap-2">
-            <a href="#" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              Facebook
-            </a>
+            <LoginFacebookButton />
             <a href="#" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
               Google
             </a>
@@ -77,8 +85,66 @@
   </div>
 </template>
 <script setup>
-  const { locale } = useI18n()
-  const goToDashboard = () => {
-    navigateTo('/dashboard')
+  import { computed } from 'vue';
+
+  const userStore = userAdminStore()
+  const locale = useI18n()
+  const userEmail = defineModel('userEmail')
+  const userPassword = defineModel('userPassword')
+  const emailErrored = defineModel('emailErrored');
+  const passwordErrored = defineModel('passwordErrored');
+
+  emailErrored.value = null;
+  passwordErrored.value = null;
+
+  const errorMessage = computed(() => {
+    
+    switch (userStore.lastError) {
+      case 401:
+        return locale.t('login.invalid_credentials');
+      default:
+        return locale.t('general.unexpected_error');
+    }
+  });
+
+  const validateAndSignIn = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^[^\s]{6,14}$/;
+    let isValid = true;
+
+    emailErrored.value = null;
+    passwordErrored.value = null;
+    
+    if (!emailRegex.test(userEmail.value)) {
+      emailErrored.value = locale.t('login.invalid_email')
+      isValid = false;
+    }
+    
+    if (!passwordRegex.test(userPassword.value) || userPassword.value === undefined) {
+      passwordErrored.value = locale.t('login.invalid_pass')
+      isValid = false;
+    }
+
+    if (isValid) {
+      const loginResult = await userStore.login(userEmail.value, userPassword.value);
+      
+      if (loginResult) {
+        navigateTo('/dashboard')
+      }
+    }
+  }
+
+  if (!process.client) {
+    const { error } = await useAsyncData(
+      'profile_data',
+      async () => {
+        const result = await userStore.verifyUserToken('tokenString')
+
+        if (result) {
+          navigateTo('/dashboard')
+        }
+
+      }
+    )
   }
 </script>
