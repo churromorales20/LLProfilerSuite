@@ -1,8 +1,15 @@
 import type { IApiResponse } from "../interfaces/IApiResponses";
 import type { ILoginResponse } from "../interfaces/ILoginResponse";
+import { NodeEventContext } from "h3";
 
 export class LLApiFetcher {
   protected apiUrl = `${process.env.LL_API_PROFILE}`;
+  protected nodeEvent: null | NodeEventContext = null;
+
+  constructor(nodeEvent: null | NodeEventContext) {
+    this.nodeEvent = nodeEvent;
+  }
+
   async post<T extends object | null>(service: string, data: Object): Promise<IApiResponse<T>> {
 
     return this._fetch<T>(service, 'POST', data);
@@ -15,13 +22,13 @@ export class LLApiFetcher {
   }
 
   private _getAuthCookie(): null | ILoginResponse{
-    const headers = useRequestHeaders(['cookie'])
+    const headers = this.nodeEvent ? this.nodeEvent.req.headers : useRequestHeaders(['cookie'])
     const cookies = headers.cookie?.split(';');
-
+    
     try{
-      const llFrameworkInfo = cookies?.find(function (cookie) {
-        return cookie.trim().startsWith('LL_FRAMEWORK_INFO=');
-      })?.trim().substring('LL_FRAMEWORK_INFO='.length);
+      const llFrameworkInfo = cookies?.find(function (cookie: string) {
+        return cookie.trim().startsWith('_LL_FRAMEWORK_INFO_=');
+      })?.trim().substring('_LL_FRAMEWORK_INFO_='.length);
 
       return llFrameworkInfo === undefined ? null : JSON.parse(llFrameworkInfo) as ILoginResponse;
     } catch (error: any) {
@@ -37,16 +44,6 @@ export class LLApiFetcher {
     const authCookie = this._getAuthCookie();
     
     try {
-
-      console.log('reqqqqq', {
-        method: type === "GET" ? 'GET' : 'POST',
-        body: type !== 'GET' ? data : null,
-        headers: authCookie ? {
-          'Authorization': `Bearer ${authCookie.auth_token.token}`,
-        } : {},
-      });
-      
-
       const apiResponse = await (
         $fetch(`${this.apiUrl}${service}`, {
           method: type === "GET" ? 'GET' : 'POST',
@@ -59,8 +56,7 @@ export class LLApiFetcher {
             toResponse.result = 'error';
           },
         })
-      ) as IApiResponse
-      console.log('apiResponse', apiResponse);
+      ) as IApiResponse;
       
       toResponse.data = apiResponse.data as T;
     } catch (error: any) {

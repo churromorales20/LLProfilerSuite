@@ -1,5 +1,5 @@
 <template>
-  <h5>Dahsboarxxxxxxd</h5>
+  <h5>CONF</h5>
 </template>
 <script setup>
 

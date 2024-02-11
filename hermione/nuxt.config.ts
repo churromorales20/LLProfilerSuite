@@ -29,5 +29,6 @@ export default defineNuxtConfig({
   alias: {
     '@ll-interfaces': path.resolve(__dirname, '../interfaces'),
     '@ll-fetchers': path.resolve(__dirname, '../fetchers'),
+    '@ll-utils': path.resolve(__dirname, '../utils'),
   },
 })

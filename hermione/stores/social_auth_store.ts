@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import type { IProfileResponse } from '@ll-interfaces/IProfileResponse';
+import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
 import type { IApiResponse } from '@ll-interfaces/IApiResponses';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import type { ISocialUrlResponse } from '@ll-interfaces/ISocialUrlResponse';
+import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
 //import type { IApiResponse } from '~/interfaces/IApiResponses';
 
 export const socialAuthStore = defineStore('socialAuthStore', {
@@ -26,7 +27,7 @@ export const socialAuthStore = defineStore('socialAuthStore', {
     async fetchSocialUrlAuth(type: string) {
       this.error_code = null
       this.is_working = true
-
+      
       try {
         const response = await internalApiFetcher.post<ISocialUrlResponse>(`auth/social/url`, {
           type
@@ -40,6 +41,41 @@ export const socialAuthStore = defineStore('socialAuthStore', {
         }
         
         this.url = response.data?.url as string;
+        this.is_working = false
+        
+        return true
+      } catch (error: any) {
+        console.log('errorSSSSS', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+
+        this.is_working = false
+      }
+
+      return false;
+    },
+    async confirmAuth(type: string, sign: string | null = null) {
+      this.error_code = null
+      this.is_working = true
+
+      try {
+        const response = await internalApiFetcher.post<ILoginResponse>(`auth/social/confirm`, {
+          type,
+          sign
+        });
+
+        if (response.code) {
+          const error: ILLApiError<IApiResponse<ILoginResponse>> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        //this.url = response.data?.url as string;
         this.is_working = false
         
         return true

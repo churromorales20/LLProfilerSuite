@@ -8,12 +8,7 @@
   </div>
 </template>
 <script setup>
-  import { computed } from 'vue';
-  const showModal = defineModel('showModal')
   const socialStore = socialAuthStore()
-  const locale = useI18n()
-  
-  showModal.value = false;
   
   const getFacebookAuthUrl = async () => {
     const result = await socialStore.fetchSocialUrlAuth('facebook');

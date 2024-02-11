@@ -1,8 +1,9 @@
 import { LLApiFetcher } from './llApiFetcher'
+import { NodeEventContext } from "h3";
 
-class LLAdminApiFetcher extends LLApiFetcher {
-  constructor() {
-    super(); 
+export class LLAdminApiFetcher extends LLApiFetcher {
+  constructor(event: null | NodeEventContext = null) {
+    super(event); 
     this.apiUrl += 'profiler_admin/'
   }
 }
