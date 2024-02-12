@@ -15,7 +15,19 @@
         {{ $t('login.pass') }}
       </label>
       <div class="mt-1">
-        <UInput color="primary" v-model="userPassword" icon="i-fa6-solid-lock" size="md" type="password" />
+        <UInput color="primary" :ui="{ icon: { trailing: { pointer: '' } } }" v-model="userPassword" icon="i-fa6-solid-lock" size="md" :type="viewPassword ? 'text' : 'password'" >
+          <template #trailing>
+            <UButton
+              @click="() => {
+                viewPassword = !viewPassword
+              }"
+              :padded="false"
+              color="gray"
+              variant="link"
+              :icon="`i-fa6-solid-eye${viewPassword ? '-slash' : ''}`"
+            />
+          </template>
+        </UInput>
         <p v-if="passwordErrored" class="absolute font-medium text-sm text-red-500 mt-1">{{ passwordErrored }}</p>
       </div>
     </div>
@@ -76,9 +88,15 @@
   const userPassword = defineModel('userPassword')
   const emailErrored = defineModel('emailErrored');
   const passwordErrored = defineModel('passwordErrored');
+  const viewPassword = defineModel('viewPassword');
 
   emailErrored.value = null;
   passwordErrored.value = null;
+  viewPassword.value = false;
+
+  const Miverga = () => {
+    console.log('COND');
+  }
 
   const errorMessage = computed(() => {
     

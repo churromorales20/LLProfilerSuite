@@ -2,7 +2,7 @@
   <div>
     <!--<div v-show="socialStore.isWorking || !inited">-->
     <div v-show="socialStore.isWorking || !inited">
-      <h2 class="mb-8 text-center">Please wait authenticating with {{ type === 'Facebook' ? 'Facebook' : 'Google'}}...</h2>
+      <h2 class="mb-8 text-center">{{ $t('login.social_authenticating_with', {network: type === 'facebook' ? 'Facebook' : 'Google' })}}...</h2>
       <div class="flex items-center space-x-4">
         <USkeleton class="h-16 w-16" :ui="{ rounded: 'rounded-full' }" />
         <div class="space-y-2">
@@ -16,15 +16,15 @@
     <!--<div v-show="!socialStore.isWorking && socialStore.isErrored">-->
     <div v-show="!socialStore.isWorking && socialStore.isErrored" class="text-center">
       <UIcon name="i-fa6-solid-triangle-exclamation text-llyellow-700" class="confirm-data-icon" />
-      <h2 class="mt-4 text-center font-semibold">Invalid confirmation data.</h2>
+      <h2 class="mt-4 text-center font-semibold">{{ $t('login.social_login_invalid') }}</h2>
       <UButton @click="backToLogin" size="md" class="mt-4" color="primary" variant="solid" block>
-        Back to login
+        {{ $t('login.back_to_login') }}
       </UButton>
     </div>
     <!--<div v-show="!socialStore.isWorking && !socialStore.isErrored && inited">-->
     <div v-show="!socialStore.isWorking && !socialStore.isErrored && inited" class="text-center">
       <UIcon name="i-fa6-solid-circle-check text-green-600" class="confirm-data-icon" />
-      <h2 class="mt-4 text-center font-semibold">Success redirecting</h2>
+      <h2 class="mt-4 text-center font-semibold">{{ $t('login.social_success') }}</h2>
     </div>
   </div>
 </template>

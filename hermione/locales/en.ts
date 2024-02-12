@@ -11,6 +11,10 @@ const en = {
     'invalid_email': "Invalid email address.",
     'invalid_pass': "Invalid password.",
     'invalid_credentials': "Invalid credentials.",
+    'social_authenticating_with': 'Please wait authenticating with {network}',
+    'social_login_invalid': 'Invalid confirmation data.',
+    'back_to_login': 'Back to login',
+    'social_success': 'Success redirecting',
   },
   general: {
     'unexpected_error': 'Unexpected error ocurred.'
