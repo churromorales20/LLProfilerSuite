@@ -12,8 +12,10 @@
   "dependencies": {
     "@iconify-json/fa6-solid": "^1.1.20",
     "@nuxt/ui": "^2.13.0",
+    "@popperjs/core": "^2.11.8",
     "nuxt": "^3.10.1",
     "pinia": "^2.1.7",
+    "v-calendar": "^3.1.2",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },

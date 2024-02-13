@@ -94,10 +94,6 @@
   passwordErrored.value = null;
   viewPassword.value = false;
 
-  const Miverga = () => {
-    console.log('COND');
-  }
-
   const errorMessage = computed(() => {
     
     switch (userStore.lastError) {

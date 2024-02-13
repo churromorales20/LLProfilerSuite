@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import type { IApiResponse } from '@ll-interfaces/IApiResponses';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
 import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
+import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import type { IUserInfo } from '@ll-interfaces/IUserInfo';
 //import type { IApiResponse } from '~/interfaces/IApiResponses';
 
@@ -40,7 +40,7 @@ export const userAdminStore = defineStore('userAdminStore', {
           const response = await adminApiFetcher.get<IUserInfo>(`auth/user/info`);
           
           if (response.code) {
-            const error: ILLApiError<IApiResponse<IUserInfo>> = new Error(`${response.code}`);
+            const error: ILLApiError<IUserInfo> = new Error(`${response.code}`);
             error.response = response;
             throw error;
 
@@ -77,7 +77,7 @@ export const userAdminStore = defineStore('userAdminStore', {
         });
         
         if (response.code) {
-          const error: ILLApiError<IApiResponse<ILoginResponse>> = new Error(`${response.code}`);
+          const error: ILLApiError<ILoginResponse> = new Error(`${response.code}`);
           error.response = response;
           throw error;
 

@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
-import type { IApiResponse } from '@ll-interfaces/IApiResponses';
+import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import type { ISocialUrlResponse } from '@ll-interfaces/ISocialUrlResponse';
 import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
@@ -34,7 +33,7 @@ export const socialAuthStore = defineStore('socialAuthStore', {
         });
 
         if (response.code) {
-          const error: ILLApiError<IApiResponse<ISocialUrlResponse>> = new Error(`${response.code}`);
+          const error: ILLApiError<ISocialUrlResponse> = new Error(`${response.code}`);
           error.response = response;
           throw error;
 
@@ -69,7 +68,7 @@ export const socialAuthStore = defineStore('socialAuthStore', {
         });
 
         if (response.code) {
-          const error: ILLApiError<IApiResponse<ILoginResponse>> = new Error(`${response.code}`);
+          const error: ILLApiError<ILoginResponse> = new Error(`${response.code}`);
           error.response = response;
           throw error;
 
