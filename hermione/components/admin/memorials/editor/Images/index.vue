@@ -28,22 +28,18 @@
   <AdminMemorialsEditorImagesCropper v-if="imagesPicker.showCropper" />
 </template>
 <script setup>
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
+
 import { ref, computed } from 'vue'
 import { onMounted } from 'vue';
 
+
+const imagesGallery = imagesGalleryStore();
+
 onMounted(() => {
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#_profile_gallery_images_',
-    children: '.image-profile',
-    pswpModule: () => import('photoswipe')
-  });
-  lightbox.init();
+  imagesGallery.init();
 });
 
 const fileInput = ref(null);
-//const isUploading = ref(false);
 const editorStore = memorialEditorStore()
 const imagesPicker = imagesPickerStore();
 

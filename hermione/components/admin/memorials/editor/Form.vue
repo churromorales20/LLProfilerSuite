@@ -142,7 +142,7 @@
     </div>
     <div class="w-full bg-white p-4 rounded-md mb-4">
       <label for="obituary" class="text-neutral-950 text-2xl font-bold mb-2 block">{{ $t('memorials.obituary') }}</label>
-      <UTextarea size="xl" id="obituary" :placeholder="$t('memorials.enter_obituary')"/>
+      <UTextarea v-model="memorial.obituary" size="xl" id="obituary" :placeholder="$t('memorials.enter_obituary')"/>
       <div class="flex justify-end mt-3">
         <UButton 
           :disabled="originalMemorial.obituary === memorial.obituary" 

@@ -250,6 +250,8 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         }
         this.memorial!.images = this.memorial!.images?.filter((item, item_index) => item_index !== index);
         this.show_slider = true;
+        this.initGallery();
+
       } catch (error: any) {
         console.log('error', error.response);
 
@@ -298,10 +300,11 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
           error.response = response;
           throw error;
         }
+        
 
         this.memorial?.images!.push(response.data?.name!)
         this.show_slider = true;
-
+        this.initGallery();
       } catch (error: any) {
         console.log('error', error.response);
 
@@ -376,6 +379,8 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         this.show_form = false;
         memorialStore.updateItemList(this.memorial_id!, this.memorial!);
         this.show_form = true;
+        this.setOriginalValues();
+
       } catch (error: any) {
         console.log('error', error.response);
 
@@ -416,6 +421,12 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
 
       this.is_working = false;
+    },
+    initGallery(){
+      setTimeout(() => {
+        const imagesGallery = imagesGalleryStore();
+        imagesGallery.init();
+      }, 100);
     }
   },
 })
