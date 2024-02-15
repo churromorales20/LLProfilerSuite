@@ -16,6 +16,7 @@
     "nuxt": "^3.10.1",
     "parse-nested-form-data": "^1.0.0",
     "pinia": "^2.1.7",
+    "sharp": "^0.33.2",
     "v-calendar": "^3.1.2",
     "vue": "^3.4.15",
     "vue-picture-cropper": "^0.7.0",

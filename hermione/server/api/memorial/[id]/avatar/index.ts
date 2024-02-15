@@ -2,8 +2,7 @@ import { LLAdminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
 import { IImageResponse } from "@ll-interfaces/IImageResponse";
 import { useMultipartReader } from '../../../../utils/multipart';
 import { storageHandler } from '../../../../utils/storage';
-import { type MultiPartData } from 'h3';
-import { randomUUID } from 'node:crypto';
+import { profileImage } from '../../../../utils/profileImagesSaver';
 
 export default defineEventHandler(async (event) => {
   const { node } = event;
@@ -11,22 +10,11 @@ export default defineEventHandler(async (event) => {
   const adminApiFetcher = new LLAdminApiFetcher(node)
   const body = await useMultipartReader(event);
 
-  const saveFile = async (file: MultiPartData): Promise<string | null> => {
-    const [_mime, ext] = String(file.type).split('/');
-    const fileName = randomUUID() + '.' + ext;
-
-    try {
-      await storageHandler.setItemRaw(`/${body.code}/${fileName}`, file.data);
-
-      return fileName;
-    } catch (error) {
-      console.log('ERRRO UOAIDNG FILE');
-      
-      return null;
-    }
-  };
-
-  const fileName = await saveFile(body.avatar)
+  const fileName = await profileImage.resizeAndSave({
+    image: body.avatar,
+    profile_code: body.code,
+    height: 700
+  })
 
   if (fileName) {
     const response = await adminApiFetcher.post<IImageResponse>(`profile/avatar`, {
