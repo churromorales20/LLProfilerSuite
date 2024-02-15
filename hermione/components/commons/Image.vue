@@ -1,14 +1,24 @@
 <template>
-  <div class="relative" @mouseover="showDeleteIcon = true" @mouseleave="showDeleteIcon = false">
-    <img 
-      class="w-40"
-      v-show="loaded && !errorLoadingImage" 
-      :src="`/profiles/assets/${memorialCode}/${imageUrl}`" 
-      @error="onImageError"
-      @load="onImageLoad" 
-      @mouseover="showDeleteIcon = true" 
-      @mouseleave="showDeleteIcon = false"
-    />
+  <div 
+    class="relative"  
+    @mouseover="showDeleteIcon = true" 
+    @mouseleave="showDeleteIcon = false"
+  >
+    <a
+      class="image-profile"
+      :href="`/profiles/assets/${memorialCode}/${imageUrl}`"
+      :data-pswp-src="`/profiles/assets/${memorialCode}/${imageUrl}`" 
+      data-pswp-width="800" 
+      data-pswp-height="800" 
+    >
+      <img 
+        class="w-40"
+        v-show="loaded && !errorLoadingImage" 
+        :src="`/profiles/assets/${memorialCode}/${imageUrl}`" 
+        @error="onImageError"
+        @load="onImageLoad"
+      />
+    </a>
     <div v-show="errorLoadingImage" class="w-40 rounded border border-slate-100 flex h-full items-center justify-center">
       <UIcon name="i-fa6-solid-image" class="text-6xl text-slate-200"/>
     </div>
@@ -58,7 +68,6 @@
         </UCard>
       </template>
     </UPopover>
-    
   </div>
 </template>
 <script setup>

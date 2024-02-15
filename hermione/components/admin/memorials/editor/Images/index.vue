@@ -6,8 +6,15 @@
       <UButton v-if="images.length > 0" size="md" variant="outline" @click="pickFile" :loading="isUploading"
         label="Add images" icon="i-fa6-solid-file-circle-plus" />
     </div>
-    <UCarousel v-if="images.length > 0 && editorStore.showSlider" v-slot="{ item, index }" indicators
-      class="rounded-lg overflow-hidden mb-2" :items="images" :ui="{ item: 'md:w-fit lg:w-fit' }">
+    <UCarousel 
+      id="_profile_gallery_images_"
+      v-if="images.length > 0 && editorStore.showSlider" 
+      v-slot="{ item, index }" 
+      indicators
+      class="rounded-lg overflow-hidden mb-2" 
+      :items="images" 
+      :ui="{ item: 'md:w-fit lg:w-fit' }"
+    >
       <CommonsImage :imageUrl="item" :index="index" />
     </UCarousel>
     <div v-else-if="!editorStore.showSlider" class="flex items-center justify-center top-0 right-0 w-full h-40">
@@ -21,8 +28,19 @@
   <AdminMemorialsEditorImagesCropper v-if="imagesPicker.showCropper" />
 </template>
 <script setup>
-import { format } from 'date-fns'
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 import { ref, computed } from 'vue'
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#_profile_gallery_images_',
+    children: '.image-profile',
+    pswpModule: () => import('photoswipe')
+  });
+  lightbox.init();
+});
 
 const fileInput = ref(null);
 //const isUploading = ref(false);
