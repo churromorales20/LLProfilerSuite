@@ -8,7 +8,11 @@
     }
   }" :rows="memorialStore.list">
     <template #avatar-data="{ row }">
-      <UAvatar :alt="`${row.first_name}${row.last_name}`" :src="!isEmpty(row.avatar) ? row.avatar : null" size="md" />
+      <UAvatar 
+        :alt="`${row.first_name}${row.last_name}`" 
+        :src="`/profiles/assets/${row.code}/${row.avatar}`" 
+        size="md" 
+      />
     </template>
     <template #fullname-data="{ row }">
       <span>{{ `${row.first_name} ${row.last_name}` }}</span>
@@ -39,6 +43,7 @@ import { format } from 'date-fns'
 
 const memorialStore = memorialsStore()
 const editorStore = memorialEditorStore()
+const locale = useI18n()
 
 const getDateInfo = (date, place) => {
   const validPlace = !isEmpty(place);
@@ -73,28 +78,24 @@ const columns = [
   },
   {
     key: 'fullname',
-    label: 'Full name',
+    label: locale.t('memorials.full_name'),
   },
   {
     key: 'relationship',
-    label: 'Relationship'
+    label: locale.t('memorials.relationship')
   },
   {
     key: 'borninfo',
-    label: 'Born'
+    label: locale.t('memorials.born')
   },
   {
     key: 'death',
-    label: 'Passed away'
+    label: locale.t('memorials.death')
   },
   {
     key: 'status',
     label: 'Status'
   },
-  /*{
-    key: 'nickname',
-    label: 'Nickname'
-  },*/
   {
     key: 'actions',
     class: 'w-28'

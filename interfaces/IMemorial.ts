@@ -2,6 +2,7 @@ import type { IProfileUIResponse } from "./IProfileUIResponse";
 
 export interface IMemorial {
   id: number;
+  code?: string;
   first_name: string;
   last_name: string;
   obituary?: string;
@@ -16,7 +17,7 @@ export interface IMemorial {
   uname?: string;
   images?: string[];
   videos?: string[];
-  avatar?: string | null;
+  avatar?: string;
   top_image?: string | null;
 }
 export interface IMemorialWithUI extends IMemorial {

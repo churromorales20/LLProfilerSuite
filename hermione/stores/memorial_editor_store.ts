@@ -2,12 +2,15 @@ import { defineStore } from 'pinia'
 import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import type { IMemorialWithUI } from '@ll-interfaces/IMemorial';
+import type { IImageResponse } from '@ll-interfaces/IImageResponse';
 
 export const memorialEditorStore = defineStore('memorialEditorStore', {
   state: () => ({
     error_code: null as number | null,
     is_working: true as boolean,
     show_form: true as boolean,
+    show_slider: true as boolean,
+    show_slider_video: true as boolean,
     updating_attr: null as null | string,
     memorial: null as null | IMemorialWithUI,
     memorial_original: null as null | IMemorialWithUI,
@@ -23,6 +26,12 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     },
     updatingAttr: (state) => {
       return state.updating_attr;
+    },
+    showSlider: (state) => {
+      return state.show_slider;
+    },
+    showSliderVideo: (state) => {
+      return state.show_slider_video;
     },
     originalMemorial: (state) => {
       return state.memorial_original;
@@ -116,6 +125,219 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         this.memorial!.born_date = value;
       } else {
         this.memorial!.death_date = value;
+      }
+    },
+    async removeHeader() {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/header/delete`, {
+          current_header: this.memorial?.top_image,
+          code: this.memorial?.code,
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial!.top_image = null!;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+      }
+    },
+    async setHeader(dataHeader: FormData) {
+      try {
+        dataHeader.append('code', this.memorial?.code!);
+        const response = await internalApiFetcher.post<IImageResponse>(`memorial/${this.memorial_id}/header`, dataHeader);
+
+        if (response.code) {
+          const error: ILLApiError<IImageResponse> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial!.top_image = response.data?.name!;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+      }
+    },
+    async setAvatar(dataAvatar: FormData) {
+      try {
+        this.show_slider = false;
+        dataAvatar.append('code', this.memorial?.code!);
+        const response = await internalApiFetcher.post<IImageResponse>(`memorial/${this.memorial_id}/avatar`, dataAvatar);
+
+        if (response.code) {
+          const error: ILLApiError<IImageResponse> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial?.images!.push(this.memorial.avatar!)
+        this.memorial!.avatar = response.data?.name!;
+        this.show_slider = true;
+        const memorialStore = memorialsStore()
+        memorialStore.updateItemList(this.memorial_id!, this.memorial!);
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+        this.show_slider = true;
+      }
+    },
+    async removeAvatar() {
+      try {
+        this.show_slider = false;
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/avatar/delete`, {
+          current_avatar: this.memorial?.avatar,
+          code: this.memorial?.code,
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial!.avatar = null!;
+        this.show_slider = true;
+        const memorialStore = memorialsStore()
+        memorialStore.updateItemList(this.memorial_id!, this.memorial!);
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+        this.show_slider = true;
+      }
+    },
+    async removeImage(index: number, imageName: string) {
+      try {
+        this.show_slider = false;
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/image/delete`, {
+          index: index,
+          image_name: imageName,
+          code: this.memorial?.code,
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+        this.memorial!.images = this.memorial!.images?.filter((item, item_index) => item_index !== index);
+        this.show_slider = true;
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+        this.show_slider = true;
+      }
+    },
+    async removeVideo(index: number) {
+      try {
+        this.show_slider_video = false;
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/video/delete`, {
+          index: index,
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+        this.memorial!.videos = this.memorial!.videos?.filter((item, item_index) => item_index !== index);
+        this.show_slider_video = true;
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+
+        this.show_slider_video = true;
+      }
+    },
+    async addImage(dataImage: FormData) {
+      try {
+        this.show_slider = false;
+        dataImage.append('code', this.memorial?.code!);
+        const response = await internalApiFetcher.post<IImageResponse>(`memorial/${this.memorial_id}/image`, dataImage);
+        
+        if (response.code) {
+          const error: ILLApiError<IImageResponse> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial?.images!.push(response.data?.name!)
+        this.show_slider = true;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+        this.show_slider = true;
+      }
+    },
+    async addVIdeo(videoId: string) {
+      try {
+        this.show_slider_video = false;
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/video`, {
+          video_id: videoId
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial?.videos!.push(videoId)
+        this.show_slider_video = true;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+        this.show_slider_video = true;
       }
     },
     async updateMemorial (attr: string, value: string, now: boolean) {

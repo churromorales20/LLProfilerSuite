@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   devServer: {
     port: 4000
   },
+  /*routeRules: {
+    '/profiles/images/**': { proxy: '/home/cecilio/projects/LegacyLink/LLDocker/LLProfilerSuite/hermione/resources/**' },
+  },*/
+  serverHandlers: [
+    { route: '/profiles/assets/:directory/:assetname', handler: '~/server/assets/profileAssets.ts' }
+  ],
   pages: true,
   modules: [
     '@pinia/nuxt',
@@ -13,7 +19,7 @@ export default defineNuxtConfig({
     'dayjs-nuxt'
   ], 
   tailwindcss: {
-    configPath: 'tailwindchurro.config',
+    configPath: 'tailwind.config',
     exposeConfig: false,
     exposeLevel: 2,
     config: {},

@@ -22,13 +22,9 @@ export const memorialsStore = defineStore('memorialsStore', {
   },
   actions: {
     updateItemList(id: number, newItemValue: IMemorial){
-      console.log('POR ACA ANDAMOS');
-      
       const index = this.list.findIndex((item) => item.id === id);
 
       if (index >= 0) {
-        console.log('IDNESX', index);
-        console.log('SEVACTUALIZAR', newItemValue);
         
         this.list[index] = newItemValue;
       }

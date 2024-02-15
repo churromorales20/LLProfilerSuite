@@ -17,30 +17,30 @@
 </template>
 <script setup lang="ts">
   const route = useRoute()
-
+  const locale = useI18n()
   const links = [
     {
-      label: 'My memorials',
+      label: locale.t('general.menu_my_memorials'),
       icon: 'i-heroicons-home',
       to: '/getting-started/installation'
     }, 
     {
-      label: 'Condolences',
+      label: locale.t('general.menu_condolences'),
       icon: 'i-heroicons-chart-bar',
       to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/vertical-navigation`
     }, 
     {
-      label: 'My purchases',
+      label: locale.t('general.menu_purchases'),
       icon: 'i-heroicons-command-line',
       to: '/components/command-palette'
     },
     {
-      label: 'My profile',
+      label: locale.t('general.menu_my_profile'),
       icon: 'i-heroicons-command-line',
       to: '/components/command-palette'
     },
     {
-      label: 'Help center',
+      label: locale.t('general.menu_help_center'),
       icon: 'i-heroicons-command-line',
       to: '/components/command-palette'
     },
