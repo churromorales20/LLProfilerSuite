@@ -49,7 +49,7 @@ const getDateInfo = (date, place) => {
   const validPlace = !isEmpty(place);
   const validDate = !isEmpty(date);
   const dateInfo = `${validPlace ? `${place}` : ''}
-                      ${validPlace && validDate ? ', ' : ''}
+                      ${validPlace && validDate ? ' - ' : ''}
                       ${validDate ? dateFormatter(date) : ''}`;
 
   return !isEmpty(dateInfo) ? dateInfo : '-';
@@ -67,7 +67,6 @@ const editMemorial = (id) => {
 }
 
 const isEmpty = (value) => {
-  console.log('typeof value', typeof value);
   return (typeof value === 'string' && /^[\s\n]*$/.test(value)) || value === null || value === undefined ;
 }
 

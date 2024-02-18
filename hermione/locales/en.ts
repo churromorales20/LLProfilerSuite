@@ -24,6 +24,8 @@ const en = {
     'menu_my_profile': 'My profile',
     'menu_help_center': 'Help center',
     'update': 'Update',
+    'close': 'Close',
+    'status': 'Status',
   },
   memorials: {
     'add_new': 'Add new memorial',
@@ -65,6 +67,19 @@ const en = {
     'rel_husband': 'Husband',
     'rel_partner': 'Partner',
     'profile_editor': 'Profile Editor',
+    'gen_info_tab': 'General information',
+    'condolences_wall_tab': 'Condolences wall',
+    'config_tab': 'Configurations',
+    'condolence_status_pending': 'Pending',
+    'condolence_status_approved': 'Approved',
+    'condolence_status_rejected': 'Rejected',
+    'condolence_status_all': 'All',
+    'condolence_wall_title': 'Condolences wall entries',
+    'condolence_no_records': 'No matching records',
+    'condolence_user_verified': 'Verified user',
+    'condolence_user_anonymous': 'Anonymous user',
+    'condolence_update_status': 'Update status',
+    'load_more_btn': "Load more entries ({qty_more} more)"
   }
 };
 

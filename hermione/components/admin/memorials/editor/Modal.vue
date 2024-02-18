@@ -54,7 +54,7 @@
           <USkeleton class="h-3 w-3/6" />
         </div>
       </template>
-      <AdminMemorialsEditor v-else/>
+      <AdminMemorialsEditor v-else-if="!editorStore.isErrored"/>
       <template v-if="!editorStore.isWorking" #header>
           <div class="flex justify-between">
             <h2 class="font-semibold text-xl">{{ $t('memorials.profile_editor') }}</h2>
@@ -63,7 +63,7 @@
               size="md"
               @click="closeModal"
               color="llblue" 
-              label="Close"
+              :label="$t('general.close')"
             />
           </div>
       </template>
@@ -94,5 +94,6 @@ const closeModal = () => {
   .ll-modal-editor-body{
     max-height: 85vh;
     overflow: auto;
+    padding: 15px 10px !important;
   }
 </style>

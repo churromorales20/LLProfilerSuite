@@ -393,14 +393,16 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
     },
     async fetch(id: number) {
+      this.error_code = null;
+      this.is_working = true;
+      this.memorial_id = id
       try {
-        this.is_working = true;
-        this.memorial_id = id
         const response = await internalApiFetcher.get<IMemorialWithUI>(`memorial/${id}`);
 
         if (response.code) {
           const error: ILLApiError<IMemorialWithUI> = new Error(`${response.code}`);
           error.response = response;
+          this.memorial_id = null;
           throw error;
 
         }
@@ -410,17 +412,17 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         this.memorial.born_date = response.data?.born_date !== null ? new Date(response.data?.born_date!) : null;
         
         this.setOriginalValues();
+        this.is_working = false;
       } catch (error: any) {
-        console.log('error', error.response);
-
+        console.log('erroreeeee', error.response);
+        this.memorial_id = null;
         if (error.response) {
           this.error_code = error.response.code
         } else {
           this.error_code = 500
         }
+        this.is_working = false;
       }
-
-      this.is_working = false;
     },
     initGallery(){
       setTimeout(() => {

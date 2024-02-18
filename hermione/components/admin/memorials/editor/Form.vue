@@ -1,7 +1,7 @@
 
 <template>
   <div v-if="editorStore.showForm">
-    <div class="flex flex-col md:flex-row mb-4 gap-4">
+    <div class="flex flex-col md:flex-row mb-4 mt-2 gap-4">
       <div class="w-full md:w-1/2 bg-white p-4 rounded-md">
         <h2 class="text-neutral-950 text-2xl font-bold mb-2">{{ $t('memorials.personal_info') }}</h2>
         <label for="first-name" class="form-label text-neutral-950 mb-2 block">{{ $t('memorials.first_name') }}</label>
