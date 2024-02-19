@@ -22,6 +22,9 @@
     <template #memorials="{ item }">
       <AdminMemorialsEditorCondolences />
     </template>
+    <template #configurations="{ item }">
+      <AdminMemorialsEditorConfig />
+    </template>
     <template #default="{ item, index, selected }">
       <div class="flex items-center gap-2 relative truncate">
         <UIcon :name="item.icon" class="w-4 h-4 flex-shrink-0" />

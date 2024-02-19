@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
     profile_id: id,
     field_name: body.attr,
     field_value: body.value,
+    type: body.type,
   });
 
   if (response.code) {

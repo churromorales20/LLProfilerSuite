@@ -27,23 +27,112 @@
       <span>{{ getDateInfo(row.born_date, row.born_place) }}</span>
     </template>
     <template #status-data="{ row }">
-      <span>Active</span>
+      <span>
+        Active
+      </span>
     </template>
     <template #actions-data="{ row }">
-      <div class="px-4">
+      <div class="px-4 flex">
         <UButton @click="editMemorial(row.id)" icon="i-fa6-solid-pen-to-square" size="sm" color="llblue" square class="mr-2" />
-        <UButton icon="i-fa6-solid-share-nodes" size="sm" color="llyellow" square variant="solid" />
+        <UDropdown 
+          :popper="{ placement: 'bottom-start' }"
+          :ui="{
+            item:{
+              padding: 'px-1.5 py-4'
+            }
+          }"
+          :items="[[
+            {
+              label: $t('memorials.share_link_fb'),
+              to: 'https://www.facebook.com/sharer/sharer.php?u=example.org?code=' + row.code,
+              target: '_blank',
+              icon: 'i-mdi-facebook',
+            },
+            {
+              label: $t('memorials.share_link_whatsapp'),
+              to: `https://api.whatsapp.com/send?text=${whatsappMessage(row)}`,
+              icon: 'i-mdi-whatsapp',
+              target: '_blank',
+            },
+            {
+              label: $t('memorials.share_link_copy'),
+              click: () => {
+                copyLink('htttp:///legaylink.pe/?code=' + row.code)
+              },
+              icon: 'i-mdi-content-copy',
+            }
+          ]]"
+        >
+          <UButton 
+            icon="i-fa6-solid-share-nodes" 
+            size="sm" 
+            color="llyellow" 
+            square 
+            variant="solid" 
+          />
+        </UDropdown>
       </div>
     </template>
   </UTable>
 </template>
 <script setup>
-import { onMounted } from 'vue';
 import { format } from 'date-fns'
 
 const memorialStore = memorialsStore()
 const editorStore = memorialEditorStore()
 const locale = useI18n()
+
+const items = [
+  [{
+    label: 'Profile',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    }
+  }], [{
+    label: 'Edit',
+    icon: 'i-heroicons-pencil-square-20-solid',
+    shortcuts: ['E'],
+    click: () => {
+      console.log('Edit')
+    }
+  }, {
+    label: 'Duplicate',
+    icon: 'i-heroicons-document-duplicate-20-solid',
+    shortcuts: ['D'],
+    disabled: true
+  }], [{
+    label: 'Archive',
+    icon: 'i-heroicons-archive-box-20-solid'
+  }, {
+    label: 'Move',
+    icon: 'i-heroicons-arrow-right-circle-20-solid'
+  }], [{
+    label: 'Delete',
+    icon: 'i-heroicons-trash-20-solid',
+    shortcuts: ['⌘', 'D']
+  }]
+];
+
+const copyLink = (link) => {
+  var tempTextArea = document.createElement("textarea");
+  tempTextArea.value = link;
+  tempTextArea.style.position = "fixed";
+  tempTextArea.style.top = 0;
+  tempTextArea.style.left = 0;
+  tempTextArea.style.opacity = 0;
+  
+  document.body.appendChild(tempTextArea);
+
+  tempTextArea.select();
+  
+  document.execCommand("copy");
+
+  document.body.removeChild(tempTextArea);
+}
+
+const whatsappMessage = (row) => {
+  return encodeURIComponent('htttp:///legaylink.pe/?code=' + row.code);
+}
 
 const getDateInfo = (date, place) => {
   const validPlace = !isEmpty(place);

@@ -1,5 +1,13 @@
 import type { IProfileUIResponse } from "./IProfileUIResponse";
 
+interface IMemorialSettings {
+  condolences_wall: boolean;
+  condolences_wall_default_status: string;
+  language: string;
+  timezone: string;
+  date_format: string;
+}
+
 export interface IMemorial {
   id: number;
   code?: string;
@@ -14,12 +22,12 @@ export interface IMemorial {
   relationship?: string | null;
   bio?: string;
   is_active?: boolean;
+  is_published?: boolean;
   uname?: string;
   images?: string[];
   videos?: string[];
   avatar?: string;
   top_image?: string | null;
-}
-export interface IMemorialWithUI extends IMemorial {
-  ui?: IProfileUIResponse
+  custom_ui: IProfileUIResponse;
+  settings: IMemorialSettings;
 }

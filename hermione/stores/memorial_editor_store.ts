@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
-import type { IMemorialWithUI } from '@ll-interfaces/IMemorial';
+import type { IMemorial } from '@ll-interfaces/IMemorial';
 import type { IImageResponse } from '@ll-interfaces/IImageResponse';
 
 export const memorialEditorStore = defineStore('memorialEditorStore', {
@@ -12,14 +12,17 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     show_slider: true as boolean,
     show_slider_video: true as boolean,
     updating_attr: null as null | string,
-    memorial: null as null | IMemorialWithUI,
-    memorial_original: null as null | IMemorialWithUI,
+    memorial: null as null | IMemorial,
+    memorial_original: null as null | IMemorial,
     memorial_id: null as null | number,
     timeout_id: null as null | NodeJS.Timeout,
   }),
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    settings: (state) => {
+      return state.memorial?.settings;
     },
     showForm: (state) => {
       return state.show_form;
@@ -50,8 +53,9 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     reset(){
       this.memorial_id = null;
       this.memorial = null;
+      this.memorial_original = null;
     },
-    getOriginalValue(attr: string): string | null{
+    getOriginalValue(attr: string): string | boolean | null{
       switch (attr) {
         case 'first_name':
           return this.memorial_original!['first_name'];
@@ -80,45 +84,77 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         case 'uname':
           return this.memorial_original!['uname']!;
 
+        case 'condolences_wall':
+          return this.memorial_original!.settings.condolences_wall!;
+
+        case 'condolences_wall_default_status':
+          return this.memorial_original!.settings.condolences_wall_default_status!;
+
+        case 'language':
+          return this.memorial_original!.settings.language!;
+
+        case 'timezone':
+          return this.memorial_original!.settings.timezone!;
+
+        case 'date_format':
+          return this.memorial_original!.settings.date_format!;
+
         default:
           return null
       }
     },
-    updateMemorialItem(attr: string, value: string){
+    updateMemorialItem(attr: string, value: string|boolean){
+      console.log('va;lue', value);
+      
       switch (attr) {
         case 'first_name':
-          this.memorial!['first_name'] = value;
+          this.memorial!['first_name'] = value as string;
           break;
         case 'last_name':
-          this.memorial!['last_name'] = value;
+          this.memorial!['last_name'] = value as string;
           break;
         case 'obituary':
-          this.memorial!['obituary'] = value;
+          this.memorial!['obituary'] = value as string;
           break;
         case 'born_place':
-          this.memorial!['born_place'] = value;
+          this.memorial!['born_place'] = value as string;
           break;
         case 'nickname':
-          this.memorial!['nickname'] = value;
+          this.memorial!['nickname'] = value as string;
           break;
         case 'death_place':
-          this.memorial!['death_place'] = value;
+          this.memorial!['death_place'] = value as string;
           break;
         case 'relationship':
-          this.memorial!['relationship'] = value;
+          this.memorial!['relationship'] = value as string;
           break;
         case 'bio':
-          this.memorial!['bio'] = value;
+          this.memorial!['bio'] = value as string;
           break;
         case 'uname':
-          this.memorial!['uname'] = value;
+          this.memorial!['uname'] = value as string;
+          break;
+        case 'condolences_wall':
+          this.memorial!.settings['condolences_wall'] = value as boolean;
+          break;
+        case 'condolences_wall_default_status':
+          this.memorial!.settings['condolences_wall_default_status'] = value as string;
+          break;
+        case 'language':
+          this.memorial!.settings['language'] = value as string;
+          break;
+        case 'timezone':
+          this.memorial!.settings['timezone'] = value as string;
+          break;
+        case 'date_format':
+          this.memorial!.settings['date_format'] = value as string;
           break;
         default:
           break;
       }
     },
     setOriginalValues(){
-      this.memorial_original = JSON.parse(JSON.stringify(this.memorial)) as IMemorialWithUI;
+      this.memorial_original = JSON.parse(JSON.stringify(this.memorial)) as IMemorial;
     },
     setDate(type: string, value: Date){
       if (type === 'born') {
@@ -357,12 +393,16 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
       
     },
-    async postUpdate(attr: string, value: string){
+    async updateConfigurations(attr: string, value: string) {
+      await this.postUpdate(attr, value, true)
+    },
+    async postUpdate(attr: string, value: string, isConfig: boolean = false){
       try {
         this.updating_attr = attr;
         const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/update`, {
           attr,
-          value
+          value,
+          type: isConfig === true ? 'settings' : ''
         });
 
         if (response.code) {
@@ -397,10 +437,10 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       this.is_working = true;
       this.memorial_id = id
       try {
-        const response = await internalApiFetcher.get<IMemorialWithUI>(`memorial/${id}`);
+        const response = await internalApiFetcher.get<IMemorial>(`memorial/${id}`);
 
         if (response.code) {
-          const error: ILLApiError<IMemorialWithUI> = new Error(`${response.code}`);
+          const error: ILLApiError<IMemorial> = new Error(`${response.code}`);
           error.response = response;
           this.memorial_id = null;
           throw error;
@@ -414,7 +454,7 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
         this.setOriginalValues();
         this.is_working = false;
       } catch (error: any) {
-        console.log('erroreeeee', error.response);
+        console.log('error', error.response);
         this.memorial_id = null;
         if (error.response) {
           this.error_code = error.response.code

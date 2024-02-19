@@ -20,7 +20,7 @@
         <div class="flex items-center">
           <span class="text-sm font-semibold mr-2">{{ $t('memorials.condolence_update_status') }}:</span>
           <USelect 
-            :disabled="isUpdatingStatus"
+            :disabled="isUpdatingStatus || !isCondolencesActive"
             size="md"
             v-model="currentStatus" 
             :options="condolencesStore.statusOptions" 
@@ -41,12 +41,15 @@
 import { ref, computed } from 'vue'
 import { format } from 'date-fns'
 
+const memorialStore = memorialEditorStore();
 const props = defineProps({
   index: {
     type: Number,
     required: true,
   },
 });
+
+const isCondolencesActive = computed(() => memorialStore.settings?.condolences_wall);
 
 const { index } = props;
 const condolencesStore = condolencesTabStore()

@@ -16,7 +16,7 @@
           base: 'flex-shrink-0 w-5 h-5 text-llblue-600',
         },
       }" 
-      title='In loving memory, their digital footprint continues to guide us.' 
+      :title='userStore.dashboardPhrase' 
     />
     <div class="flex items-center space-x-4">
       <UPopover>
@@ -53,9 +53,10 @@
   </header>
 </template>
 <script setup>
-  const logout = () => {
-    const authCookie = useCookie('_LL_FRAMEWORK_INFO_')
-    authCookie.value = null;
-    navigateTo('/auth/login');
-  }
+const userStore = userAdminStore();
+const logout = () => {
+  const authCookie = useCookie('_LL_FRAMEWORK_INFO_')
+  authCookie.value = null;
+  navigateTo('/auth/login');
+}
 </script>

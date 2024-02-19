@@ -23,9 +23,18 @@ const en = {
     'menu_purchases': 'My purchases',
     'menu_my_profile': 'My profile',
     'menu_help_center': 'Help center',
+    'general': 'General',
     'update': 'Update',
     'close': 'Close',
     'status': 'Status',
+    'attention': 'Attention!',
+    'language': 'Language',
+    'lang_es': 'Spanish',
+    'lang_en': 'English',
+    'timezone': 'Timezone',
+    'date_format': 'Formato de fecha',
+    'date_format_american': 'Year/Month/Day',
+    'date_format_latin': 'Day/Month/Year',
   },
   memorials: {
     'add_new': 'Add new memorial',
@@ -79,7 +88,12 @@ const en = {
     'condolence_user_verified': 'Verified user',
     'condolence_user_anonymous': 'Anonymous user',
     'condolence_update_status': 'Update status',
-    'load_more_btn': "Load more entries ({qty_more} more)"
+    'load_more_btn': "Load more entries ({qty_more} more)",
+    'condolence_wall_disabled': "The condolences wall is deactivated, so this memorial will not receive new messages. Go to the settings tab to change this option.",
+    'share_link_fb': 'Share on Facebook',
+    'share_link_whatsapp': 'Share on Whatsapp',
+    'share_link_copy': 'Copy link',
+    'config_condolences_require': 'Condolences entries require approval',
   }
 };
 

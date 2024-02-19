@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import { IImageSaverParams } from "@ll-interfaces/IImageSaverParams";
 
 export class LLProfileImagesSaver {
-  async resizeAndSave({ image, profile_code: profileCode, height }: IImageSaverParams): Promise<string | null> {
+  async resizeAndSave({ image, profile_code: profileCode, height, width }: IImageSaverParams): Promise<string | null> {
     try {
       const [_mime, ext] = String(image.type).split('/');
       const fileName = randomUUID() + '.webp';
@@ -14,6 +14,7 @@ export class LLProfileImagesSaver {
         .webp()
         .resize({
           height: height,
+          width: width,
           withoutEnlargement: true
         })
         .toBuffer();

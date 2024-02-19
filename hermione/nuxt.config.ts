@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     viewer: true,
   },
   ui: {
-    icons: ['fa6-solid'],
+    icons: ['fa6-solid', 'mdi'],
   },
   css: [
     '@/assets/main.css',

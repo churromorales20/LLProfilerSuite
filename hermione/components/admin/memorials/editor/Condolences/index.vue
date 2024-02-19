@@ -1,5 +1,14 @@
 <template>
   <div v-if="!condolencesStore.isWorking" class="container mx-auto pb-4 pt-10 px-4 bg-white min-h-96">
+    <UAlert
+      v-if="!isCondolencesActive"
+      icon="i-fa6-solid-exclamation"
+      color="red"
+      variant="subtle"
+      class="mb-4"
+      :title="$t('general.attention')"
+      :description="$t('memorials.condolence_wall_disabled')"
+    />
     <div class="mb-4 flex items-center justify-between">
       <h3 class="text-lg font-semibold">{{ $t('memorials.condolence_wall_title') }}</h3>
       <div class="flex items-center">
@@ -43,13 +52,10 @@ import { onMounted } from 'vue';
 
 const locale = useI18n()
 
-const uiOptions = ref({
-  background: 'bg-cool-300',
-  rounded: 'rounded-full'
-})
-
 const condolencesStore = condolencesTabStore()
 const memorialStore = memorialEditorStore();
+
+const isCondolencesActive = computed(() => memorialStore.settings?.condolences_wall);
 
 const filterStatus = computed({
   get() {

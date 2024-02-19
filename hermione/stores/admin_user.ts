@@ -11,16 +11,19 @@ export const userAdminStore = defineStore('userAdminStore', {
     count: 0 as number,
     error_code: null as number | null,
     error_code_user: null as number | null,
-    //profile: {} as IProfileResponse,
     is_working: false as boolean,
     is_subdomain: false as boolean,
     code: null as string | null,
+    phrase: '' as string,
     token_verified: false as boolean,
     token_confirmed: false as boolean,
   }),
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    dashboardPhrase: (state) => {
+      return state.phrase;
     },
     isErrored: (state) => {
       return state.error_code !== null;
@@ -46,6 +49,12 @@ export const userAdminStore = defineStore('userAdminStore', {
 
           }
 
+          console.log('response');
+          console.log('response');
+          console.log(response);
+          
+
+          this.phrase = response?.data!.phrase!;
           this.token_confirmed = true;
           
         } catch (error: any) {
