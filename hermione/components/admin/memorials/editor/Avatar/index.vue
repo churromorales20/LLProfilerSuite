@@ -8,6 +8,7 @@
             '3xl': 'h-32 w-32 text-4xl'
           }
         }" 
+        class="drop-shadow"
         v-if="!avatarWorking" 
         size="3xl" 
         :src="`/profiles/assets/${memorial.code}/${memorial.avatar}`"

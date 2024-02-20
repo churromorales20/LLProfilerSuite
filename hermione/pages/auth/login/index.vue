@@ -24,7 +24,7 @@
               :padded="false"
               color="gray"
               variant="link"
-              :icon="`i-fa6-solid-eye${viewPassword ? '-slash' : ''}`"
+              :icon="viewPassword ? 'i-fa6-solid-eye-slash' : 'i-fa6-solid-eye'"
             />
           </template>
         </UInput>
@@ -70,64 +70,73 @@
     <div>
       <p class="text-center text-sm text-gray-600">
         {{ $t('login.dont_have_account') }}
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+        <ULink
+          to="/auth/signup"
+          active-class="font-medium text-indigo-600 hover:text-indigo-500"
+          inactive-class="font-medium text-indigo-600 hover:text-indigo-500"
+        >
           {{ $t('login.sign_up') }}
-        </a>
+        </ULink>
       </p>
     </div>
   </form>
 </template>
 <script setup>
-  import { computed } from 'vue';
-  definePageMeta({
-    layout: 'auth-views'
-  })
-  const userStore = userAdminStore()
-  const locale = useI18n()
-  const userEmail = defineModel('userEmail')
-  const userPassword = defineModel('userPassword')
-  const emailErrored = defineModel('emailErrored');
-  const passwordErrored = defineModel('passwordErrored');
-  const viewPassword = defineModel('viewPassword');
+import { computed } from 'vue';
+
+definePageMeta({
+  layout: 'auth-views'
+})
+const userStore = userAdminStore()
+const locale = useI18n()
+const userEmail = defineModel('userEmail')
+const userPassword = defineModel('userPassword')
+const emailErrored = defineModel('emailErrored');
+const passwordErrored = defineModel('passwordErrored');
+const viewPassword = defineModel('viewPassword');
+
+emailErrored.value = null;
+passwordErrored.value = null;
+viewPassword.value = false;
+
+const goToSignup = () => {
+  navigateTo('login/signup')
+}
+
+const errorMessage = computed(() => {
+  
+  switch (userStore.lastError) {
+    case 401:
+      return locale.t('login.invalid_credentials');
+    default:
+      return locale.t('general.unexpected_error');
+  }
+});
+
+const validateAndSignIn = async () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^[^\s]{6,14}$/;
+  let isValid = true;
 
   emailErrored.value = null;
   passwordErrored.value = null;
-  viewPassword.value = false;
+  
+  if (!emailRegex.test(userEmail.value)) {
+    emailErrored.value = locale.t('login.invalid_email')
+    isValid = false;
+  }
+  
+  if (!passwordRegex.test(userPassword.value) || userPassword.value === undefined) {
+    passwordErrored.value = locale.t('login.invalid_pass')
+    isValid = false;
+  }
 
-  const errorMessage = computed(() => {
+  if (isValid) {
+    const loginResult = await userStore.login(userEmail.value, userPassword.value);
     
-    switch (userStore.lastError) {
-      case 401:
-        return locale.t('login.invalid_credentials');
-      default:
-        return locale.t('general.unexpected_error');
-    }
-  });
-
-  const validateAndSignIn = async () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^[^\s]{6,14}$/;
-    let isValid = true;
-
-    emailErrored.value = null;
-    passwordErrored.value = null;
-    
-    if (!emailRegex.test(userEmail.value)) {
-      emailErrored.value = locale.t('login.invalid_email')
-      isValid = false;
-    }
-    
-    if (!passwordRegex.test(userPassword.value) || userPassword.value === undefined) {
-      passwordErrored.value = locale.t('login.invalid_pass')
-      isValid = false;
-    }
-
-    if (isValid) {
-      const loginResult = await userStore.login(userEmail.value, userPassword.value);
-      
-      if (loginResult) {
-        navigateTo('/dashboard')
-      }
+    if (loginResult) {
+      navigateTo('/dashboard')
     }
   }
+}
 </script>

@@ -47,7 +47,6 @@ if (process.client) {
   const { error } = await useAsyncData(
     'auth_facebook_confirmation',
     async () => {
-      console.log('SIGNN', route.query.sign);
       const result = await socialStore.confirmAuth(type, type === 'google' ? route.query.sign : null)
       inited.value = true;
       if (result) {

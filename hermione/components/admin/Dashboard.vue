@@ -1,7 +1,7 @@
 <template>
   <AdminTitle title="My memorials">
     <template v-slot:buttons>
-      <UButton icon="i-fa6-solid-qrcode">{{ $t('memorials.add_new') }}</UButton>
+      <UButton size="md" icon="i-fa6-solid-qrcode">{{ $t('memorials.add_new') }}</UButton>
     </template>
   </AdminTitle>
   <AdminLoader v-if="memorialStore.isWorking" />

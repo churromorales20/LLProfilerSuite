@@ -4,12 +4,14 @@ import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
 import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
 import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import type { IUserInfo } from '@ll-interfaces/IUserInfo';
+import type { ISignUpRequest } from '@ll-interfaces/ISignUpRequest';
 //import type { IApiResponse } from '~/interfaces/IApiResponses';
 
 export const userAdminStore = defineStore('userAdminStore', {
   state: () => ({
     count: 0 as number,
     error_code: null as number | null,
+    signup_error_code: null as number | null,
     error_code_user: null as number | null,
     is_working: false as boolean,
     is_subdomain: false as boolean,
@@ -28,19 +30,27 @@ export const userAdminStore = defineStore('userAdminStore', {
     isErrored: (state) => {
       return state.error_code !== null;
     },
+    signUpIsErrored: (state) => {
+      return state.signup_error_code !== null;
+    },
     lastError: (state) => {
       return state.error_code;
+    },
+    lastSingUpError: (state) => {
+      return state.signup_error_code;
     },
     lastUserError: (state) => {
       return state.error_code_user;
     },
   },
   actions: {
-    async verifyUserToken() {
+    async verifyUserToken(isClient: boolean = false): Promise<boolean> {
       if (!this.token_verified) {
         this.error_code_user = null;
         try {
-          const response = await adminApiFetcher.get<IUserInfo>(`auth/user/info`);
+          const response = isClient 
+            ? await internalApiFetcher.get<IUserInfo>(`auth/user/info`)
+            : await adminApiFetcher.get<IUserInfo>(`auth/user/info`)
           
           if (response.code) {
             const error: ILLApiError<IUserInfo> = new Error(`${response.code}`);
@@ -48,12 +58,7 @@ export const userAdminStore = defineStore('userAdminStore', {
             throw error;
 
           }
-
-          console.log('response');
-          console.log('response');
-          console.log(response);
           
-
           this.phrase = response?.data!.phrase!;
           this.token_confirmed = true;
           
@@ -107,6 +112,57 @@ export const userAdminStore = defineStore('userAdminStore', {
         }
 
         this.is_working = false
+      }
+
+      return false;
+    },
+    async signup(signUpInfo: ISignUpRequest) {
+      this.signup_error_code = null
+
+      try {
+        const response = await internalApiFetcher.post<Object>(`auth/signup`, {
+          email: signUpInfo.email, 
+          password: signUpInfo.password,
+          first_name: signUpInfo.first_name,
+          last_name: signUpInfo.last_name,
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        return true
+      } catch (error: any) {
+        console.log('error', error.response);
+
+        if (error.response) {
+          this.signup_error_code = error.response.code
+        } else {
+          this.signup_error_code = 500
+        }
+      }
+
+      return false;
+    },
+    async checkEmailAvailability(emailValue: string) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`auth/email/check`, {
+          email: emailValue,
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        return true
+      } catch (error: any) {
+        console.log('error', error.response);
       }
 
       return false;

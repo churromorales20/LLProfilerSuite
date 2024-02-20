@@ -2,14 +2,15 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const userStore = userAdminStore()
   const publicRoutes = [
     '/auth/recover',
+    '/auth/signup',
     '/auth/recover/confirm',
     '/auth/social/facebook/confirm',
     '/auth/social/google/confirm',
   ];
 
-  if (!process.client && !publicRoutes.includes(to.path)) {
+  if (!publicRoutes.includes(to.path)) {
+    const result = await userStore.verifyUserToken(process.client)
 
-    const result = await userStore.verifyUserToken()
     if (to.path === '/auth/login') {
       if (result) {
         return navigateTo('/')

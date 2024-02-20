@@ -3,6 +3,12 @@ import { IMemorial } from "@ll-interfaces/IMemorial";
 
 export default defineEventHandler(async (event) => {
   const { node } = event;
+
+  console.log("node.req.headers['accept-language']");
+  console.log("node.req.headers['accept-language']");
+  console.log("node.req.headers['accept-language']");
+  console.log(node.req.headers['accept-language']);
+  
   const id = getRouterParam(event, 'id') as string;
   const adminApiFetcher = new LLAdminApiFetcher(node)
 

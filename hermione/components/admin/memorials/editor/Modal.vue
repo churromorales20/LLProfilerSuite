@@ -10,50 +10,7 @@
       },
       divide: 'divide-y divide-gray-100 dark:divide-gray-800'
     }">
-      <template v-if="editorStore.isWorking">
-        <div class="h-44 bg-cover relative bg-center rounded-t-md mb-16">
-          <div class="z-100 bg-white rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/4">
-            <USkeleton class="h-40 w-40" :ui="{ rounded: 'rounded-full' }" />
-          </div>
-          <div class="border-b border-slate-200 pb-20 space-y-3 flex justify-center items-center flex-col">
-            <USkeleton class="h-3 w-full" />
-            <USkeleton class="h-3 w-full" />
-            <USkeleton class="h-3 w-5/6" />
-            <USkeleton class="h-3 w-5/6" />
-            <USkeleton class="h-3 w-4/6" />
-            <USkeleton class="h-3 w-3/6" />
-            <USkeleton class="h-3 w-2/6" />
-          </div>
-        </div>
-        <div class="space-y-3 mt-4">
-          <USkeleton class="h-3 w-full" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-4/6" />
-          <USkeleton class="h-3 w-3/6" />
-        </div>
-        <div class="space-y-3 mt-4">
-          <USkeleton class="h-3 w-full" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-4/6" />
-          <USkeleton class="h-3 w-3/6" />
-        </div>
-        <div class="space-y-3 mt-8" dir="rtl">
-          <USkeleton class="h-3 w-full" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-4/6" />
-          <USkeleton class="h-3 w-3/6" />
-        </div>
-        <div class="space-y-3 mt-4" dir="rtl">
-          <USkeleton class="h-3 w-full" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-5/6" />
-          <USkeleton class="h-3 w-4/6" />
-          <USkeleton class="h-3 w-3/6" />
-        </div>
-      </template>
+      <AdminMemorialsEditorLoader v-if="editorStore.isWorking" />
       <AdminMemorialsEditor v-else-if="!editorStore.isErrored"/>
       <template v-if="!editorStore.isWorking" #header>
           <div class="flex justify-between">
