@@ -12,6 +12,7 @@ export default defineEventHandler(async (event) => {
   const response = await adminApiFetcher.post<ISocialUrlResponse>(`auth/social/${type}/url`,{
     language: lang,
     ip_address: ipAddress,
+    is_popup: body.is_popup,
   });
   
   if (response.code) {

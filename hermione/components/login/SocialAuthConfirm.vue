@@ -50,7 +50,14 @@ if (process.client) {
       const result = await socialStore.confirmAuth(type, type === 'google' ? route.query.sign : null)
       inited.value = true;
       if (result) {
-        navigateTo('/dashboard')
+        if (socialStore.IsPopUp) {
+          setTimeout(() => {
+            window.close();
+          }, 2000);
+          
+        } else {
+          navigateTo('/dashboard')
+        }
       }
 
     }

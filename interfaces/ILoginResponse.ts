@@ -8,4 +8,5 @@ interface IAuthToken {
 export interface ILoginResponse {
   auth_token: IAuthToken;
   user: IUserInfo;
+  is_popup?: boolean;
 }

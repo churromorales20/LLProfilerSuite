@@ -1,7 +1,7 @@
 <template>
   <AdminTitle title="My memorials">
     <template v-slot:buttons>
-      <UButton size="md" icon="i-fa6-solid-qrcode">{{ $t('memorials.add_new') }}</UButton>
+      <CommonsShoppingModal />
     </template>
   </AdminTitle>
   <AdminLoader v-if="memorialStore.isWorking" />
@@ -11,9 +11,11 @@
   <AdminMemorialsList v-else />
 </template>
 <script setup>
-  import { onMounted } from 'vue';
-  const memorialStore = memorialsStore()
-  onMounted(() => {
-    memorialStore.fetchList();
-  });
+import { onMounted } from 'vue';
+
+const showShoppingModal = ref(false);
+const memorialStore = memorialsStore()
+onMounted(() => {
+  memorialStore.fetchList();
+});
 </script>

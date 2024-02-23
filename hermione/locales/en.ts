@@ -1,4 +1,7 @@
 const en = {
+  shopping:{
+    'item_basic_profile': 'Basic memorial plaque'
+  },
   login : {
     'forgot_pass': 'Forgot your password?',
     'email': 'Email address',

@@ -58,6 +58,5 @@ const logout = () => {
   const authCookie = useCookie('_LL_FRAMEWORK_INFO_')
   authCookie.value = null;
   window.location.href = '/auth/login';
-  console.log('NAVIAFATAFAF');
 }
 </script>

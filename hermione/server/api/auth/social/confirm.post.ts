@@ -5,9 +5,6 @@ import { ILoginResponse } from "@ll-interfaces/ILoginResponse";
 import { ISocialUrlResponse } from "@ll-interfaces/ISocialUrlResponse";
 import { llCookie } from "@ll-utils/llCookie";
 
-
-//import { useDayjs } from '#dayjs'
-
 export default defineEventHandler(async (event) => {
   const { node } = event;
   const body = await readBody(event)
@@ -18,8 +15,7 @@ export default defineEventHandler(async (event) => {
 
   if (body.type === 'facebook') {
     const cookieData = llCookie.getCookieByName<ISocialUrlResponse>('_FB_LOGIN_SIGN_', node);
-    console.log('cookieData', cookieData);
-    
+   
     if (cookieData) {
       sign = cookieData?.sign!;
       isValid = true;

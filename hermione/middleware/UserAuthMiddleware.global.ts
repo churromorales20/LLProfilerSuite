@@ -6,6 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     '/auth/recover/confirm',
     '/auth/social/facebook/confirm',
     '/auth/social/google/confirm',
+    '/shopping',
   ];
 
   if (!publicRoutes.includes(to.path)) {

@@ -194,10 +194,6 @@ const errorMessage = computed(() => {
   }
 });
 
-const isValidEmail = (emailValue: string): boolean => {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-}
-
 const validateForm = (): boolean => {
   const passwordRegex = /^[^\s]{6,14}$/;
   let isValid = true;

@@ -11,13 +11,14 @@ export default defineNuxtConfig({
   serverHandlers: [
     { route: '/profiles/assets/:directory/:assetname', handler: '~/server/assets/profileAssets.ts' }
   ],
+  //plugins: [{ src: "~/plugins/vue-paycard.js", mode: "client" }],
   pages: true,
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/i18n',
     '@nuxt/ui',
     'dayjs-nuxt'
-  ], 
+  ],
   tailwindcss: {
     configPath: 'tailwind.config',
     exposeConfig: false,

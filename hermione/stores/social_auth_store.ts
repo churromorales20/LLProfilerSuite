@@ -10,10 +10,14 @@ export const socialAuthStore = defineStore('socialAuthStore', {
     error_code: null as number | null,
     is_working: false as boolean,
     url: '' as string,
+    is_popup: false as boolean,
   }),
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    IsPopUp: (state) => {
+      return state.is_popup;
     },
     isErrored: (state) => {
       return state.error_code !== null;
@@ -23,13 +27,14 @@ export const socialAuthStore = defineStore('socialAuthStore', {
     },
   },
   actions: {
-    async fetchSocialUrlAuth(type: string) {
+    async fetchSocialUrlAuth(type: string, isPopUp: boolean = false) {
       this.error_code = null
       this.is_working = true
       
       try {
         const response = await internalApiFetcher.post<ISocialUrlResponse>(`auth/social/url`, {
-          type
+          type,
+          is_popup: isPopUp
         });
 
         if (response.code) {
@@ -71,12 +76,11 @@ export const socialAuthStore = defineStore('socialAuthStore', {
           const error: ILLApiError<ILoginResponse> = new Error(`${response.code}`);
           error.response = response;
           throw error;
-
         }
         
         //this.url = response.data?.url as string;
         this.is_working = false
-        
+        this.is_popup = response.data?.is_popup!
         return true
       } catch (error: any) {
         console.log('error', error.response);
