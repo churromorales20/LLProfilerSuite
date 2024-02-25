@@ -7,17 +7,22 @@ import isEmptyString from '~/utils/isEmptyString';
 import { internalApiFetcher } from '@ll-fetchers/internalApiFetcher';
 import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import type { IOrder } from '@ll-interfaces/IOrder';
+import type { IMemorial } from '@ll-interfaces/IMemorial';
 
 export const shoppingStore = defineStore('shoppingStore', {
   state: () => ({
     error_code: null as number | null,
+    view_step: 1 as number,
+    view_next_step: 0 as number,
     shipping_view_step: 1 as number,
     shipping_view_next_step: 0 as number,
     is_working: true as boolean,
     is_user_authenticated: false as boolean,
     items_verified: false as boolean,
     terms_conditions: false as boolean,
-    in_modal: false as boolean,
+    in_admin: false as boolean,
+    modal_opened: false as boolean,
+    completed: false as boolean,
     order: null as null | IOrder,
     user_info: {
       last_name: '',
@@ -50,29 +55,70 @@ export const shoppingStore = defineStore('shoppingStore', {
     isWorking: (state) => {
       return state.is_working;
     },
+    modalOpened: (state) => {
+      return state.modal_opened;
+    },
     addressList: (state) => {
       return state.shipping_address_list;
     },
     orderData: (state) => {
       return state.order;
     },
-    inModal: (state) => {
-      return state.in_modal;
+    orderDetails: (state) => {
+      return {
+        last_name: state.user_info.last_name,
+        first_name: state.user_info.first_name,
+        email: state.user_info.email,
+        memorial_last_name: state.memorial_info.last_name,
+        memorial_first_name: state.memorial_info.first_name,
+        shipping_address_selected: state.shipping_address_selected,
+        shipping_address_line_1: state.shipping_address.address_line_1,
+        shipping_city: state.shipping_address.city,
+        shipping_state: state.shipping_address.state,
+        shipping_reference: state.shipping_address.reference,
+        shipping_postal_code: state.shipping_address.postal_code,
+        shipping_country: state.shipping_address.country,
+        card_number: state.credit_card.card_number,
+        cardholder_name: state.credit_card.cardholder_name,
+        expiration_date: state.credit_card.expiration_date,
+        cvv: state.credit_card.cvv,
+      }
+    },
+    inAdmin: (state) => {
+      return state.in_admin;
+    },
+    viewStep: (state) => {
+      return state.view_step;
     },
     shippingViewStep: (state) => {
       return state.shipping_view_step;
+    },
+    shippingAddressInfo: (state) => {
+      if (state.shipping_address_selected !== 0) {
+        const address = state.shipping_address_list.find((add) => add.id === state.shipping_address_selected);
+        return {
+          address_line_1: address!.address_line_1,
+          city: address!.city,
+          state: address!.state,
+          reference: address!.reference,
+          postal_code: address!.postal_code,
+          country: address!.country,
+        }
+      }
+
+      return state.shipping_address;
     },
     shippingSelectedAddress: (state) => {
       return state.shipping_address_selected!;
     },
     subTotal: (state) => {
       return state.order?.items.reduce((accumulator, item) => {
-        return accumulator + item.price;
+        return accumulator + (item.price * item.qty);
       }, 0);
     },
     totalDiscount: (state) => {
       return state.order?.items.reduce((accumulator, item) => {
-        return accumulator + item.discount;
+        return accumulator + (item.discount * item.qty);
       }, 0);
     },
     isValid: (state) => {
@@ -110,8 +156,40 @@ export const shoppingStore = defineStore('shoppingStore', {
     },
   },
   actions: {
+    reset(){
+      this.view_step = 1;
+      this.memorial_info.last_name = '';
+      this.memorial_info.first_name = '';
+      this.shipping_address_list = [];
+      this.shipping_address_selected = 0;
+      this.shipping_address.address_line_1 = '';
+      this.shipping_address.city = '';
+      this.shipping_address.state = '';
+      this.shipping_address.reference = '';
+      this.shipping_address.postal_code = '';
+      this.shipping_address.country = '';
+      this.credit_card.card_number = '';
+      this.credit_card.cardholder_name = '';
+      this.credit_card.expiration_date = '';
+      this.credit_card.cvv = '';
+    },
     seletedAddress(selection: number) {
       this.shipping_address_selected = selection;
+    },
+    setModalStatus(newStatus: boolean) {
+      if (newStatus) {
+        this.shipping_view_step = 1;
+        this.reset();
+      }
+      this.modal_opened = newStatus;
+    },
+    shoppingMoveNextStep() {
+      this.view_step = this.view_next_step;
+      this.view_next_step = 0;
+    },
+    shoppingMovetStep(step: number) {
+      this.view_step = 0;
+      this.view_next_step = step;
     },
     shippingMoveNextStep() {
       
@@ -124,8 +202,8 @@ export const shoppingStore = defineStore('shoppingStore', {
       this.shipping_view_next_step = step;
       this.shipping_address_selected = 0;
     },
-    setInModal(inModal: boolean) {
-      this.in_modal = inModal;
+    setInAdmin(inAdmin: boolean) {
+      this.in_admin = inAdmin;
     },
     validateCreditCard(): boolean {
       const creditCardRegex = /^(\d{4}[\s-]?){3}\d{4}$/;
@@ -143,7 +221,6 @@ export const shoppingStore = defineStore('shoppingStore', {
           isEmptyString(this.user_info.last_name!) ||
           isEmptyString(this.user_info.email!)
         )) {
-
         this.is_valid = false;
         return;
 
@@ -154,11 +231,11 @@ export const shoppingStore = defineStore('shoppingStore', {
 
       } else if (
           (this.shipping_address_selected === 0 && this.shipping_view_step === 3) ||
-          (isEmptyString(this.shipping_address.address_line_1!) ||
+          (this.shipping_address_selected === 0 && (isEmptyString(this.shipping_address.address_line_1!) ||
             isEmptyString(this.shipping_address.city!) ||
             isEmptyString(this.shipping_address.state!) ||
             isEmptyString(this.shipping_address.postal_code!) ||
-            isEmptyString(this.shipping_address.country!
+            isEmptyString(this.shipping_address.country!)
           )
         )
       ) {
@@ -235,6 +312,66 @@ export const shoppingStore = defineStore('shoppingStore', {
 
       return result;
     },
+    async sendOrder(): Promise<boolean> {
+      let result = false;
+      try {
+        this.shoppingMovetStep(3);
+        const response = await internalApiFetcher.post<IMemorial>(`shopping/confirm`, {
+          last_name: this.user_info.last_name,
+          first_name: this.user_info.first_name,
+          email: this.user_info.email,
+          memorial_last_name: this.memorial_info.last_name,
+          memorial_first_name: this.memorial_info.first_name,
+          shipping_address_selected: this.shipping_address_selected,
+          shipping_address_line_1: this.shipping_address.address_line_1,
+          shipping_city: this.shipping_address.city,
+          shipping_state: this.shipping_address.state,
+          shipping_reference: this.shipping_address.reference,
+          shipping_postal_code: this.shipping_address.postal_code,
+          shipping_country: this.shipping_address.country,
+          card_number: this.credit_card.card_number,
+          cardholder_name: this.credit_card.cardholder_name,
+          expiration_date: this.credit_card.expiration_date,
+          cvv: this.credit_card.cvv,
+          items: JSON.stringify({
+            items: this.order?.items.map((item) => {
+              return {
+                id: item.id,
+                qty: item.qty
+              }
+            })
+          }),
+          currency_code: this.order!.currency.code
+        });
+
+        if (response.code) {
+          const error: ILLApiError<IMemorial> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+
+        result = true;
+        this.completed = true;
+        if (this.in_admin) {
+          const memorialStore = memorialsStore()
+          memorialStore.addItem(response.data!)
+        }
+      } catch (error: any) {
+        console.log('error', error.response);
+        this.shoppingMovetStep(2);
+
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
+      }
+
+      this.is_working = false
+
+      return result;
+    },
     async fetchAddresses() {
       let result = false;
       try {
@@ -258,7 +395,7 @@ export const shoppingStore = defineStore('shoppingStore', {
 
         setTimeout(() => {
           this.shippingMovetStep(addressNextStep);
-        }, 500);
+        }, 1500);
 
         result = true;
       } catch (error: any) {

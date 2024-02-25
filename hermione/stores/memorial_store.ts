@@ -21,6 +21,9 @@ export const memorialsStore = defineStore('memorialsStore', {
     },
   },
   actions: {
+    addItem(newItem: IMemorial){
+      this.list.push(newItem)
+    },
     updateItemList(id: number, newItemValue: IMemorial){
       const index = this.list.findIndex((item) => item.id === id);
 

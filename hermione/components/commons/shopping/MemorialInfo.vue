@@ -1,5 +1,5 @@
 <template>
-  <div :class="[shopping.inModal ? '' : 'mt-6']">
+  <div :class="[shopping.inAdmin ? '' : 'mt-6']">
     <form class="space-y-4" action="#" method="POST">
       <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">Memorial Information</h2>
       <div>

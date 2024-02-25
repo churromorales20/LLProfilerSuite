@@ -23,8 +23,16 @@
         Country
       </label>
       <div class="mt-1">
-        <USelect size="md" color="primary" @blur="shopping.validate()" icon="i-mdi-earth"
-          placeholder="Select address country" v-model="shippingAddress.country" :options="countries" />
+        <USelect 
+          size="md" 
+          color="primary" 
+          @blur="shopping.validate()" 
+          icon="i-mdi-earth"
+          placeholder="Select address country" 
+          v-model="shippingAddress.country" 
+          :options="countries" 
+          option-attribute="name" 
+        />
       </div>
     </div>
     <div>
@@ -73,7 +81,27 @@ const goToBook = () => {
 }
 const shopping = shoppingStore();
 const shippingAddress = computed(() => shopping.shippingAddress);
-const countries = ['United States', 'Canada', 'Mexico']
+const countries = [
+  { "name": "Argentina", "value": "AR" },
+  { "name": "Bolivia", "value": "BO" },
+  { "name": "Brazil", "value": "BR" },
+  { "name": "Chile", "value": "CL" },
+  { "name": "Colombia", "value": "CO" },
+  { "name": "Ecuador", "value": "EC" },
+  { "name": "Guyana", "value": "GY" },
+  { "name": "Paraguay", "value": "PY" },
+  { "name": "Peru", "value": "PE" },
+  { "name": "Suriname", "value": "SR" },
+  { "name": "Uruguay", "value": "UY" },
+  { "name": "Venezuela", "value": "VE" },
+  { "name": "Costa Rica", "value": "CR" },
+  { "name": "El Salvador", "value": "SV" },
+  { "name": "Guatemala", "value": "GT" },
+  { "name": "Honduras", "value": "HN" },
+  { "name": "Nicaragua", "value": "NI" },
+  { "name": "Panama", "value": "PA" },
+  { "name": "USA", "value": "US" }
+]
 </script>
 
 <style scoped>

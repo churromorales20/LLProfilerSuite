@@ -5,8 +5,8 @@
 
     <!-- Cart items -->
     <div v-for="(item, index) in order.items" :key="index" class="flex justify-between text-sm mb-2">
-      <span>{{ $t(`shopping.item${item.lang_tag}`) }}</span>
-      <CommonsNumbersCurency :amount="item.price" :currency="order.currency" />
+      <span>{{ $t(`shopping.item${item.lang_tag}`) }} x {{ (item.qty) }}</span>
+      <CommonsNumbersCurency :amount="item.price * item.qty" :currency="order.currency" />
     </div>
 
     <!-- Subtotal -->
@@ -55,12 +55,13 @@
         v-model="shopping.terms_conditions" 
       />
       <UButton
-        icon="i-mdi-google"
-        size="sm"
+        :icon="buttonInfo.icon"
+        size="md"
         color="primary"
         square
-        label="Continue"
-        :loading="false"
+        @click="continueNextStep"
+        :label="buttonInfo.label"
+        :loading="sendingOrder"
         :disabled="!shopping.isValid"
         block
       />
@@ -72,6 +73,31 @@
 
 <script setup>
 import { computed } from 'vue';
+const sendingOrder = ref(false);
+
+const continueNextStep = async () => {
+  if (shopping.viewStep === 1) {
+    shopping.shoppingMovetStep(2)
+  } else {
+    sendingOrder.value = true;
+    await shopping.sendOrder()
+    sendingOrder.value = false;
+  }
+}
+
+const buttonInfo = computed(() => {
+  if (shopping.viewStep === 1) {
+    return {
+      icon: 'i-fa6-solid-circle-chevron-right',
+      label: 'Continue',
+    }
+  }
+
+  return {
+    icon: 'i-mdi-cart-check',
+    label: 'Confirm order',
+  }
+}); 
 
 const shopping = shoppingStore();
 

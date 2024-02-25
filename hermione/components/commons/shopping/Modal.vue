@@ -1,7 +1,9 @@
 <template>
   <UButton 
     size="md" 
-    @click="isOpen = true"
+    @click="() => {
+      shopping.setModalStatus(true)
+    }"
     icon="i-fa6-solid-qrcode"
   >
     {{ $t('memorials.add_new') }}
@@ -11,6 +13,7 @@
     :ui="{
       width: 'll-card'
     }"
+    :prevent-close="preventClose"
   >
     <UCard 
       :ui="{ 
@@ -22,11 +25,19 @@
         divide: 'divide-y divide-gray-100 dark:divide-gray-800'
       }"
     >
-      <CommonsShopping :inModal="true"/>
+      <CommonsShopping :inAdmin="true"/>
     </UCard>
   </UModal>
 </template>
 <script setup>
-const isOpen = ref(false)
-
+const isOpen = computed({
+  get() {
+    return shopping.modalOpened
+  },
+  set() {
+    shopping.setModalStatus(false)
+  }
+});
+const shopping = shoppingStore();
+const preventClose = computed(() => shopping.viewStep === 3);
 </script>

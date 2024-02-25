@@ -3,4 +3,5 @@ export interface IOrderItem {
   lang_tag: string;
   price: number;
   discount: number;
+  qty: number;
 }

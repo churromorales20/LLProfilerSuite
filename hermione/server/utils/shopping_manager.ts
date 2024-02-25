@@ -28,7 +28,7 @@ export class LLShoppingManager {
     });
   }
 
-  private serializeRequest(request: IShoppingRequest) : string {
+  serializeRequest(request: IShoppingRequest) : string {
     const jsonStr = JSON.stringify(request);
     const base64Str = Buffer.from(jsonStr).toString('base64');
 
