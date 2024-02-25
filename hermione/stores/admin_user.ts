@@ -166,6 +166,67 @@ export const userAdminStore = defineStore('userAdminStore', {
       }
 
       return false;
+    },
+    async sendRecoverMail(emailValue: string) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`auth/recover`, {
+          email: emailValue,
+        });
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        return true
+      } catch (error: any) {
+        console.log('error', error.response);
+      }
+
+      return false;
+    },
+    async confirmRecover(code: string, password: string) {
+      try {
+        
+        const response = await internalApiFetcher.post<Object>(`auth/recover/confirm`,{
+          code,
+          password
+        })
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        return true
+      } catch (error: any) {
+        console.log('error', error.response);
+      }
+
+      return false;
+    },
+    async checkRecoverCode(code: string) {
+      try {
+        
+        const response = await internalApiFetcher.get<Object>(`auth/recover/confirm?code=${code}`)
+        
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+        
+        return true
+      } catch (error: any) {
+        console.log('error', error.response);
+      }
+
+      return false;
     }
   },
 })

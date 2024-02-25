@@ -4,7 +4,14 @@
       {{ $t('login.email') }}
     </label>
     <div class="mt-1">
-      <UInput color="primary" v-model="userEmail" icon="i-fa6-solid-envelope" size="md" type="email" />
+      <UInput 
+        color="primary" 
+        v-model="userEmail" 
+        icon="i-fa6-solid-envelope" 
+        size="md" 
+        type="email" 
+        :placeholder="$t('login.enter_email_address')"
+      />
       <p v-if="emailErrored" class="absolute font-medium text-sm text-red-500" :class="[!isShopping ? 'mt-1' : 'mt-0']">{{ emailErrored }}</p>
     </div>
   </div>
@@ -14,7 +21,15 @@
       {{ $t('login.pass') }}
     </label>
     <div class="mt-1">
-      <UInput color="primary" :ui="{ icon: { trailing: { pointer: '' } } }" v-model="userPassword" icon="i-fa6-solid-lock" size="md" :type="viewPassword ? 'text' : 'password'" >
+      <UInput 
+        color="primary" 
+        :ui="{ icon: { trailing: { pointer: '' } } }" 
+        :placeholder="$t('login.enter_password')"
+        v-model="userPassword" 
+          icon="i-fa6-solid-lock" 
+          size="md" 
+          :type="viewPassword ? 'text' : 'password'" 
+        >
         <template #trailing>
           <UButton
             @click="() => {
@@ -33,9 +48,13 @@
 
   <div v-if="!isShopping" class="flex items-center justify-between">
     <div class="text-sm">
-      <a href="#" class="ll-text-bold text-llyellow-700 hover:text-llyellow-600">
+      <ULink
+        to="/auth/recover"
+        active-class="hover:text-llyellow-600"
+        inactive-class="ll-text-bold text-llyellow-700"
+      >
         {{ $t('login.forgot_pass') }}
-      </a>
+      </ULink>
     </div>
   </div>
   <div :class="[!isShopping ? '' : 'py-2']">
@@ -121,7 +140,7 @@ const validateAndSignIn = async () => {
     if (loginResult) {
       emits('user-logged', {});
       if (!isShopping) {
-        navigateTo('/dashboard')
+        window.location.href = '/'
       }
       
     }

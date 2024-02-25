@@ -30,7 +30,9 @@ const en = {
     'first_name_placeholder': 'Enter your First name',
     'last_name_placeholder': 'Enter your Last name',
     'pass_placeholder': 'Enter password',
-    'pass_confirm_placeholder': 'Enterpasswrod confirmation',
+    'pass_confirm_placeholder': 'Enter password confirmation',
+    'enter_email_address': 'Enter your email address',
+    'enter_password': 'Enter your password',
   },
   general: {
     'unexpected_error': 'Unexpected error ocurred.',

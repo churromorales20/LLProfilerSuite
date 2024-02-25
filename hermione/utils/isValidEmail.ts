@@ -1,3 +1,3 @@
 export default function (emailValue: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+  return emailValue !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
 };

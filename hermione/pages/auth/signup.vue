@@ -89,6 +89,7 @@
             color="primary" 
             icon="i-fa6-solid-lock"
             type="password"
+            size="md"
             :ui="{ icon: { trailing: { pointer: '' } } }" 
             v-model="userPasswordConfirm" 
             :placeholder="$t('login.pass_confirm_placeholder')"
