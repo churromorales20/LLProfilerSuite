@@ -101,7 +101,7 @@
   <div class="mb-4">
       <div class="field-container mt-2">
         <label for="name" class="block text-sm font-medium text-gray-700">
-          Name
+          {{ $t('shopping.credit_card_holder_name') }}
         </label>
         <div class="mt-1">
           <UInput 
@@ -109,13 +109,13 @@
             size="md" 
             color="primary" 
             icon="i-fa6-solid-user"
-            placeholder="Credit card holder name" 
+            :placeholder="$t('shopping.credit_card_name_placeholder')" 
           />
         </div>
       </div>
       <div class="field-container mt-2">
         <label for="cardnumber" class="block text-sm font-medium text-gray-700">
-          Card Number
+          {{ $t('shopping.credit_card_number') }}
         </label>
         <div class="mt-1">
           <UInput 
@@ -125,7 +125,7 @@
             size="md" 
             color="primary" 
             icon="i-mdi-credit-card"
-            placeholder="Credit card number" 
+            :placeholder="$t('shopping.credit_card_number_placeholder')" 
           />
         </div>
         <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@
       <div class="flex gap-4 colspan-row">
         <div class="field-container mt-2">
           <label for="expirationdate" class="block text-sm font-medium text-gray-700">
-            Expiration (mm/yy)
+            {{ $t('shopping.credit_card_expiration') }}
           </label>
           <div class="mt-1">
             <UInput 
@@ -145,7 +145,7 @@
               size="md" 
               color="primary" 
               icon="i-mdi-calendar"
-              placeholder="Expiration" 
+              :placeholder="$t('shopping.credit_card_expiration_placeholder')" 
             />
           </div>
         </div>

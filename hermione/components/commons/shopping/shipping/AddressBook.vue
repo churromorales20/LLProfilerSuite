@@ -24,7 +24,7 @@
       class="mt-4"
       @click="goToForm" 
       variant="outline" 
-      label="Add new address" 
+      :label="$t('shopping.new_address_btn')" 
     />
   </div>
 </template>

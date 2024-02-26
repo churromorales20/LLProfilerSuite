@@ -3,31 +3,31 @@
     <h2 class="text-lg font-semibold mb-4 pb-3 border-b border-gray-300">Confirm Order Details</h2>
     <!-- Customer Details -->
     <div class="mb-6">
-      <h3 class="text-md font-semibold mb-2">Customer Details:</h3>
-      <p class="text-sm"><span class="font-semibold">Name:</span> {{ orderDetails.first_name }} {{ orderDetails.last_name }}</p>
-      <p class="text-sm"><span class="font-semibold">Email:</span> {{ orderDetails.email }}</p>
+      <h3 class="text-md font-semibold mb-2">{{ $t('shopping.customer_details') }}:</h3>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.customer_name') }}:</span> {{ orderDetails.first_name }} {{ orderDetails.last_name }}</p>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.customer_email') }}:</span> {{ orderDetails.email }}</p>
       <!-- Add more customer details as needed -->
     </div>
     
     <div class="mb-6">
-      <h3 class="text-md font-semibold mb-2">Memorial (plaque):</h3>
-      <p class="text-sm"><span class="font-semibold">Name:</span> {{ orderDetails.memorial_first_name }}</p>
-      <p class="text-sm"><span class="font-semibold">Last name:</span> {{ orderDetails.memorial_last_name }}</p>
+      <h3 class="text-md font-semibold mb-2">{{ $t('shopping.memorial_plaque') }}:</h3>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.customer_name') }}:</span> {{ orderDetails.memorial_first_name }}</p>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.customer_last_name') }}:</span> {{ orderDetails.memorial_last_name }}</p>
       <!-- Add more shipping details as needed -->
     </div>
 
     <div class="mb-6">
-      <h3 class="text-md font-semibold mb-2">Shipping Details:</h3>
-      <p class="text-sm"><span class="font-semibold">Address:</span> {{ shippingAddressInfo.address_line_1 }}, {{ shippingAddressInfo.city }}, {{ shippingAddressInfo.state }}, {{ shippingAddressInfo.postal_code }}, {{ shippingAddressInfo.country }}</p>
-      <p class="text-sm"><span class="font-semibold">Shipping Reference:</span> {{ shippingAddressInfo.reference }}</p>
+      <h3 class="text-md font-semibold mb-2">{{ $t('shopping.shipping_details') }}:</h3>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.address') }}:</span> {{ shippingAddressInfo.address_line_1 }}, {{ shippingAddressInfo.city }}, {{ shippingAddressInfo.state }}, {{ shippingAddressInfo.postal_code }}, {{ shippingAddressInfo.country }}</p>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.shipping_reference') }}:</span> {{ shippingAddressInfo.reference }}</p>
       <!-- Add more shipping details as needed -->
     </div>
 
     <!-- Credit Card Details -->
     <div class="mb-6">
-      <h3 class="text-md font-semibold mb-2">Payment Details:</h3>
-      <p class="text-sm"><span class="font-semibold">Credit card:</span> {{ maskCreditCard }}</p>
-      <p class="text-sm"><span class="font-semibold">Cardholder Name:</span> {{ orderDetails.cardholder_name }}</p>
+      <h3 class="text-md font-semibold mb-2">{{ $t('shopping.payment_details') }}:</h3>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.credit_card') }}:</span> {{ maskCreditCard }}</p>
+      <p class="text-sm"><span class="font-semibold">{{ $t('shopping.credit_card_holder_name') }}:</span> {{ orderDetails.cardholder_name }}</p>
       <!-- Add more credit card details as needed -->
     </div>
      <UButton
@@ -36,7 +36,7 @@
         color="primary"
         variant="outline"
         @click="editOrderInfo"
-        label="Edit information"
+        :label="$t('shopping.edit_info_btn')"
       />
   </div>
 </template>

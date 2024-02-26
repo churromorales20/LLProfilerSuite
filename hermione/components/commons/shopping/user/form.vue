@@ -1,6 +1,6 @@
 <template>
   <form class="space-y-4" action="#" method="POST">
-    <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">Personal Information</h2>
+    <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('general.personal_info') }}</h2>
     <div>
       <label for="email" class="block text-sm font-medium text-gray-700">
         {{ $t('login.first_name') }}
@@ -65,7 +65,7 @@
         }"
       >
         <template #description>
-          This information will be utilized for user identification purposes on our platform.
+          {{ $t('shopping.account_data_info') }}
           <UTooltip 
             :ui="{
               base: 'h-6 p-4 text-md w-96 h-fit text-wrap font-bold relative',
@@ -73,10 +73,10 @@
             }"
             :popper="{ placement: 'right' }"
           >
-            <span class="cursor-pointer underline">Why?</span>
+            <span class="cursor-pointer underline">{{ $t('shopping.why_question') }}</span>
             <UIcon name="i-fa6-solid-circle-question" class="cursor-pointer ml-1 mt-0.5"/>
             <template #text>
-              <span>Please note, identification is required to access and edit your memorials. Once registration steps are completed, we'll send all account details, including your password, to the email address provided.</span>
+              <span>{{ $t('shopping.account_data_info_tooltip') }}</span>
             </template>
           </UTooltip>
         </template>

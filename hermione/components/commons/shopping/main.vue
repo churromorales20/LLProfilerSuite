@@ -5,12 +5,12 @@
         <div class="rounded-lg p-4">
           <div class="flex flex-col items-center mb-8">
             <UIcon name="i-fa6-solid-circle-check" class="text-green-500 text-6xl mb-4" />
-            <h2 class="text-xl font-semibold mb-2">Purchase Successful</h2>
+            <h2 class="text-xl font-semibold mb-2">{{ $t('shopping.purchase_successful') }}</h2>
           </div>
           <div class="space-y-4">
-            <p>Thank you very much for your trust!</p>
-            <p>We will start engraving your plaques as soon as possible. In the meantime, you can access the link and edit the information of the newly acquired Memorial from your dashboard.</p>
-            <p>All details of the recent transaction have been sent to your email.</p>
+            <p>{{ $t('shopping.purchase_successful_line_1') }}</p>
+            <p>{{ $t('shopping.purchase_successful_line_2') }}</p>
+            <p>{{ $t('shopping.purchase_successful_line_3') }}</p>
             <UButton
               icon="i-mdi-qrcode"
               size="md"
@@ -48,7 +48,7 @@
             <div class="flex items-center justify-center h-60vh" v-if="shopping.viewStep == 3">
               <div class="text-center">
                 <UIcon name="i-fa6-solid-circle-notch" class="text-llblue-600 animate-spin text-6xl" />
-                <h3 class="mt-4 text-lg font-semibold text-llblue-600">Placing order, plase wait...</h3>
+                <h3 class="mt-4 text-lg font-semibold text-llblue-600">{{ $t('shopping.placing_order') }}</h3>
               </div>
             </div>
           </transition>

@@ -34,7 +34,7 @@
   </transition>
   <transition name="fade" @after-leave="checkStep = 2">
     <div v-if="checkStep == 1">
-      <h2 class="text-lg font-semibold pb-3 border-b border-gray-300 mb-4">User Information</h2>
+      <h2 class="text-lg font-semibold pb-3 border-b border-gray-300 mb-4">{{ $t('shopping.user_info') }}</h2>
       <div class="flex border-b border-gray-200 pb-2 items-center mb-4 pb-4">
         <USkeleton :ui="uiOptions" class="h-14 w-14 mr-4" />
         <div class="space-y-2 w-5/6">

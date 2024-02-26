@@ -2,25 +2,36 @@
   <div class="space-y-4">
     <div>
       <label for="address" class="block text-sm font-medium text-gray-700">
-        Address
+        {{ $t('addresses.line_1') }}
       </label>
       <div class="mt-1">
-        <UInput size="md" color="primary" @blur="shopping.validate()" v-model="shippingAddress.address_line_1"
-          icon="i-mdi-home-plus" placeholder="Enter address line 1" />
+        <UInput 
+          size="md" 
+          color="primary" 
+          @blur="shopping.validate()" 
+          v-model="shippingAddress.address_line_1"
+          icon="i-mdi-home-plus" 
+          :placeholder="$t('addresses.line_1_placeholder')" 
+        />
       </div>
     </div>
     <div>
       <label for="address" class="block text-sm font-medium text-gray-700">
-        Reference
+        {{ $t('addresses.reference') }}
       </label>
       <div class="mt-1">
-        <UInput size="md" color="primary" v-model="shippingAddress.reference" icon="i-mdi-map-marker-path"
-          placeholder="Reference to address" />
+        <UInput 
+          size="md" 
+          color="primary" 
+          v-model="shippingAddress.reference" 
+          icon="i-mdi-map-marker-path"
+          :placeholder="$t('addresses.reference_placeholder')" 
+        />
       </div>
     </div>
     <div>
       <label for="country" class="block text-sm font-medium text-gray-700">
-        Country
+        {{ $t('addresses.country') }}
       </label>
       <div class="mt-1">
         <USelect 
@@ -28,7 +39,7 @@
           color="primary" 
           @blur="shopping.validate()" 
           icon="i-mdi-earth"
-          placeholder="Select address country" 
+          :placeholder="$t('addresses.country_placeholder')"
           v-model="shippingAddress.country" 
           :options="countries" 
           option-attribute="name" 
@@ -37,29 +48,47 @@
     </div>
     <div>
       <label for="state" class="block text-sm font-medium text-gray-700">
-        State
+        {{ $t('addresses.state') }}
       </label>
       <div class="mt-1">
-        <UInput size="md" color="primary" @blur="shopping.validate()" v-model="shippingAddress.state"
-          icon="i-fa6-solid-flag" placeholder="Address state" />
+        <UInput 
+          size="md" 
+          color="primary" 
+          @blur="shopping.validate()" 
+          v-model="shippingAddress.state"
+          icon="i-fa6-solid-flag" 
+          :placeholder="$t('addresses.state_placeholder')"
+        />
       </div>
     </div>
     <div>
       <label for="city" class="block text-sm font-medium text-gray-700">
-        City
+        {{ $t('addresses.city') }}
       </label>
       <div class="mt-1">
-        <UInput size="md" color="primary" @blur="shopping.validate()" v-model="shippingAddress.city"
-          icon="i-fa6-solid-city" placeholder="Addres city EG: new york" />
+        <UInput 
+          size="md" 
+          color="primary" 
+          @blur="shopping.validate()" 
+          v-model="shippingAddress.city"
+          icon="i-fa6-solid-city" 
+          :placeholder="$t('addresses.city_placeholder')"
+        />
       </div>
     </div>
     <div>
       <label for="zip" class="block text-sm font-medium text-gray-700">
-        ZIP Code
+        {{ $t('addresses.zip_code') }}
       </label>
       <div class="mt-1">
-        <UInput size="md" color="primary" @blur="shopping.validate()" v-model="shippingAddress.postal_code"
-          icon="i-mdi-mailbox" placeholder="Address zip code" />
+        <UInput 
+          size="md" 
+          color="primary" 
+          @blur="shopping.validate()" 
+          v-model="shippingAddress.postal_code"
+          icon="i-mdi-mailbox" 
+          :placeholder="$t('addresses.zip_code_placeholder')"
+        />
       </div>
     </div>
     <UButton 
@@ -68,7 +97,7 @@
       size="md" 
       @click="goToBook" 
       variant="outline" 
-      label="Select from address book" 
+      :label="$t('addresses.select_address_btn')" 
     />
   </div>
 </template>

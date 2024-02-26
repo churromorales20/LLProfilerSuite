@@ -1,7 +1,7 @@
 <!-- OrderSummary.vue -->
 <template>
   <div>
-    <h2 class="text-lg font-semibold mb-4 pb-3 border-b border-gray-300">Order Summary</h2>
+    <h2 class="text-lg font-semibold mb-4 pb-3 border-b border-gray-300">{{ $t('shopping.order_summary') }}</h2>
 
     <!-- Cart items -->
     <div v-for="(item, index) in order.items" :key="index" class="flex justify-between text-sm mb-2">
@@ -11,13 +11,13 @@
 
     <!-- Subtotal -->
     <div class="flex border-t border-gray-300 mt-4 pt-4 justify-end gap-2 gap-2 text-sm mb-2">
-      <span>Subtotal:</span>
+      <span>{{ $t('shopping.sub_total') }}:</span>
       <span><CommonsNumbersCurency :amount="shopping.subTotal" :currency="order.currency" /></span>
     </div>
 
     <!-- Taxes -->
     <div class="flex justify-end gap-2 text-sm mb-2">
-      <span>Taxes:</span>
+      <span>{{ $t('shopping.taxes') }}:</span>
       <span>
         <CommonsNumbersCurency :amount="0" :currency="order.currency" />  
       </span>
@@ -25,7 +25,7 @@
 
     <!-- Shipping -->
     <div class="flex justify-end gap-2 text-sm mb-2">
-      <span>Shipping:</span>
+      <span>{{ $t('shopping.shipping_total') }}:</span>
       <span>
         <CommonsNumbersCurency :amount="order.delivery" :currency="order.currency" />  
       </span>
@@ -33,13 +33,13 @@
 
     <!-- Discount -->
     <div class="flex justify-end gap-2 text-sm mb-2">
-      <span>Discount:</span>
+      <span>{{ $t('shopping.discount_total') }}:</span>
       <span>-<CommonsNumbersCurency :amount="shopping.totalDiscount" :currency="order.currency" /></span>
     </div>
 
     <!-- Total -->
     <div class="flex justify-end gap-2">
-      <span class="font-semibold text-md">Total:</span>
+      <span class="font-semibold text-md">{{ $t('shopping.grand_total') }}:</span>
       <span class="font-semibold text-md">
         <CommonsNumbersCurency :amount="orderTotal" :currency="order.currency" />
       </span>
@@ -51,7 +51,7 @@
         }"
         class="mb-2" 
         color="primary" 
-        label="Acepted our terms and conditions" 
+        :label="$t('shopping.terms_conditions')" 
         v-model="shopping.terms_conditions" 
       />
       <UButton
@@ -74,6 +74,7 @@
 <script setup>
 import { computed } from 'vue';
 const sendingOrder = ref(false);
+const locale = useI18n()
 
 const continueNextStep = async () => {
   if (shopping.viewStep === 1) {
@@ -89,13 +90,13 @@ const buttonInfo = computed(() => {
   if (shopping.viewStep === 1) {
     return {
       icon: 'i-fa6-solid-circle-chevron-right',
-      label: 'Continue',
+      label: locale.t('shopping.continue_order'),
     }
   }
 
   return {
     icon: 'i-mdi-cart-check',
-    label: 'Confirm order',
+    label: locale.t('shopping.confirm_order'),
   }
 }); 
 

@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white rounded-md shadow-md">
     <div class="mb-2 pb-3 border-b border-gray-300 flex justify-between">
-      <h2 class="text-lg font-semibold">Identified as</h2>
+      <h2 class="text-lg font-semibold">{{ $t('general.identified_as') }}</h2>
       <UButton 
         color="primary" 
         size="xs" 
         variant="link"
         @click="changeUser"
-      >Change user</UButton>
+      >{{ $t('general.change_user') }}</UButton>
     </div>
     <div class="p-2">
       <div class="flex items-center mb-4">
@@ -21,9 +21,8 @@
           </h4>
         </div>
       </div>
-      <p class="mb-4 text-sm">We extend a warm welcome and heartfelt thanks for choosing our services. Your trust is
-        truly appreciated.</p>
-      <p class="text-sm">Sincerely,</p>
+      <p class="mb-4 text-sm">{{ $t('general.user_welcome_line_1') }}</p>
+      <p class="text-sm">{{ $t('general.user_welcome_line_2') }},</p>
       <p class="text-sm font-semibold">Legacy Link Staff</p>
     </div>
   </div>

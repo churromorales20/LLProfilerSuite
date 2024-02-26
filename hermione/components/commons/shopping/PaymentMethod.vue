@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text-lg font-semibold mt-6 pb-3 border-b border-gray-300">Payment Information</h2>
+  <h2 class="text-lg font-semibold mt-6 pb-3 border-b border-gray-300">{{ $t('shopping.payment_info') }}</h2>
   <CommonsCreditCard @card-updated="updateCard" />
   <img src="/credit_cards.png" />
 </template>

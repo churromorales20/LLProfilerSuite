@@ -1,7 +1,7 @@
 <template>
   <div class="mt-6">
     <h2 class="text-lg font-semibold pb-3 mb-4 border-b border-gray-300">
-      {{ shopping.shippingViewStep == 3 ? 'Select shipping address' : 'Shipping address' }}
+      {{ shopping.shippingViewStep == 3 ?$t('addresses.select_shipping_address') :$t('addresses.shipping_address_title') }}
     </h2>
     <transition name="fade" @after-leave="red">
       <CommonsShoppingShippingForm v-if="shopping.shippingViewStep == 2"/>

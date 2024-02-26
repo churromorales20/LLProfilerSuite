@@ -1,10 +1,10 @@
 <template>
   <div :class="[shopping.inAdmin ? '' : 'mt-6']">
     <form class="space-y-4" action="#" method="POST">
-      <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">Memorial Information</h2>
+      <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('shopping.memorial_info') }}</h2>
       <div>
         <label for="address" class="block text-sm font-medium text-gray-700">
-          First name
+          {{ $t('shopping.customer_name') }}
         </label>
         <div class="mt-1">
           <UInput 
@@ -13,13 +13,13 @@
             @blur="shopping.validate()"
             v-model="memorialInfo.first_name" 
             icon="i-mdi-account-heart"
-            placeholder="Memorial first name" 
+            :placeholder="$t('shopping.memorial_first_name')" 
           />
         </div>
       </div>
       <div>
         <label for="country" class="block text-sm font-medium text-gray-700">
-          Last name
+          {{ $t('shopping.customer_last_name') }}
         </label>
         <div class="mt-1">
           <UInput 
@@ -28,7 +28,7 @@
             @blur="shopping.validate()"
             v-model="memorialInfo.last_name" 
             icon="i-mdi-account-heart"
-            placeholder="Memorial last name" 
+            :placeholder="$t('shopping.memorial_last_name')" 
           />
         </div>
       </div>

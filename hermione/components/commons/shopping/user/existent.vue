@@ -1,13 +1,13 @@
 <template>
   <div class="mt-4">
-    <UDivider class="mb-2" label="You can also identify using:" />
+    <UDivider class="mb-2" :label="`${$t('login.also_identify_using')}:`" />
     <div class="flex space-x-2">
       <UButton
         :icon="view == 'new_user_form' ? 'i-fa6-solid-envelope' : 'i-fa6-solid-plus'"
         size="sm"
         color="primary"
         square
-        :label="view == 'new_user_form' ? 'Email' : 'New Account'"
+        :label="view == 'new_user_form' ? $t('shopping.customer_email') : $t('login.new_account')"
         variant="outline"
         :disabled="isFetchingUrl"
         @click="setFormView()"
