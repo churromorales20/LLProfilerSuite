@@ -1,12 +1,5 @@
 <template>
-  <div>
-    <template v-if="profileStore.loaded == true">
-      <ProfileDetails />
-    </template>
-    <template v-else>
-      <h5>LODING</h5>
-    </template>
-  </div>
+  <ProfileDetails />
 </template>
 
 <script setup>

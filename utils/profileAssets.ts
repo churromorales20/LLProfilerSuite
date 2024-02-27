@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { sendStream } from 'h3'
-
+import { storageHandler } from './storageHandler'
 export default defineEventHandler(async (event) => {
   const assetname = getRouterParam(event, 'assetname') as string;
   const directory = getRouterParam(event, 'directory') as string;

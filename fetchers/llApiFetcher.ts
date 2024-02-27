@@ -5,6 +5,7 @@ import { NodeEventContext } from "h3";
 export class LLApiFetcher {
   protected apiUrl = `${process.env.LL_API_PROFILE}`;
   protected nodeEvent: null | NodeEventContext = null;
+  public loadAuthCookie = true;
 
   constructor(nodeEvent: null | NodeEventContext) {
     this.nodeEvent = nodeEvent;
@@ -41,7 +42,7 @@ export class LLApiFetcher {
       result: 'success',
     }
     
-    const authCookie = this._getAuthCookie();
+    const authCookie = this.loadAuthCookie ? this._getAuthCookie() : null;
     
     try {
       const apiResponse = await (
@@ -50,6 +51,7 @@ export class LLApiFetcher {
           body: type !== 'GET' ? data : null,
           headers: authCookie ? {
             'Authorization': `Bearer ${authCookie.auth_token.token}`,
+            //"Content-Type": "multipart/form-data"
           } : {},
           async onResponseError({ request, response, options }) {
             toResponse.code = response.status;

@@ -11,7 +11,7 @@
         class="drop-shadow"
         v-if="!avatarWorking" 
         size="3xl" 
-        :src="`/profiles/assets/${memorial.code}/${memorial.avatar}`"
+        :src="memorial.avatar ? `/profiles/assets/${memorial.code}/${memorial.avatar}`: null"
         :alt="`${memorial.first_name} ${memorial.last_name}`" 
       />
       <div v-else>

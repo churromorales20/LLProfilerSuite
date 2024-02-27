@@ -1,58 +1,34 @@
 <template>
-  <div class="p-8">
-    <div class="max-w-2xl mx-auto">
-      <!-- Encabezado del perfil -->
-      <div class="text-center mb-6">
-        <h1 class="ll-title font-bold">{{ profile.first_name }} {{ profile.last_name }}</h1>
-        <p v-if="!isEmptyString(profile.uname)" class="ll-uname-text">{{ profile.uname }}</p>
-      </div>
+  <div class="text-sm">
+    <ProfileHeader />
 
-      <!-- Información personal -->
-      <div class="ll-box-text ll-box p-6 ll-rounded shadow-md mb-6">
-        <h2 class="ll-box-title font-semibold mb-4">Información Personal</h2>
-        <div v-if="!isEmptyString(profile.born_date)">
-          <strong>Fecha de Nacimiento:</strong> {{ profile.born_date }}
-        </div>
-        <div v-if="!isEmptyString(profile.death_date)">
-          <strong>Fecha de Muerte:</strong> {{ profile.death_date }}
-        </div>
-        <div v-if="!isEmptyString(profile.born_place)">
-          <strong>Lugar de Nacimiento:</strong> {{ profile.born_place }}
-        </div>
-        <div v-if="!isEmptyString(profile.nickname)">
-          <strong>Apodo:</strong> {{ profile.nickname }}
+    <div class="container mx-auto px-2 flex flex-col lg:flex-row">
+      <div class="lg:w-1/3 px-4 py-1">
+        <ProfilePersonalInfo />
+        
+        <ImagesSection />
+        <div class="bg-white shadow rounded-lg p-4">
+          <h2 class="text-lg font-bold mb-2">Videos</h2>
         </div>
       </div>
 
-      <!-- Biografía -->
-      <div v-if="!isEmptyString(profile.bio)" class="ll-box p-6 ll-rounded shadow-md mb-6">
-        <h2 class="ll-box-title font-semibold mb-4">Biografía</h2>
-        <p class="ll-box-text">{{ profile.bio }}</p>
-      </div>
-
-      <!-- Obituario -->
-      <div v-if="!isEmptyString(profile.obituary)" class="ll-box p-6 ll-rounded shadow-md mb-6">
-        <h2 class="ll-box-title font-semibold mb-4">Obituario</h2>
-        <p class="ll-box-text">{{ profile.obituary }}</p>
-      </div>
-
-      <!-- Galería de imágenes -->
-      <div v-if="profile.images.length > 0" class="ll-box p-6 ll-rounded shadow-md mb-6">
-        <h2 class="ll-box-title font-semibold mb-4">Galería de Imágenes</h2>
-        <div class="grid grid-cols-2 gap-4">
-          <!-- Iterar sobre las imágenes en el array -->
-          <img v-for="(image, index) in profile.images" :key="index" :src="image" alt="Imagen del perfil"
-            class="w-full h-auto ll-rounded">
+      <div class="lg:w-2/3 px-4 py-1">
+        <div class="bg-white shadow rounded-lg p-4 mb-4">
+          <!-- Obituario -->
+          <div>
+            <h2 class="text-xl font-bold mb-2">Obituario</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae sapien et odio dictum rutrum. In hac habitasse platea dictumst.</p>
+          </div>
         </div>
-      </div>
-
-      <!-- Videos de YouTube -->
-      <div v-if="profile.videos.length > 0" class="ll-box p-6 ll-rounded shadow-md mb-6">
-        <h2 class="ll-box-title font-semibold mb-4">Videos de YouTube</h2>
-        <div class="grid grid-cols-2 gap-4">
-          <!-- Iterar sobre los videos en el array -->
-          <iframe v-for="(video, index) in profile.videos" :key="index" :src="video" width="100%" height="250"
-            frameborder="0" allowfullscreen></iframe>
+        <!-- Biografía -->
+        <div class="bg-white shadow rounded-lg p-4 mb-4">
+          <h2 class="text-xl font-bold mb-2">Biografía</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae sapien et odio dictum rutrum. In hac habitasse platea dictumst.</p>
+        </div>
+        <!-- Comentarios -->
+        <div class="bg-white shadow rounded-lg p-4">
+          <h2 class="text-xl font-bold mb-2">Últimos Comentarios</h2>
+          <!-- Aquí podrías incluir la sección de comentarios -->
         </div>
       </div>
     </div>
@@ -60,7 +36,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 const profileStore = useProfileStore()
 const profile = computed(() => profileStore.profile);
 </script>

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { apiFetcher } from "@/server/utils/llApiFetcher";
-import { IProfileUIResponse } from '~/interfaces/ProfileUIResponse';
+import { apiFetcher } from "@ll-fetchers/llApiFetcher";
+import { IProfileUIResponse } from '@ll-interfaces/IProfileUIResponse';
 
 class ProfileCssProcessor {
 
@@ -33,8 +33,12 @@ class ProfileCssProcessor {
     return this.resultantCss;
   }
   private async fetch(){
+    apiFetcher.loadAuthCookie = false;
     const response = await apiFetcher.get<IProfileUIResponse>(`profile/ui/${this.identifier}`);
-
+    console.log('response');
+    console.log('response');
+    console.log(response);
+    
     if (response.code !== null) {
       this.profileUI = {
         ...this.profileUI,
@@ -128,6 +132,5 @@ class ProfileCssProcessor {
 
 export const cssProc = async (identifier: string): Promise<string> =>{
   const profileCssProcessor = new ProfileCssProcessor(identifier);
-  console.log('CONTRUYOOO'); 
   return profileCssProcessor.get();
 }

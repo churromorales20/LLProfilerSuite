@@ -6,13 +6,27 @@
       <UButton v-if="images.length > 0" size="md" variant="outline" @click="pickFile" :loading="isUploading"
         label="Add images" icon="i-fa6-solid-file-circle-plus" />
     </div>
-    <UCarousel 
+    <!--<UCarousel 
       id="_profile_gallery_images_"
       v-if="images.length > 0 && editorStore.showSlider" 
       v-slot="{ item, index }" 
       indicators
       class="rounded-lg overflow-hidden mb-2" 
       :items="images" 
+      
+      :ui="{ item: 'md:w-fit lg:w-fit' }"
+    >
+      <CommonsImage :imageUrl="item" :index="index" />
+    </UCarousel>
+    <div v-if="images.length > 0 && editorStore.showSlider" id="_profile_gallery_images_">
+      <CommonsImage v-for="item, index in images" :imageUrl="item" :index="index" />
+    </div>-->
+    <UCarousel
+      class="rounded-lg overflow-hidden mb-2" 
+      id="_profile_gallery_images_"
+      v-if="images.length > 0 && editorStore.showSlider"  
+      v-slot="{ item, index }" 
+      :items="images"
       :ui="{ item: 'md:w-fit lg:w-fit' }"
     >
       <CommonsImage :imageUrl="item" :index="index" />
@@ -48,6 +62,16 @@ const isUploading = computed(() => imagesPicker.imageWorking);
 const images = computed(() => {
   return editorStore.memorial.images
 });
+
+const items = [
+  'https://picsum.photos/600/800?random=1',
+  'https://picsum.photos/600/800?random=2',
+  'https://picsum.photos/600/800?random=3',
+  'https://picsum.photos/600/800?random=4',
+  'https://picsum.photos/600/800?random=5',
+  'https://picsum.photos/600/800?random=6'
+]
+
 
 const pickFile = () => {
   fileInput.value.click();

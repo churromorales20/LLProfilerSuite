@@ -5,6 +5,9 @@ import colors from 'tailwindcss/colors'
 export default <Partial<Config>>{
   theme: {
     extend: {
+      height: {
+        '50vh': '50vh',
+      },
       colors: {
         llblue: {
           50: '#3E5EFF',

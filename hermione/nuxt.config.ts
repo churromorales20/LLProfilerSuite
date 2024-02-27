@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import path from 'path';
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
@@ -24,7 +25,6 @@ export default defineNuxtConfig({
     exposeConfig: false,
     exposeLevel: 2,
     config: {},
-    injectPosition: 'first',
     viewer: true,
   },
   ui: {
@@ -38,4 +38,13 @@ export default defineNuxtConfig({
     '@ll-fetchers': path.resolve(__dirname, '../fetchers'),
     '@ll-utils': path.resolve(__dirname, '../utils'),
   },
+  vite:{
+    build: {
+      rollupOptions: {
+        external: [
+          "sharp"
+        ]
+      }
+    }
+  }
 })

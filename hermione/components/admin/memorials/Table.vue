@@ -10,7 +10,7 @@
     <template #avatar-data="{ row }">
       <UAvatar 
         :alt="`${row.first_name}${row.last_name}`" 
-        :src="`/profiles/assets/${row.code}/${row.avatar}`" 
+        :src="row.avatar ? `/profiles/assets/${row.code}/${row.avatar}` : null" 
         size="md" 
       />
     </template>

@@ -1,7 +1,9 @@
 <template>
-  <UModal v-model="isOpen" :ui="{
-    width: 'll-card'
-  }">
+  <UModal 
+    v-model="isOpen" 
+    :ui="{
+      width: 'll-card'
+    }">
     <UCard :ui="{ 
       ring: '', 
       body: {

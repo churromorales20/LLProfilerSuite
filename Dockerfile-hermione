@@ -1,0 +1,50 @@
+
+# Use the official Node.js 18.19.0 image
+FROM node:18-alpine
+
+RUN mkdir /source
+RUN mkdir /source/app
+RUN mkdir /source/fetchers
+RUN mkdir /source/interfaces
+RUN mkdir /source/utils
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /source
+
+# Copia el package.json y package-lock.json para instalar las dependencias
+COPY ./hermione/package*.json ./app/
+
+# Copia los archivos de la aplicación, excepto el directorio que deseas omitir
+COPY ./hermione ./app
+COPY ./fetchers ./fetchers
+COPY ./interfaces ./interfaces
+COPY ./utils ./utils
+# Ejecuta el comando de construcción (build) de Nuxt.js
+WORKDIR /source/app
+RUN ls -all
+
+RUN npm install --platform=linuxmusl --arch=x64 --include=optional --force sharp 
+
+RUN npx nuxi build
+
+# Crea un directorio para el output de la aplicación
+RUN mkdir /app-output
+
+# Copia el output de la aplicación al nuevo directorio
+RUN cp -r .output/. /app-output
+
+WORKDIR /source
+
+# Elimina los archivos de la aplicación en el directorio de trabajo
+RUN rm -rf ./*
+
+# Establece el directorio de trabajo para el output de la aplicación
+WORKDIR /app-output
+
+# Compilar la aplicación (si es necesario)
+# RUN npm run build
+
+# Exponer el puerto en el que la aplicación se ejecutará
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD ["node", "server/index.mjs"]

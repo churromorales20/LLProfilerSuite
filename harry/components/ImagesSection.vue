@@ -1,0 +1,59 @@
+<template>
+  <UModal 
+    v-model="isOpen" 
+    :ui="{
+      width: 'll-card',
+      overlay: {
+        background: 'bg-black/75 dark:bg-gray-800/75',
+      }
+    }"
+  >
+    <UCard :ui="{
+      ring: '',
+      body: {
+        background: 'bg-zinc-200',
+        base: 'll-modal-editor-body',
+      },
+      divide: 'divide-y divide-gray-100 dark:divide-gray-800'
+    }">
+      <template #header>
+        <div class="flex justify-between">
+          <h2 class="font-semibold text-xl">Images</h2>
+          <UButton 
+            icon="i-fa6-solid-ban" 
+            size="md"
+            color="amber" 
+            label="Close"
+          />
+        </div>
+      </template>
+      <ImagesDisplayer 
+        :inModal="true"  
+        :imagesLimit="3"
+        gridCols="grid-cols-6"
+      />
+    </UCard>
+  </UModal>
+  <div class="bg-white shadow rounded-lg p-4 mb-4">
+    <h2 class="text-lg font-bold mb-2">Imagenes</h2>
+    <ImagesDisplayer />
+  </div>
+</template>
+<script setup>
+const profileStore = useProfileStore()
+
+const isOpen = computed({
+  get(){
+    return profileStore.isImageGalleryOpened;
+  },
+  set(newVal){
+    profileStore.toggleImageGallery(false)
+  }
+});
+</script>
+<style>
+.ll-card {
+    width: 70vw;
+    max-width: 960px;
+}
+</style>
