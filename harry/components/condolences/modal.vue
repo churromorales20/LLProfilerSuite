@@ -19,7 +19,7 @@
     }">
       <template #header>
         <div class="flex justify-between">
-          <h2 class="font-semibold text-xl">Leave an entry</h2>
+          <h2 class="font-semibold text-xl">{{ $t('condolences.modal_title') }}</h2>
         </div>
       </template> 
       <CondolencesForm />
@@ -32,7 +32,7 @@
             @click="wallStore.toggleNewEntryModal(false)"
             variant="outline"
             color="amber" 
-            label="Cancel"
+            :label="$t('condolences.modal_cancel_btn')"
           />
           <UButton 
             class="ml-2"
@@ -41,7 +41,7 @@
             :loading="isSendingEntry"
             @click="validateAndSend"
             color="sky" 
-            label="Send"
+            :label="$t('condolences.modal_send_btn')"
             />
         </div>
       </template>

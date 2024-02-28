@@ -25,7 +25,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
@@ -74,26 +73,3 @@ const profileStore = useProfileStore()
 const images = computed(() => profileStore.profile.images.slice(0, localLimit.value));
 const remainingImages = computed(() => profileStore.profile.images.length - localLimit.value);
 </script>
-<style>
-.image-container img {
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.zoomed {
-  transform: scale(1.2);
-  /* ajusta el valor de escala según sea necesario */
-}
-.show-more-images-btn {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  opacity: 0.7;
-}
-</style>

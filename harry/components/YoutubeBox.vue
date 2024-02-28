@@ -1,25 +1,19 @@
 <template>
-  <a
-    :href="!isShowMoreButton ? imageUrl : '#'" 
+  <a 
+    href="#" 
     @click.prevent="() => {
       if (isShowMoreButton) {
         btnShowMoreAction();
+      } else {
+        profileStore.setVideoViewing(videoId)
       }
-    }"
-    :data-pswp-src="imageUrl"  
-    data-pswp-width="800" 
-    data-pswp-height="800" 
+    }" 
     @mouseenter="isZoomed = true"
     @mouseleave="isZoomed = false" 
-    :class="{'image-profile': !isShowMoreButton }"
-    class="relative image-container w-full h-24 ll-rounded overflow-hidden"
-    >
-    <img 
-      :src="imageUrl" 
-      alt="imagen"
-      class="absolute" 
-      :class="{ 'zoomed': isZoomed }"
-    >
+    :class="{ 'image-profile': !isShowMoreButton }"
+    class="relative image-container w-full h-20  ll-rounded overflow-hidden"
+  >
+    <img :src="imageUrl" alt="imagen" class="absolute" :class="{ 'zoomed': isZoomed }">
     <div class="bg-black/75 show-more-images-btn" v-if="isShowMoreButton">
       + {{ remaining }}
     </div>
@@ -29,7 +23,7 @@
 <script setup>
 import { toRefs } from 'vue';
 const props = defineProps({
-  image: {
+  videoId: {
     type: String,
     required: true,
   },
@@ -44,12 +38,13 @@ const props = defineProps({
   btnShowMoreAction: {
     type: Function,
     required: false,
-    default: () => {}
+    default: () => { }
   },
 });
-const { image, remaining, isShowMoreButton, btnShowMoreAction } = toRefs(props);
+const { videoId, remaining, isShowMoreButton, btnShowMoreAction } = toRefs(props);
 
 const profileStore = useProfileStore()
-const imageUrl = computed(() => `/profiles/assets/${profileStore.profile.code}/${image.value}`);
+
+const imageUrl = computed(() => `https://img.youtube.com/vi/${videoId.value}/0.jpg`);
 const isZoomed = ref(false);
 </script>

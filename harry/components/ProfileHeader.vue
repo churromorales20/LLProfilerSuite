@@ -23,24 +23,26 @@
     </div>
     <div>
       <UButton 
+        v-if="wallActive"
         icon="i-mdi-notebook-heart" 
         size="md"
+        @click="wallStore.toggleNewEntryModal(true)"
         color="sky"
-        label="Leave condolence"
+        :label="$t('profile.btn_leave_condo')"
         class="mr-2"
       />
       <UButton 
         icon="i-mdi-share-variant" 
         size="md"
         color="sky"
-        label="Share"
+        :label="$t('profile.btn_share')"
         class="mr-2"
       />
       <UButton 
         icon="i-mdi-bell" 
         size="md"
         color="sky"
-        label="Suscribe"
+        :label="$t('profile.btn_subscribe')"
       />
     </div>
   </div>
@@ -48,6 +50,8 @@
 
 <script setup>
 const profileStore = useProfileStore()
+const wallActive = profileStore.profile.settings.condolences_wall;
+const wallStore = condolencesWallStore()
 const profile = computed(() => profileStore.profile);
 const fullName = computed(() => profileStore.fullName);
 </script>

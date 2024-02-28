@@ -10,9 +10,11 @@ export const useProfileStore = defineStore('profileStore', {
     profile: {} as IMemorial,
     loaded: false as boolean,
     image_gallery_opened: false as boolean,
+    video_gallery_opened: false as boolean,
     is_subdomain: false as boolean,
     code: null as string | null,
     uname: null as string | null,
+    video_viewing: null as string | null,
   }),
   getters: {
     isSubdomain: (state) => {
@@ -24,6 +26,15 @@ export const useProfileStore = defineStore('profileStore', {
     isImageGalleryOpened: (state) => {
       return state.image_gallery_opened;
     },
+    isVideoGalleryOpened: (state) => {
+      return state.video_gallery_opened;
+    },
+    isViewingVideo: (state) => {
+      return state.video_viewing !== null;
+    },
+    viewingVideoId: (state) => {
+      return state.video_viewing;
+    },
     
   },
   actions: {
@@ -33,8 +44,16 @@ export const useProfileStore = defineStore('profileStore', {
     toggleImageGallery(status: boolean) {
       this.image_gallery_opened = status;
     },
+    toggleVideoGallery(status: boolean) {
+      this.video_gallery_opened = status;
+    },
     setCode(code: string) {
       this.code = code;
+    },
+    setVideoViewing(videoId: string | null) {
+      console.log('{AAAPPP');
+      
+      this.video_viewing = videoId;
     },
     async fetchByCode(code: string) {
       this.error_code = null;

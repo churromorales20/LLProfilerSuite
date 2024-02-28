@@ -12,7 +12,7 @@
       </div>
       <p class="text-gray-500 text-sm">{{ entryDate }}</p>
     </div>
-    <p class="max-w-3xl text-gray-700 mb-2 text-sm">
+    <p class="max-w-3xl text-gray-700 text-sm">
       {{ entry.message_text }}
     </p>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <UModal 
-    v-model="isOpen" 
+    v-model="isGalleryOpen" 
     :ui="{
       width: 'll-card',
       overlay: {
@@ -18,7 +18,7 @@
     }">
       <template #header>
         <div class="flex justify-between">
-          <h2 class="font-semibold text-xl">Images</h2>
+          <h2 class="font-semibold text-xl">Videos</h2>
           <UButton 
             icon="i-fa6-solid-ban" 
             size="md"
@@ -27,33 +27,22 @@
           />
         </div>
       </template>
-      <ImagesDisplayer 
-        :inModal="true"  
-        :imagesLimit="3"
+      <VideosDisplayer 
+        :videosLimit="18"
+        :inModal="true"
         gridCols="grid-cols-6"
       />
     </UCard>
   </UModal>
-  <div class="bg-white shadow rounded-lg p-4 mb-4">
-    <h2 class="text-lg font-bold mb-2">{{ $t('profile.images') }}</h2>
-    <ImagesDisplayer />
-  </div>
 </template>
 <script setup>
 const profileStore = useProfileStore()
-
-const isOpen = computed({
-  get(){
-    return profileStore.isImageGalleryOpened;
+const isGalleryOpen = computed({
+  get() {
+    return profileStore.isVideoGalleryOpened;
   },
-  set(newVal){
-    profileStore.toggleImageGallery(false)
+  set() {
+    profileStore.toggleVideoGallery(false);
   }
 });
 </script>
-<style>
-.ll-card {
-    width: 70vw;
-    max-width: 960px;
-}
-</style>
