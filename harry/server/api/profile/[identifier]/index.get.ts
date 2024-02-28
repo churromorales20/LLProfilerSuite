@@ -1,12 +1,12 @@
-import { IProfileResponse } from "~/interfaces/ProfileResponse";
+import type { IProfileResponse } from "@ll-interfaces/IProfileResponse";
 import { apiFetcher } from "@/server/utils/llApiFetcher";
 export default defineEventHandler(async (event) => {
   const { node } = event;
   const identifier = getRouterParam(event, 'identifier') as string;
-  const fieldService = 
-    (/^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(identifier)) ? 
-      'code' 
-    : 
+  const fieldService =
+    (/^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(identifier)) ?
+      'code'
+      :
       'uname';
   const response = await apiFetcher.get<IProfileResponse>(`profile/${fieldService}/${identifier}`);
   if (response.code !== null) {
@@ -34,6 +34,6 @@ export default defineEventHandler(async (event) => {
       ]
     }
   } as IProfileResponse;*/
-  
+
   node.res.end(JSON.stringify(response));
 })

@@ -37,7 +37,7 @@
     </div>
   </transition>
 </template>
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from 'vue'
 import { format } from 'date-fns'
 

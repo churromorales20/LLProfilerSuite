@@ -1,5 +1,5 @@
 <template>
-  <div class="ll-main-custom h-screen flex justify-center">
+  <div class="ll-main-custom h-full pb-4 flex justify-center">
     <NuxtPage />
   </div>
 </template>

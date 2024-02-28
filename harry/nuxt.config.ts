@@ -13,7 +13,11 @@ export default defineNuxtConfig({
   ],
   css: [
     '@/assets/main.css',
+    'animate.css'
   ],
+  ui: {
+    icons: ['mdi'],
+  },
   serverHandlers: [
     { route: '/assets/css/:uuid/stylesheet.css', handler: '~/server/assets/stylesheet.ts' },
     { route: '/profiles/assets/:directory/:assetname', handler: '@ll-utils/profileAssets.ts' }

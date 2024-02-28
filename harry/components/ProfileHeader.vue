@@ -23,14 +23,21 @@
     </div>
     <div>
       <UButton 
-        icon="i-fa6-solid-ban" 
+        icon="i-mdi-notebook-heart" 
+        size="md"
+        color="sky"
+        label="Leave condolence"
+        class="mr-2"
+      />
+      <UButton 
+        icon="i-mdi-share-variant" 
         size="md"
         color="sky"
         label="Share"
         class="mr-2"
       />
       <UButton 
-        icon="i-fa6-solid-ban" 
+        icon="i-mdi-bell" 
         size="md"
         color="sky"
         label="Suscribe"

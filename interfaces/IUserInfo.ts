@@ -8,6 +8,5 @@ export interface IUserInfo {
 export enum UserInfoFields {
   LastName = 'last_name',
   FirstName = 'first_name',
-  Email = 'email',
-  Phrase = 'phrase'
+  Email = 'email'
 }

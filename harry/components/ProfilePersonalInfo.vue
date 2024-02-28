@@ -7,11 +7,18 @@
         <li><span class="font-bold">Fallecimiento:</span> Ciudad, País (DD/MM/AAAA)</li>
         <li><span class="font-bold">Relación:</span> Parentesco</li>
       </ul>
+      <ul v-show="viewMore" v-auto-animate>
+        <li><span class="font-bold">Nacimiento:</span> {{ getDateInfo(profile.born_date, profile.born_place) }}</li>
+        <li><span class="font-bold">Fallecimiento:</span> Ciudad, País (DD/MM/AAAA)</li>
+        <li><span class="font-bold">Relación:</span> Parentesco</li>
+      </ul>
+      <a href="#" @click="viewMore = !viewMore">MORE</a>
     </div>
   </div>
 </template>
 
 <script setup>
+import { vAutoAnimate } from '@formkit/auto-animate'
 const profileStore = useProfileStore()
 const profile = computed(() => profileStore.profile);
 const getDateInfo = (date, place) => {
@@ -23,4 +30,5 @@ const getDateInfo = (date, place) => {
 
   return !isEmptyString(dateInfo) ? dateInfo : '';
 }
+const viewMore = ref(false)
 </script>

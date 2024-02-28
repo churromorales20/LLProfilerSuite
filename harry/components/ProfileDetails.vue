@@ -13,23 +13,21 @@
       </div>
 
       <div class="lg:w-2/3 px-4 py-1">
-        <div class="bg-white shadow rounded-lg p-4 mb-4">
+        <div 
+          v-if="!isEmptyString(profile.obituary)" 
+            class="bg-white shadow rounded-lg p-4 mb-4">
           <!-- Obituario -->
           <div>
-            <h2 class="text-xl font-bold mb-2">Obituario</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae sapien et odio dictum rutrum. In hac habitasse platea dictumst.</p>
+            <h2 class="text-xl font-bold mb-2">Obituary</h2>
+            <p>{{ profile.obituary }}</p>
           </div>
         </div>
         <!-- Biografía -->
         <div class="bg-white shadow rounded-lg p-4 mb-4">
-          <h2 class="text-xl font-bold mb-2">Biografía</h2>
+          <h2 class="text-xl font-bold mb-2">Biografiii</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae sapien et odio dictum rutrum. In hac habitasse platea dictumst.</p>
         </div>
-        <!-- Comentarios -->
-        <div class="bg-white shadow rounded-lg p-4">
-          <h2 class="text-xl font-bold mb-2">Últimos Comentarios</h2>
-          <!-- Aquí podrías incluir la sección de comentarios -->
-        </div>
+        <Condolences />
       </div>
     </div>
   </div>

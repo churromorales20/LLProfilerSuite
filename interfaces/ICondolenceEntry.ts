@@ -11,3 +11,10 @@ interface IWallUser {
   last_name: string;
   first_name: string;
 }
+
+export enum EntryFormField {
+  LastName = 'last_name',
+  FirstName = 'first_name',
+  Email = 'email',
+  Entry = 'entry_text'
+}
