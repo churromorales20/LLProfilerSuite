@@ -18,3 +18,8 @@
   justify-content: center;
   font-size: 1.2rem;
 }
+.main-width {
+  width: 1200px;
+  max-width: 1200px;
+  min-width: 1200px;
+}

@@ -15,6 +15,12 @@ export default defineNuxtConfig({
     '@/assets/main.css',
     'animate.css'
   ],
+  tailwindcss: {
+    configPath: 'tailwind.config',
+    exposeConfig: false,
+    exposeLevel: 2,
+    config: {},
+  },
   ui: {
     icons: ['mdi'],
   },

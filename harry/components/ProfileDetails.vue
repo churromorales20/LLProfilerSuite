@@ -1,5 +1,5 @@
 <template>
-  <div class="text-sm unacosita">
+  <div class="text-sm main-width">
     <ProfileHeader />
 
     <div class="container mx-auto px-2 flex flex-col lg:flex-row">
@@ -8,6 +8,7 @@
         
         <ImagesSection />
         <VideosSection />
+        <GraveYardSection />
       </div>
 
       <div class="lg:w-2/3 px-4 py-1">
@@ -21,15 +22,7 @@
           </div>
         </div>
         <!-- Biografía -->
-        <div class="bg-white shadow rounded-lg p-4 mb-4">
-          <h2 class="text-xl font-bold mb-2">{{ $t('profile.biography') }}</h2>
-          <div class="p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
-            <p class="text-ellipsis h-96 overflow-hidden font-light leading-6">{{ profile.bio }}</p>
-          </div>
-          <div class="flex h-40 items-center justify-center" v-else>
-            <h4 class="text-sm">Nothing have been sharee dyet</h4>
-          </div>
-        </div>
+        <ProfileBiography />
         <Condolences />
       </div>
     </div>
@@ -40,10 +33,3 @@
 const profileStore = useProfileStore()
 const profile = computed(() => profileStore.profile);
 </script>
-<style scoped>
-.unacosita {
-  width:1200px;
-  max-width: 1200px;
-  min-width: 1200px;
-}
-</style>

@@ -30,6 +30,5 @@ const es = {
     'modal_cancel_btn': 'Cancel',
     'modal_send_btn': 'Send'
   }
-  
 }
 export default es;
