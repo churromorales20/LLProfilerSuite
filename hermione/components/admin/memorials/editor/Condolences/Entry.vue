@@ -37,7 +37,7 @@
     </div>
   </transition>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { format } from 'date-fns'
 
@@ -70,7 +70,6 @@ const currentStatus = computed({
     isUpdatingStatus.value = true;
     await condolencesStore.updateStatus(index, newStatus);
     isUpdatingStatus.value = false;
-    //showByStatus.value = checkDisplayByStatus();
   }
 });
 
@@ -78,9 +77,6 @@ const entry = computed(() => {
   return condolencesStore.list[index]
 });
 
-const checkDisplayByStatus = () => {
-  return condolencesStore.list[index].status === condolencesStore.filters.status
-};
 
 const entryDate = computed(() => {
   let dateEntry = condolencesStore.list[index].created_at;

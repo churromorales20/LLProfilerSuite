@@ -1,3 +1,4 @@
+import type { IGraveyardInfo } from "./IGraveyardInfo";
 import type { IProfileUIResponse } from "./IProfileUIResponse";
 
 interface IMemorialSettings {
@@ -30,4 +31,5 @@ export interface IMemorial {
   top_image?: string | null;
   custom_ui: IProfileUIResponse;
   settings: IMemorialSettings;
+  grave_yard_info: IGraveyardInfo | null;
 }

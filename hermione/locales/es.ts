@@ -177,6 +177,14 @@ const es = {
     'share_link_whatsapp': 'Compartir en Whatsapp',
     'share_link_copy': 'Copiar enlace',
     'config_condolences_require': 'Las entradas de condolencias requieren aprobación',
+  },
+  graveyard: {
+    'name': 'Información del cementerio',
+    'select': 'Seleccionar cementerio',
+    'search': 'Buscar por nombre o ciudad...',
+    'internal': 'Direcciones a la tumba',
+    'internal_placeholder': 'Ubicación interna de la tumba (por ejemplo, sección, parcela)',
+    'change': 'Cambiar cementerio'
   }
 };
 

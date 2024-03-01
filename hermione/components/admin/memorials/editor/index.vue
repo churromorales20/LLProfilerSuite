@@ -16,11 +16,15 @@
   >
     <template #general_info="{ item }">
       <AdminMemorialsEditorForm />
-      <AdminMemorialsEditorImages />
-      <AdminMemorialsEditorVideos />
     </template>
-    <template #memorials="{ item }">
+    <template #condolences="{ item }">
       <AdminMemorialsEditorCondolences />
+    </template>
+    <template #multimedia="{ item }">
+      <div class="mt-2">
+        <AdminMemorialsEditorImages />
+       <!-- <AdminMemorialsEditorVideos /> -->
+      </div>
     </template>
     <template #configurations="{ item }">
       <AdminMemorialsEditorConfig />
@@ -45,7 +49,12 @@ const tabs = [
     icon: 'i-fa6-solid-user-pen',
   }, 
   {
-    slot: 'memorials',
+    slot: 'multimedia',
+    label: 'Media',
+    icon: 'i-fa6-solid-photo-film',
+  },
+  {
+    slot: 'condolences',
     label: locale.t('memorials.condolences_wall_tab'),
     icon: 'i-fa6-solid-handshake-simple',
   },

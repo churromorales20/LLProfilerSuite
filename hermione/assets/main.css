@@ -11,3 +11,6 @@
   font-weight: 700;
   font-style: normal;
 }
+.min-h-112 {
+  min-height: 28rem;
+}

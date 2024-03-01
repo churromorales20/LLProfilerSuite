@@ -10,9 +10,12 @@
   </div>
 </template>
 
-<script>
-  const toggleMenu = () => {
-    const menu = document.querySelector('aside');
-    menu.classList.toggle('hidden');
-  }
+<script setup>
+const toggleMenu = () => {
+  const menu = document.querySelector('aside');
+  menu.classList.toggle('hidden');
+}
+if (process.server) {
+  useHead({ script: [{ src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_PLACES_KEY}&v=weekly`, defer: true }] });
+}
 </script>

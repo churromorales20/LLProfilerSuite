@@ -178,6 +178,14 @@ const en = {
     'share_link_copy': 'Copy link',
     'config_condolences_require': 'Condolences entries require approval',
   },
+  graveyard:{
+    'name': 'Graveyard information',
+    'select': 'Select graveyard',
+    'search': 'Search by name or city...',
+    'internal': 'Directions to grave',
+    'internal_placeholder ': '"Internal grave location (e.g., section, plot)',
+    'change': 'Change graveyard'
+  }
 };
 
 export default en;

@@ -48,7 +48,7 @@ const closeModal = () => {
 </script>
 <style>
   .ll-card {
-    min-width: 960px;
+    min-width: 1050px;
   }
   .ll-modal-editor-body{
     max-height: 85vh;

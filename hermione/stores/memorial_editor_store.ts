@@ -3,12 +3,15 @@ import type { ILLApiError } from '@ll-interfaces/ILLApiError';
 import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import type { IMemorial } from '@ll-interfaces/IMemorial';
 import type { IImageResponse } from '@ll-interfaces/IImageResponse';
+import type { IPlaceDetailedItem } from '@ll-interfaces/IAutocompleteItem';
+import type { GraveyardInfoFields } from '@ll-interfaces/IGraveyardInfo';
 
 export const memorialEditorStore = defineStore('memorialEditorStore', {
   state: () => ({
     error_code: null as number | null,
     is_working: true as boolean,
     show_form: true as boolean,
+    graveyard_pending: false as boolean,
     show_slider: true as boolean,
     show_slider_video: true as boolean,
     updating_attr: null as null | string,
@@ -20,6 +23,9 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    isGraveyardPending: (state) => {
+      return state.graveyard_pending;
     },
     settings: (state) => {
       return state.memorial?.settings;
@@ -54,6 +60,29 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       this.memorial_id = null;
       this.memorial = null;
       this.memorial_original = null;
+    },
+    setGraveyard(placeDetails: IPlaceDetailedItem){
+      this.memorial!.grave_yard_info = {
+        ...placeDetails,
+        internal_steps: ''
+      };
+      this.graveyard_pending = true;
+    },
+    resetGraveyard(){
+      this.memorial!.grave_yard_info = null;
+    },
+    updateGraveyardinfo(field: GraveyardInfoFields, value: string){
+      if (this.memorial!.grave_yard_info === null) {
+        this.memorial!.grave_yard_info = {
+          name: '',
+          phone_number: '',
+          city: '',
+          state: '',
+          country: '',
+        }
+      }
+      this.memorial!.grave_yard_info![field] = value;
+      this.graveyard_pending = true;
     },
     getOriginalValue(attr: string): string | boolean | null{
       switch (attr) {
@@ -430,6 +459,37 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
           this.error_code = 500
         }
         this.updating_attr = null;
+      }
+    },
+    async updateGraveyard(){
+      try {
+        let graveyarInfo = null
+        try {
+          graveyarInfo = JSON.stringify(this.memorial!.grave_yard_info)
+        } catch (error) {
+          
+        }
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/graveyard`, {
+          info: graveyarInfo
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+
+        }
+
+        this.graveyard_pending = false;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+        this.memorial_id = null;
+        if (error.response) {
+          this.error_code = error.response.code
+        } else {
+          this.error_code = 500
+        }
       }
     },
     async fetch(id: number) {
