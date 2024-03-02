@@ -13,10 +13,6 @@ export default defineEventHandler(async (event) => {
 
   if (cachedCssBuffer === null) {
     cachedCss = await cssProc(uuid);
-    console.log('cachedCss');
-    console.log('cachedCss');
-    console.log('cachedCss');
-    console.log(cachedCss);
     
     await memcached.set(cacheKey, cachedCss, { expires: 10 });
   } else {

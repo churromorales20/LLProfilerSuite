@@ -14,6 +14,7 @@
     "@nuxtjs/tailwindcss": "^6.11.2",
     "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.10.1",
+    "nuxt-viewport": "^2.1.4",
     "sass": "^1.71.1",
     "typescript": "^5.3.3",
     "vue": "^3.4.14",

@@ -12,7 +12,7 @@
     @mouseenter="isZoomed = true"
     @mouseleave="isZoomed = false" 
     :class="{'image-profile': !isShowMoreButton }"
-    class="relative image-container w-full h-24 ll-rounded overflow-hidden"
+    class="relative image-container w-full md:h-56 sm:h-56 h-28 lg:h-24 ll-rounded overflow-hidden"
     >
     <img 
       :src="imageUrl" 
@@ -20,7 +20,7 @@
       class="absolute" 
       :class="{ 'zoomed': isZoomed }"
     >
-    <div class="bg-black/75 show-more-images-btn" v-if="isShowMoreButton">
+    <div class="bg-black/75 md:h-56 sm:h-56 h-28 lg:h-24 show-more-images-btn" v-if="isShowMoreButton">
       + {{ remaining }}
     </div>
   </a>

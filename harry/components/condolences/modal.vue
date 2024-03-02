@@ -1,6 +1,7 @@
 <template>
   <UModal 
     v-model="isOpen" 
+    :fullscreen="viewport.isLessThan('lg')"
     :ui="{
       width: 'll-modal-standard',
       overlay: {
@@ -10,9 +11,10 @@
   >
     <UCard :ui="{
       ring: '',
+      base: 'h-full flex lg:h-max flex-col',
       body: {
         background: 'bg-white',
-        base: 'll-modal-editor-body',
+        base: 'grow lg:grow-0',
         padding: 'px-4 py-3 sm:py-3 sm:px-6',
       },
       divide: 'divide-y divide-gray-100 dark:divide-gray-800'
@@ -49,6 +51,7 @@
   </UModal>
 </template>
 <script setup>
+const viewport = useViewport()
 const wallStore = condolencesWallStore()
 const isOpen = computed({
   get() {

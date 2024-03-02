@@ -35,9 +35,6 @@ class ProfileCssProcessor {
   private async fetch(){
     apiFetcher.loadAuthCookie = false;
     const response = await apiFetcher.get<IProfileUIResponse>(`profile/ui/${this.identifier}`);
-    console.log('response');
-    console.log('response');
-    console.log(response);
     
     if (response.code !== null) {
       this.profileUI = {

@@ -23,6 +23,12 @@ export const useProfileStore = defineStore('profileStore', {
     fullName: (state) => {
       return `${state.profile.first_name} ${state.profile.last_name}`;
     },
+    bioText: (state) => {
+      return state.profile.bio ? state.profile.bio.replace(/<[^>]*>/g, '') : ''
+    },
+    nickname: (state) => {
+      return state.profile.nickname ? state.profile.nickname : null;
+    },
     isImageGalleryOpened: (state) => {
       return state.image_gallery_opened;
     },

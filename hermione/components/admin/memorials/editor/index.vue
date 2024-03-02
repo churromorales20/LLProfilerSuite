@@ -23,7 +23,7 @@
     <template #multimedia="{ item }">
       <div class="mt-2">
         <AdminMemorialsEditorImages />
-       <!-- <AdminMemorialsEditorVideos /> -->
+        <AdminMemorialsEditorVideos />
       </div>
     </template>
     <template #configurations="{ item }">

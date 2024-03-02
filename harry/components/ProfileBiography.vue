@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white shadow rounded-lg p-4 mb-4">
     <h2 class="text-xl font-bold pb-4 border-b border-gray-300">{{ $t('profile.biography') }}</h2>
-    <div class="p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
+    <div class="px-1 py-2 lg:p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
      <!-- <p class="font-light leading-6">
         {{ !viewAll ? biographyInfo.text :  profile.bio}}
         <UButton 
