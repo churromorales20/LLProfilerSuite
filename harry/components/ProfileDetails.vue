@@ -8,7 +8,7 @@
         
         <ImagesSection />
         <VideosSection />
-        <GraveYardSection />
+        <GraveyardSection />
       </div>
 
       <div class="lg:w-2/3 px-4 py-1">

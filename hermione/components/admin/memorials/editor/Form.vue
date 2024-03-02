@@ -1,31 +1,7 @@
 <template>
   <div v-if="editorStore.showForm">
     <AdminMemorialsEditorFormGeneral />
-    <div class="w-full bg-white p-4 rounded-md mb-4">
-      <label for="biography" class="text-neutral-950 text-lg font-bold mb-2 block">{{ $t('memorials.biography') }}</label>
-      <UTextarea 
-        v-model="memorial.bio" 
-        :ui="{
-          form: 'form-textarea h-80',
-        }"
-        size="xl" 
-        id="biography" 
-        :placeholder="$t('memorials.enter_biography')"
-      />
-      <div class="flex justify-end mt-3">
-        <UButton 
-          :disabled="originalMemorial.bio === memorial.bio" 
-          size="md"
-          variant="outline"
-          :loading="editorStore.updatingAttr === 'bio'"
-          @click="() => {
-            updateAttribute('bio', memorial.bio, true)
-          }"
-          icon="i-fa6-solid-floppy-disk"
-          :label="$t('general.update')" 
-        />
-      </div>
-    </div>
+    <AdminMemorialsEditorBiography />
     <div class="flex flex-col md:flex-row mb-4 mt-2 gap-4">
       <div class="w-full md:w-1/2 bg-white p-4 rounded-md">
         <div class="border-b min-h-11 border-gray-300 pb-2 mb-4 flex justify-between">
