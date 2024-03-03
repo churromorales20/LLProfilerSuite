@@ -97,7 +97,15 @@
           </div>
       </div>
   </div>
-  <UDivider class="mb-2" label="Credit card information" />
+  <UDivider 
+    :ui="{
+       wrapper: {
+        base: 'flex items-center align-center text-center w-full pt-6 lg:pt-0',
+      },
+    }"
+    class="mb-2 mt-4 lg:mt-0" 
+    label="Credit card information" 
+  />
   <div class="mb-4">
       <div class="field-container mt-2">
         <label for="name" class="block text-sm font-medium text-gray-700">

@@ -9,7 +9,8 @@ const es = {
     'personal_info': 'Personal information',
     'born': 'Born',
     'death': 'Death',
-    'images': 'Images'
+    'images': 'Images',
+    'graveyard_internal': 'Direcciones a la tumba',
   },
   condolences: {
     'first_name': 'First name',

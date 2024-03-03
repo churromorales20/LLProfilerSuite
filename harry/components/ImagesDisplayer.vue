@@ -3,6 +3,7 @@
     :class="gridCols"
     class="grid gap-2" 
     :id="wrapperId"
+    v-if="images.length > 0"
   >
     <ImageBox 
       v-for="(image, index) in images" 
@@ -21,6 +22,9 @@
         }
       }"
     />
+  </div>
+  <div class="h-32 flex items-center justify-center" v-else>
+    <h4>None video has been shared.</h4>
   </div>
 </template>
 

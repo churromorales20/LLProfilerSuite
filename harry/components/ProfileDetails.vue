@@ -5,7 +5,6 @@
     <div class="xl:mx-auto px-2 flex flex-col lg:flex-row">
       <div class="lg:w-1/3 lg:px-4 px-1 py-1">
         <ProfilePersonalInfo />
-        {{ viewport.breakpoint }}
         <ProfileBiography v-if="viewport.isLessThan('lg')" />
         <ImagesSection />
         <VideosSection />

@@ -11,7 +11,7 @@
         ${graveyardInfo!.country}` }}</p>
       <p v-if="graveyardInfo!.phone_number">{{ `${graveyardInfo!.phone_number}` }}</p>
       <template v-if="graveyardInfo!.internal_steps">
-        <label for="internal_steps" class="text-neutral-950 mb-1 mt-2 block">{{ $t('graveyard.internal') }}</label>
+        <label for="internal_steps" class="text-neutral-950 mb-1 mt-2 block">{{ $t('profile.graveyard_internal') }}</label>
         <p>{{ graveyardInfo!.internal_steps }}</p>
       </template>
     </div>

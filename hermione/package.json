@@ -19,6 +19,7 @@
     "@tiptap/starter-kit": "^2.2.4",
     "@tiptap/vue-3": "^2.2.4",
     "@types/google.maps": "^3.55.4",
+    "animate.css": "^4.1.1",
     "imask": "^7.4.0",
     "nuxt": "^3.10.1",
     "parse-nested-form-data": "^1.0.0",

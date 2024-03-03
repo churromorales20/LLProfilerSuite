@@ -57,9 +57,10 @@
 </template>
 <script setup>
 const userStore = userAdminStore();
+const menuStore = adminMenuStore();
+
 const toggleMenu = () => {
-  const menu = document.querySelector('aside');
-  menu.classList.toggle('hidden');
+  menuStore.toggleStatus()
 }
 const logout = () => {
   const authCookie = useCookie('_LL_FRAMEWORK_INFO_')

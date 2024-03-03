@@ -61,7 +61,7 @@
             {
               label: $t('memorials.share_link_copy'),
               click: () => {
-                copyLink('htttp:///legaylink.pe/?code=' + row.code)
+                copyLink(row.code)
               },
               icon: 'i-mdi-content-copy',
             }
@@ -86,7 +86,8 @@ const memorialStore = memorialsStore()
 const editorStore = memorialEditorStore()
 const locale = useI18n()
 
-const copyLink = (link) => {
+const copyLink = (code) => {
+  const link = `${process.env.LL_PROFILES_URL}/profile/${code}`;
   var tempTextArea = document.createElement("textarea");
   tempTextArea.value = link;
   tempTextArea.style.position = "fixed";

@@ -12,13 +12,28 @@
         class="mr-2"
       />
     </div>
-    <div v-if="!loading">
-      <CondolencesEntry 
-        v-for="entry, index in wallStore.entries"
-        :entry="entry"
-      />
-    </div>
-    <CondolencesLoader v-if="loading" />
+    <transition 
+      @after-enter="loaded = true"
+      leave-to-class="animate__animated animate__fadeOut" 
+    >
+      <div v-if="loaded">
+        <template v-if="wallStore.entries.length > 0">
+          <CondolencesEntry 
+            v-for="entry, index in wallStore.entries"
+            :entry="entry"
+          />
+        </template>
+        <div class="flex h-44 items-center justify-center" v-else>
+          <h4 class="text-sm">No condolences have been shared yet.</h4>
+        </div>
+      </div>
+    </transition>
+    <transition 
+      @after-leave="loaded = true"
+      leave-to-class="animate__animated animate__fadeOut" 
+    >
+      <CondolencesLoader v-if="loading" />
+    </transition>
   </div>
 </template>
 
@@ -27,6 +42,7 @@ const viewport = useViewport()
 const profileStore = useProfileStore()
 const wallStore = condolencesWallStore()
 const loading = ref(true);
+const loaded = ref(false);
 
 const wallActive = profileStore.profile.settings.condolences_wall;
 

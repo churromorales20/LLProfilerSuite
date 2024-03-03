@@ -51,6 +51,7 @@ export default defineNuxtConfig({
   },
   css: [
     '@/assets/main.css',
+    'animate.css'
   ],
   alias: {
     '@ll-interfaces': path.resolve(__dirname, '../interfaces'),

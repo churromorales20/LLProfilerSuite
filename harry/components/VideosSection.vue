@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow rounded-lg p-4">
+  <div class="bg-white shadow rounded-lg p-4" v-if="profileStore.profile.videos.length > 0">
     <h2 class="text-lg font-bold mb-2">{{ $t('profile.videos') }}</h2>
     <VideosDisplayer :videosLimit="9" />
   </div>
