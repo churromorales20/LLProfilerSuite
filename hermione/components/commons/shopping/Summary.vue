@@ -1,7 +1,7 @@
 <!-- OrderSummary.vue -->
 <template>
-  <div>
-    <h2 class="text-lg font-semibold mb-4 pb-3 border-b border-gray-300">{{ $t('shopping.order_summary') }}</h2>
+  <div class="mb-16 lg:mb-2">
+    <h2 class="lg:text-lg font-semibold mb-4 pb-3 border-b border-gray-300">{{ $t('shopping.order_summary') }}</h2>
 
     <!-- Cart items -->
     <div v-for="(item, index) in order.items" :key="index" class="flex justify-between text-sm mb-2">

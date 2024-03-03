@@ -1,6 +1,7 @@
 <template>
   <UModal 
     v-model="isOpen" 
+    :fullscreen="viewport.isLessThan('lg')"
     :ui="{
       width: 'll-card'
     }">
@@ -32,6 +33,7 @@
 <script setup>
 import { computed } from 'vue'
 
+const viewport = useViewport()
 const editorStore = memorialEditorStore()
 const isOpen = computed({
   get() {

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-6">
-    <h2 class="text-lg font-semibold pb-3 mb-4 border-b border-gray-300">
+    <h2 class="lg:text-lg font-semibold pb-3 mb-4 border-b border-gray-300">
       {{ shopping.shippingViewStep == 3 ?$t('addresses.select_shipping_address') :$t('addresses.shipping_address_title') }}
     </h2>
     <transition name="fade" @after-leave="red">

@@ -192,6 +192,10 @@ onMounted(() =>{
 });
 </script>
 <style lang="scss">
+.tiptap.ProseMirror {
+  border: 1px solid #cecece;
+  border-radius: 6px;
+}
 .ProseMirror-focused {
   outline-color: #cecece;
 }

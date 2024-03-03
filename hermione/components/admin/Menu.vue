@@ -1,5 +1,5 @@
 <template>
-  <aside class="flex flex-col justify-between bg-llblue-600 text-white w-64 overflow-y-auto absolute inset-y-0 left-0 z-10 transform lg:relative lg:static lg:translate-x-0 transition-transform duration-300 ease-in-out">
+  <aside class="hidden flex flex-col justify-between bg-llblue-600 text-white w-64 overflow-y-auto absolute inset-y-0 left-0 z-10 transform lg:block lg:relative lg:static lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div class="py-4 px-2">
       <UVerticalNavigation :links="links" :ui="{
         //wrapper: 'border-s border-gray-200 dark:border-gray-800 space-y-2',
@@ -15,7 +15,7 @@
     <img style="height:110px;" src="/logoh.png" class="mx-auto mb-4 w-auto"/>
   </aside>
 </template>
-<script setup lang="ts">
+<script setup>
   const route = useRoute()
   const locale = useI18n()
   const links = [

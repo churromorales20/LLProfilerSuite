@@ -35,6 +35,7 @@
     "@nuxtjs/tailwindcss": "^6.11.3",
     "@pinia/nuxt": "^0.5.1",
     "dayjs-nuxt": "^2.1.9",
+    "nuxt-viewport": "^2.1.4",
     "sass": "^1.71.1"
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div :class="[shopping.inAdmin ? '' : 'mt-6']">
     <form class="space-y-4" action="#" method="POST">
-      <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('shopping.memorial_info') }}</h2>
+      <h2 class="lg:text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('shopping.memorial_info') }}</h2>
       <div>
         <label for="address" class="block text-sm font-medium text-gray-700">
           {{ $t('shopping.customer_name') }}

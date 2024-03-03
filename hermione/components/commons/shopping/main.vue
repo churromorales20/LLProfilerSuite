@@ -27,8 +27,8 @@
       </div>
     </transition>
     <transition name="fade" @after-leave="moveCompleted">
-      <div class="flex flex-col md:flex-row h-full" v-if="!shopping.completed">
-        <div class="md:w-3/5 h-4/6 p-4 overflow-y-auto" style="max-height: 80vh;">
+      <div class="flex flex-col md:flex-row" v-if="!shopping.completed">
+        <div class="md:w-3/5 p-2 lg:h-[75vh] lg:mb-20 lg:p-4 lg:overflow-y-auto">
           <transition name="fade" @after-leave="moveShoppingStep">
             <div v-if="shopping.viewStep == 1">
               <CommonsShoppingUser v-if="!inAdmin" />
@@ -38,7 +38,7 @@
               <CommonsShoppingShipping />
 
               <!-- Payment method selector and card form -->
-              <CommonsShoppingPaymentMethod />
+              <CommonsShoppingPaymentMethod class="mb-20" />
             </div>
           </transition>
           <transition name="fade" @after-leave="moveShoppingStep">

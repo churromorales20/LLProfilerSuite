@@ -1,6 +1,6 @@
 <template>
   <form class="space-y-4" action="#" method="POST">
-    <h2 class="text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('general.personal_info') }}</h2>
+    <h2 class="lg:text-lg font-semibold pb-3 border-b border-gray-300">{{ $t('general.personal_info') }}</h2>
     <div>
       <label for="email" class="block text-sm font-medium text-gray-700">
         {{ $t('login.first_name') }}

@@ -1,6 +1,6 @@
 <template>
   <UButton 
-    size="md" 
+    :size="viewport.isLessThan('md') ? 'sm' : 'md'" 
     @click="() => {
       shopping.setModalStatus(true)
     }"
@@ -14,22 +14,39 @@
       width: 'll-card'
     }"
     :prevent-close="preventClose"
+    :fullscreen="viewport.isLessThan('lg')"
   >
     <UCard 
       :ui="{ 
         ring: '', 
         body: {
           background: 'bg-white',
-          base: 'll-modal-editor-body',
+          padding: 'px-2 py-5 lg:p-4',
+          base: 'overflow-y-auto h-screen lg:h-[80vh] lg:overflow-y-hidden',
         },
         divide: 'divide-y divide-gray-100 dark:divide-gray-800'
       }"
     >
+      <template #header v-if="viewport.isLessThan('md')">
+        <div class="flex justify-between">
+          <h2 class="font-semibold text-xl">New memorial</h2>
+          <UButton
+            icon="i-mdi-close-octagon"
+            size="sm"
+            variant="outline"
+            color="amber"
+            @click="() => {
+              shopping.setModalStatus(false)
+            }"
+          />
+        </div>
+      </template> 
       <CommonsShopping :inAdmin="true"/>
     </UCard>
   </UModal>
 </template>
 <script setup>
+const viewport = useViewport()
 const isOpen = computed({
   get() {
     return shopping.modalOpened

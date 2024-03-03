@@ -1,12 +1,16 @@
 <template>
-  <UTable :columns="columns" :ui="{
-    wrapper: 'relative overflow-x-auto bg-white mb-4',
-    tr: {
-      base: 'hover:bg-slate-200 dark:hover:bg-gray-800/50 cursor-pointer',
-      selected: 'bg-gray-50 dark:bg-gray-800/50',
-      active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer',
-    }
-  }" :rows="memorialStore.list">
+  <UTable 
+    :columns="columnsDisplaying" 
+    :ui="{
+      wrapper: 'relative overflow-x-auto bg-white mb-4',
+      tr: {
+        base: 'hover:bg-slate-200 dark:hover:bg-gray-800/50 cursor-pointer',
+        selected: 'bg-gray-50 dark:bg-gray-800/50',
+        active: 'hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer',
+      }
+    }" 
+    :rows="memorialStore.list"
+  >
     <template #avatar-data="{ row }">
       <UAvatar 
         :alt="`${row.first_name}${row.last_name}`" 
@@ -82,37 +86,6 @@ const memorialStore = memorialsStore()
 const editorStore = memorialEditorStore()
 const locale = useI18n()
 
-const items = [
-  [{
-    label: 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
-  }], [{
-    label: 'Edit',
-    icon: 'i-heroicons-pencil-square-20-solid',
-    shortcuts: ['E'],
-    click: () => {
-      console.log('Edit')
-    }
-  }, {
-    label: 'Duplicate',
-    icon: 'i-heroicons-document-duplicate-20-solid',
-    shortcuts: ['D'],
-    disabled: true
-  }], [{
-    label: 'Archive',
-    icon: 'i-heroicons-archive-box-20-solid'
-  }, {
-    label: 'Move',
-    icon: 'i-heroicons-arrow-right-circle-20-solid'
-  }], [{
-    label: 'Delete',
-    icon: 'i-heroicons-trash-20-solid',
-    shortcuts: ['⌘', 'D']
-  }]
-];
-
 const copyLink = (link) => {
   var tempTextArea = document.createElement("textarea");
   tempTextArea.value = link;
@@ -158,6 +131,21 @@ const editMemorial = (id) => {
 const isEmpty = (value) => {
   return (typeof value === 'string' && /^[\s\n]*$/.test(value)) || value === null || value === undefined ;
 }
+const viewport = useViewport()
+const columnsDisplaying = computed(() => {
+  console.log(viewport.breakpoint.value);
+  if (viewport.breakpoint.value === 'lg') {
+    const columnsInSmall = ['avatar', 'fullname', 'actions', 'relationship', 'status']
+    return columns.filter((column) => columnsInSmall.includes(column.key));
+  } else if (viewport.breakpoint.value === 'md') {
+    const columnsInSmall = ['avatar', 'fullname', 'actions']
+    return columns.filter((column) => columnsInSmall.includes(column.key));
+  } else if (viewport.isLessThan('md')) {
+    const columnsInSmall = ['fullname', 'actions']
+    return columns.filter((column) => columnsInSmall.includes(column.key));
+  }
+  return columns;
+})
 
 const columns = [
   {
