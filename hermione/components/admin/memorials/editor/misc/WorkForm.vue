@@ -106,6 +106,7 @@
 </template>
 <script setup lang="ts">
 import { MiscDateFields } from '@ll-interfaces/IMemorialMisc';
+import type { IEmploymentInfo } from '@ll-interfaces/IMemorialMisc';
 
 const editorStore = memorialEditorStore()
 const workStore = memorialWorkStore()
@@ -238,15 +239,17 @@ onMounted(() => {
 
 const validateAndSave = async () => {
   if (workStore.validate()) {
+    const data = JSON.parse(JSON.stringify(workStore.itemEditing)) as IEmploymentInfo;
+
     if (!workStore.isEditing) {
       workStore.setSavingStatus(true);
       emits('close-btn-pressed')
-      await editorStore.saveWorkInfo(workStore.itemEditing)
+      await editorStore.saveWorkInfo(data)
       workStore.setSavingStatus(false);
     } else {
       workStore.setUpdateStatus(true);
       emits('close-btn-pressed')
-      await editorStore.updateWorkInfo(workStore.itemEditing, workStore.editingIndex!)
+      await editorStore.updateWorkInfo(data, workStore.editingIndex!)
       workStore.setUpdateStatus(false);
     }
   }

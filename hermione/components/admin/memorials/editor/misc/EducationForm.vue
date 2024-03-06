@@ -11,7 +11,7 @@
         {{ titleAndLabel.title }}
       </h3>
     </template>
-
+    {{ JSON.stringify(educationItem) }}
     <div class="w-[400px]">
       <label for="_education_misc_institution_" class="form-label text-sm text-neutral-950 mb-2 block">Institution name</label>
       <UInput 
@@ -106,6 +106,7 @@
 </template>
 <script setup lang="ts">
 import { MiscDateFields } from '@ll-interfaces/IMemorialMisc';
+import type { IEducationInfo } from '@ll-interfaces/IMemorialMisc';
 
 const editorStore = memorialEditorStore()
 const educationStore = memorialEducationStore()
@@ -238,15 +239,18 @@ onMounted(() => {
 
 const validateAndSave = async () => {
   if (educationStore.validate()) {
+    const data = JSON.parse(JSON.stringify(educationStore.itemEditing)) as IEducationInfo;
+
     if (!educationStore.isEditing) {
       educationStore.setSavingStatus(true);
       emits('close-btn-pressed')
-      await editorStore.saveEducationInfo(educationStore.itemEditing)
+      
+      await editorStore.saveEducationInfo(data)
       educationStore.setSavingStatus(false);
     } else {
       educationStore.setUpdateStatus(true);
       emits('close-btn-pressed')
-      await editorStore.updateEducationInfo(educationStore.itemEditing, educationStore.editingIndex!)
+      await editorStore.updateEducationInfo(data, educationStore.editingIndex!)
       educationStore.setUpdateStatus(false);
     }
   }

@@ -30,7 +30,7 @@
         </div>
         <div class="mt-6 text-right">
           <ULink
-            to="/auth/signup"
+            to="/auth/login"
             active-class="hover:text-llyellow-600"
             inactive-class="ll-text-bold text-llyellow-700"
           >
