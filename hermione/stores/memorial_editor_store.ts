@@ -5,6 +5,7 @@ import type { IMemorial } from '@ll-interfaces/IMemorial';
 import type { IImageResponse } from '@ll-interfaces/IImageResponse';
 import type { IPlaceDetailedItem } from '@ll-interfaces/IAutocompleteItem';
 import type { GraveyardInfoFields } from '@ll-interfaces/IGraveyardInfo';
+import type { IEmploymentInfo, IEducationInfo } from '@ll-interfaces/IMemorialMisc';
 
 export const memorialEditorStore = defineStore('memorialEditorStore', {
   state: () => ({
@@ -53,6 +54,12 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     },
     lastError: (state) => {
       return state.error_code;
+    },
+    educationInfo: (state) => {
+      return state.memorial?.misc?.education!;
+    },
+    workInfo: (state) => {
+      return state.memorial?.misc?.carrer!;
     },
   },
   actions: {
@@ -182,6 +189,33 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
           break;
       }
     },
+    addMemorialWorkItem(item: IEmploymentInfo){
+      if (this.memorial?.misc === null) {
+        this.memorial.misc = {
+          education: [],
+          carrer: []
+        }
+      } else if (this.memorial?.misc.carrer === null) {
+        this.memorial.misc.carrer = [];
+      }
+
+      this.memorial?.misc.carrer!.push(item)
+    },
+    addMemorialEducationItem(item: IEducationInfo){
+      if (this.memorial?.misc === null) {
+        this.memorial.misc = {
+          education: [],
+          carrer: []
+        }
+      } else if (this.memorial?.misc.education === null) {
+        this.memorial.misc.education = [];
+      }
+
+      this.memorial?.misc.education!.push(item)
+    },
+    removeMemorialWorkItem(index: number){
+      this.memorial?.misc?.carrer!.splice(index, 1);
+    },
     setOriginalValues(){
       this.memorial_original = JSON.parse(JSON.stringify(this.memorial)) as IMemorial;
     },
@@ -297,6 +331,115 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
           this.error_code = 500
         }
         this.show_slider = true;
+      }
+    },
+    async saveWorkInfo(workInfo: IEmploymentInfo) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/workinginfo`, {
+          ...workInfo
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+        this.addMemorialWorkItem(workInfo);
+      } catch (error: any) {
+        console.log('error', error.response);
+        
+      }
+    },
+    async deleteWorkInfo(index: number) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/workinginfo/delete`, {
+          index: index
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+        this.removeMemorialWorkItem(index);
+      } catch (error: any) {
+        console.log('error', error.response);
+        
+      }
+    },
+    async updateWorkInfo(workInfo: IEmploymentInfo, index: number) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/workinginfo/update`, {
+          index: index,
+          ...workInfo
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial!.misc!.carrer![index] = workInfo;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+        
+      }
+    },
+    async saveEducationInfo(educationInfo: IEducationInfo) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/education`, {
+          ...educationInfo
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+        this.addMemorialEducationItem(educationInfo);
+      } catch (error: any) {
+        console.log('error', error);
+        
+      }
+    },
+    async deleteEducationInfo(index: number) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/education/delete`, {
+          index: index
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial?.misc?.education!.splice(index, 1);
+      } catch (error: any) {
+        console.log('error', error.response);
+        
+      }
+    },
+    async updateEducationInfo(educationInfo: IEducationInfo, index: number) {
+      try {
+        const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/education/update`, {
+          index: index,
+          ...educationInfo
+        });
+
+        if (response.code) {
+          const error: ILLApiError<Object> = new Error(`${response.code}`);
+          error.response = response;
+          throw error;
+        }
+
+        this.memorial!.misc!.education![index] = educationInfo;
+
+      } catch (error: any) {
+        console.log('error', error.response);
+        
       }
     },
     async removeImage(index: number, imageName: string) {

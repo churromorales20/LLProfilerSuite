@@ -41,6 +41,12 @@ export const useProfileStore = defineStore('profileStore', {
     viewingVideoId: (state) => {
       return state.video_viewing;
     },
+    education: (state) => {
+      return state.profile.misc?.education;
+    },
+    carrer: (state) => {
+      return state.profile.misc?.carrer;
+    },
     
   },
   actions: {
@@ -57,8 +63,6 @@ export const useProfileStore = defineStore('profileStore', {
       this.code = code;
     },
     setVideoViewing(videoId: string | null) {
-      console.log('{AAAPPP');
-      
       this.video_viewing = videoId;
     },
     async fetchByCode(code: string) {

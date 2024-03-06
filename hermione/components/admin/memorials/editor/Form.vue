@@ -32,6 +32,18 @@
         <AdminMemorialsEditorGraveyardInfo />
       </div>
     </div>
+    <div class="flex flex-col md:flex-row mb-4 mt-2 gap-4">
+      <div class="w-full md:w-1/2 bg-white p-4 rounded-md">
+        <div class="border-b min-h-11 border-gray-300 pb-2 mb-4 flex justify-between">
+          <h3 class="text-neutral-950 text-lg font-bold block">Career and school</h3>
+        </div>
+        <AdminMemorialsEditorMiscWork />
+        <AdminMemorialsEditorMiscEducation />
+      </div>
+      <div class="w-full md:w-1/2 bg-white p-4 rounded-md">
+        
+      </div>
+    </div>
   </div>
 </template>
 <script setup>

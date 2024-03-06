@@ -11,6 +11,15 @@ const en = {
     'death': 'Death',
     'images': 'Images',
     'graveyard_internal': 'Directions to grave',
+    'carrer_title': 'Carrer',
+    'show_more': 'Show more',
+    'show_less': 'Show less',
+    'date_since': 'Since',
+    'date_until': 'Until',
+    'location_at': 'at',
+    'education_title': 'Studies',
+    'degree_label': 'Degree',
+    'date_when': 'on'
   },
   condolences:{
     'first_name': 'First name',

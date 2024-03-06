@@ -14,4 +14,12 @@
 if (process.server) {
   useHead({ script: [{ src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_PLACES_KEY}&v=weekly`, defer: true }] });
 }
+useSeoMeta({
+  title: 'Legacy Link Memorials - Admin area',
+  ogTitle: 'Legacy Link Memorials - Admin area',
+  description: 'Legacy link digital memorials',
+  ogDescription: 'Legacy link digital memorials',
+  ogImage: 'https://example.com/image.png',
+  twitterCard: 'summary_large_image',
+})
 </script>

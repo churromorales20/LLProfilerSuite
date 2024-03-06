@@ -10,3 +10,13 @@
     </div>
   </div>
 </template>
+<script setup>
+useSeoMeta({
+  title: 'Legacy Link Memorials - A tribute for our loved ones',
+  ogTitle: 'Legacy Link Memorials - A tribute for our loved ones',
+  description: 'Legacy link digital memorials',
+  ogDescription: 'Legacy link digital memorials',
+  ogImage: 'https://example.com/image.png',
+  twitterCard: 'summary_large_image',
+})
+</script>

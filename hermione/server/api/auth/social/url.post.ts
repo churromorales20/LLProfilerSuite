@@ -9,6 +9,9 @@ export default defineEventHandler(async (event) => {
   const adminApiFetcher = new LLAdminApiFetcher(node)
   const lang = node.req?.headers['accept-language']!.substring(0, 2).toUpperCase();
   const ipAddress = getRequestHeader(event, 'x-forwarded-for')
+  console.log('ipAddress');
+  console.log(ipAddress);
+  
   const response = await adminApiFetcher.post<ISocialUrlResponse>(`auth/social/${type}/url`,{
     language: lang,
     ip_address: ipAddress,

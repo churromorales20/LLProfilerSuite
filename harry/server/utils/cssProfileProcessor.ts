@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { apiFetcher } from "@ll-fetchers/llApiFetcher";
 import { IProfileUIResponse } from '@ll-interfaces/IProfileUIResponse';
+import { BaseSheetCSS } from './baseSheet';
 
 class ProfileCssProcessor {
 
@@ -43,24 +44,6 @@ class ProfileCssProcessor {
       }
       
     }
-    /*this.profileUI = {
-      main_background_color: '#0E0E18',
-      rounded_corners_size: '0.375rem',
-      box_background_color: '#ffffff',
-      box_text_color: '#222',
-      box_text_size: '14px',
-      box_title_text_color: '#222',
-      box_title_text_size: '16px',
-      main_title_color: '#fff',
-      main_title_size: '22px',
-      main_background_image: {
-        image: 'https://scontent.flim17-1.fna.fbcdn.net/v/t1.18169-9/26731416_161436844477553_4974222360232799273_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9a8829&_nc_ohc=hRcak1mrABAAX-jVm3m&_nc_ht=scontent.flim17-1.fna&oh=00_AfBW73qCvS8TQX2zGLg3T4dufxvQB_MCj7f-E0p1gqU5Lw&oe=65E1D2EB',
-        position: 'center',
-        attachment: 'fixed',
-        repeat: 'no-repeat',
-        size: 'contain',
-      }
-    }*/
   }
 
   private sanitizeCssSheet() {
@@ -89,7 +72,8 @@ class ProfileCssProcessor {
     this.replaceText(key, this.isValueAvailable(rules) ? rules : '');
   }
   private async compileCSS(){
-    this.resultantCss = await fs.promises.readFile('server/assets/basesheet.css', 'utf-8');
+    const baseSheet = new BaseSheetCSS();
+    this.resultantCss = baseSheet.get();
     this.addFontLink('FONT_1_LINK', this.profileUI?.font_1_import!);
     this.addFontLink('FONT_2_LINK', this.profileUI.font_2_import!);
     this.rawReplaceRules('FONT_1_RULES', this.profileUI.font_1_rules!);
