@@ -48,7 +48,7 @@
           :items="[[
             {
               label: $t('memorials.share_link_fb'),
-              to: 'https://www.facebook.com/sharer/sharer.php?u=example.org?code=' + row.code,
+              to: `https://www.facebook.com/sharer/sharer.php?u=${envStore.profilesUrl}profile/${row.code}`,
               target: '_blank',
               icon: 'i-mdi-facebook',
             },
@@ -106,7 +106,7 @@ const copyLink = (code) => {
 }
 
 const whatsappMessage = (row) => {
-  return encodeURIComponent('htttp:///legaylink.pe/?code=' + row.code);
+  return encodeURIComponent(`${envStore.profilesUrl}profile/${row.code}`);
 }
 
 const getDateInfo = (date, place) => {
