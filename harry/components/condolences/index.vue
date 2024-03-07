@@ -24,7 +24,9 @@
           />
         </template>
         <div class="flex h-44 items-center justify-center" v-else>
-          <h4 class="text-sm">No condolences have been shared yet.</h4>
+          <h4 class="text-sm">
+            {{ $t('condolences.no_condolences') }}
+          </h4>
         </div>
       </div>
     </transition>

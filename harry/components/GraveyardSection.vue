@@ -27,7 +27,7 @@ if (process.server && profileStore.profile.grave_yard_info?.place_id !== null) {
 const mapGraveyard = graveyardStore();
 const map_element = ref();
 onMounted(() => {
-  if (profileStore.profile.grave_yard_info?.place_id !== null) {
+  if (profileStore.profile.grave_yard_info?.place_id !== undefined) {
     setTimeout(() => {
       mapGraveyard.init(map_element.value, {
         lat: profileStore.profile!.grave_yard_info!.latitude!,

@@ -18,7 +18,7 @@
     }">
       <template #header>
         <div class="flex justify-between">
-          <h2 class="font-semibold text-xl">Images</h2>
+          <h2 class="font-semibold text-xl">{{ $t('profile.images') }}</h2>
           <UButton 
             icon="i-fa6-solid-ban" 
             size="md"

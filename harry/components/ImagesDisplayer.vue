@@ -24,7 +24,7 @@
     />
   </div>
   <div class="h-32 flex items-center justify-center" v-else>
-    <h4>None video has been shared.</h4>
+    <h4>{{ $t('profile.no_images') }}</h4>
   </div>
 </template>
 

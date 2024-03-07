@@ -19,7 +19,10 @@ const es = {
     'location_at': 'en',
     'education_title': 'Estudios',
     'degree_label': 'Grado',
-    'date_when': 'el'
+    'date_when': 'el',
+    'no_images': 'No se ha compartido ninguna imagen.',
+    'no_bio': 'Aún no se ha compartido nada.',
+    'no_personal_info': 'La información personal no ha sido compartida.'
   },
   condolences: {
     'first_name': 'Nombre',
@@ -38,7 +41,14 @@ const es = {
     'title_section': 'Últimos mensajes',
     'modal_title': 'Deja tu mensaje',
     'modal_cancel_btn': 'Cancelar',
-    'modal_send_btn': 'Enviar'
+    'modal_send_btn': 'Enviar',
+    'no_condolences': 'Todavía no se han compartido condolencias.'
+  },
+  footer: {
+    'report': 'Reportar un problema',
+    'terms_conditions': 'Términos y condiciones',
+    'legal': 'Información legal',
+    'contact': 'Contactar al administrador del memorial',
   }
 }
 export default es;

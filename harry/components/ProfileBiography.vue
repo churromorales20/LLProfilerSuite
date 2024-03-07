@@ -15,7 +15,9 @@
       <div v-html="!viewAll ? biographyInfo.text : profile.bio"></div>
     </div>
     <div class="flex h-40 items-center justify-center" v-else>
-      <h4 class="text-sm">Nothing have been sharee dyet</h4>
+      <h4 class="text-sm">
+        {{ $t('profile.no_bio') }}
+      </h4>
     </div>
   </div>
 </template>

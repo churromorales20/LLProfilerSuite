@@ -169,11 +169,14 @@ export const condolencesWallStore = defineStore('condolencesWallStore', {
         }
 
         this.loaded = true
-        this.entries = [
-          ...this.entries,
-          ...response.data?.items!,
-        ]
-        this.filters.last_date = this.entries[this.entries.length - 1].created_at as unknown as string
+        if (response.data?.items.length! > 0) {
+          this.entries = [
+            ...this.entries,
+            ...response.data?.items!,
+          ]
+          this.filters.last_date = this.entries[this.entries.length - 1].created_at as unknown as string
+        }
+        
         return true       
       } catch (error: any) {
         console.log('error', error);

@@ -19,7 +19,10 @@ const en = {
     'location_at': 'at',
     'education_title': 'Studies',
     'degree_label': 'Degree',
-    'date_when': 'on'
+    'date_when': 'on',
+    'no_images': 'None image has been shared.',
+    'no_bio': 'Nothing has been shared yet',
+    'no_personal_info': 'Personal info has not been shared'
   },
   condolences:{
     'first_name': 'First name',
@@ -38,7 +41,14 @@ const en = {
     'title_section': 'Last messages',
     'modal_title': 'Leave your message',
     'modal_cancel_btn': 'Cancel',
-    'modal_send_btn': 'Send'
+    'modal_send_btn': 'Send',
+    'no_condolences': 'No condolences have been shared yet.'
+  },
+  footer:{
+    'report': 'Report a problem',
+    'terms_conditions': 'Terms and condiitons',
+    'legal': 'Legal information',
+    'contact': 'Contact memorial admin',
   } 
   
 }
