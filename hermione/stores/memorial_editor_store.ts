@@ -140,7 +140,6 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
     },
     updateMemorialItem(attr: string, value: string|boolean){
-      console.log('va;lue', value);
       
       switch (attr) {
         case 'first_name':
@@ -190,28 +189,18 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
     },
     addMemorialWorkItem(item: IEmploymentInfo){
-      if (this.memorial?.misc === null) {
-        this.memorial.misc = {
-          education: [],
-          carrer: []
-        }
-      } else if (this.memorial?.misc.carrer === null) {
-        this.memorial.misc.carrer = [];
+      if (this.memorial!.misc!.carrer === undefined) {
+        this.memorial!.misc!.carrer = [];
       }
 
-      this.memorial?.misc.carrer!.push(item)
+      this.memorial!.misc!.carrer!.push(item)
     },
     addMemorialEducationItem(item: IEducationInfo){
-      if (this.memorial?.misc === null) {
-        this.memorial.misc = {
-          education: [],
-          carrer: []
-        }
-      } else if (this.memorial?.misc.education === null) {
-        this.memorial.misc.education = [];
+      if (this.memorial!.misc!.education === undefined) {
+        this.memorial!.misc!.education = [];
       }
 
-      this.memorial?.misc.education!.push(item)
+      this.memorial!.misc!.education!.push(item)
     },
     removeMemorialWorkItem(index: number){
       this.memorial?.misc?.carrer!.splice(index, 1);
@@ -388,6 +377,7 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       }
     },
     async saveEducationInfo(educationInfo: IEducationInfo) {
+      
       try {
         const response = await internalApiFetcher.post<Object>(`memorial/${this.memorial_id}/education`, {
           ...educationInfo

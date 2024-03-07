@@ -12,6 +12,9 @@
 
 <script setup>
 if (process.server) {
+  const envStore = environmentStore();
+  envStore.setProfileUrl(process.env.LL_PROFILES_URL);
+
   useHead({ script: [{ src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_PLACES_KEY}&v=weekly`, defer: true }] });
 }
 useSeoMeta({

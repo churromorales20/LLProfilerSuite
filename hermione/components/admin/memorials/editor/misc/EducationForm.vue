@@ -11,7 +11,6 @@
         {{ titleAndLabel.title }}
       </h3>
     </template>
-    {{ JSON.stringify(educationItem) }}
     <div class="w-[400px]">
       <label for="_education_misc_institution_" class="form-label text-sm text-neutral-950 mb-2 block">Institution name</label>
       <UInput 

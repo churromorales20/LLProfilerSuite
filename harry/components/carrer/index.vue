@@ -1,15 +1,15 @@
 <template>
   <h3 class="text-base font-bold">{{ $t('profile.carrer_title') }}</h3>
-  <div class="max-h-72 overflow-y-auto">
+  <div class="max-h-72 overflow-y-auto mb-4">
     <ul>
-    <li v-for="carrerItem, index in carreInfo">
-      <CarrerInfoItem 
-        v-show="index < 2 || showAllItems"
-        :carrerItem="carrerItem" 
-        :key="`_carrer_info_item_${index}_`" 
-      />
-    </li>
-  </ul>
+      <li v-for="carrerItem, index in carreInfo">
+        <CarrerInfoItem 
+          v-show="index < 2 || showAllItems"
+          :carrerItem="carrerItem" 
+          :key="`_carrer_info_item_${index}_`" 
+        />
+      </li>
+    </ul>
   </div>
   <UButton 
     v-if="carreInfo.length > 3" 

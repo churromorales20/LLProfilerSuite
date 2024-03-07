@@ -85,9 +85,10 @@ import { format } from 'date-fns'
 const memorialStore = memorialsStore()
 const editorStore = memorialEditorStore()
 const locale = useI18n()
+const envStore = environmentStore();
 
 const copyLink = (code) => {
-  const link = `${process.env.LL_PROFILES_URL}/profile/${code}`;
+  const link = `${envStore.profilesUrl}profile/${code}`;
   var tempTextArea = document.createElement("textarea");
   tempTextArea.value = link;
   tempTextArea.style.position = "fixed";
