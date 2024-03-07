@@ -22,7 +22,9 @@ const en = {
     'date_when': 'on',
     'no_images': 'None image has been shared.',
     'no_bio': 'Nothing has been shared yet',
-    'no_personal_info': 'Personal info has not been shared'
+    'no_personal_info': 'Personal info has not been shared',
+    'view_less':'View less',
+    'view_more':'View more',
   },
   condolences:{
     'first_name': 'First name',

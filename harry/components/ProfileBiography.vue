@@ -12,7 +12,9 @@
           :label="viewAll ? 'View less' : 'View more'"
         />
       </p>-->
-      <div v-html="!viewAll ? biographyInfo.text : profile.bio"></div>
+      <div class="flex">
+        <div v-html="biographyInfo"></div>
+      </div>
     </div>
     <div class="flex h-40 items-center justify-center" v-else>
       <h4 class="text-sm">
@@ -22,22 +24,44 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const locale = useI18n()
+const TEXT_LIMIT = 450;
 const profileStore = useProfileStore()
 const profile = computed(() => profileStore.profile);
+const isTextOverflowed = profileStore.profile.bio.length >= TEXT_LIMIT;
 const biographyInfo = computed(() => {
-  const LIMIT = 450;
   
-  if (profileStore.profile.bio.length >= LIMIT) {
-    return {
-      text: `${profileStore.profile.bio?.slice(0, LIMIT)}...`,
-      truncated: true
+  if (isTextOverflowed) {
+    let btnText = locale.t('profile.view_less');
+    let bioText = profileStore.profile.bio;
+
+    if (!viewAll.value) {
+      btnText = locale.t('profile.view_more');
+      bioText = `${profileStore.profile.bio?.slice(0, TEXT_LIMIT)}...`;
     }
+    const viewMoreBtn = `&nbsp;<a id="_bio_content_button_" class="cursor-pointer text-sky-600 font-semibold">${btnText}</a>`;
+    return bioText + viewMoreBtn;
   }
-  return {
-    text: profileStore.profile.bio,
-    truncated: false
-  }
+  return profileStore.profile.bio
 })
 const viewAll = ref(false);
+
+const bindBtn = () => {
+  const handler = () => {
+    document.getElementById("_bio_content_button_").removeEventListener("click", handler);
+    viewAll.value = !viewAll.value;
+    bindBtn();
+  }
+  
+  setTimeout(() => {
+      document.getElementById("_bio_content_button_").addEventListener("click", handler);
+  }, 500);
+}
+
+onMounted(() => {
+  if (isTextOverflowed) {
+    bindBtn();
+  }
+});
 </script>

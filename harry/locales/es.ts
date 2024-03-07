@@ -22,7 +22,9 @@ const es = {
     'date_when': 'el',
     'no_images': 'No se ha compartido ninguna imagen.',
     'no_bio': 'Aún no se ha compartido nada.',
-    'no_personal_info': 'La información personal no ha sido compartida.'
+    'no_personal_info': 'La información personal no ha sido compartida.',
+    'view_less': 'Ver menos',
+    'view_more': 'Ver mas',
   },
   condolences: {
     'first_name': 'Nombre',
