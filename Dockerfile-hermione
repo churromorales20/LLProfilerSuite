@@ -1,6 +1,6 @@
 
 # Use the official Node.js 18.19.0 image
-FROM node:18-alpine
+FROM node:20-alpine
 
 RUN mkdir /source
 RUN mkdir /source/app
@@ -24,7 +24,7 @@ RUN ls -all
 
 RUN npm config set strict-ssl false
 
-RUN npm install --platform=linuxmusl --arch=x64 --include=optional --force sharp 
+RUN npm install --cpu=x64 --os=linux sharp
 
 RUN npx nuxi build
 
