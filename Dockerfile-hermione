@@ -24,7 +24,7 @@ RUN ls -all
 
 RUN npm config set strict-ssl false
 
-RUN npm install --cpu=x64 --os=linux sharp
+#RUN npm install --cpu=x64 --os=linux sharp
 
 RUN npx nuxi build
 
