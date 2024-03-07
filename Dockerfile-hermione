@@ -22,7 +22,9 @@ COPY ./utils ./utils
 WORKDIR /source/app
 RUN ls -all
 
-RUN npm install --platform=linuxmusl --arch=x64 --include=optional
+RUN npm config set strict-ssl false
+
+RUN npm install --platform=linuxmusl --arch=x64 --include=optional --force sharp 
 
 RUN npx nuxi build
 
