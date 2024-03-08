@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const ipAddress = getRequestHeader(event, 'x-forwarded-for')
 
   const shoppingManager = new LLShoppingManager();
-  const orderRequestString = shoppingManager.createRequestFromQuery(query.order ? query.order as string : '', ipAddress!)
+  const orderRequestString = shoppingManager.createRequestFromQuery(query.order ? query.order as string : '', ipAddress ? ipAddress : '172.0.0.1')
   
 
   const response = await adminApiFetcher.get<IOrder>(`shopping?order=${orderRequestString}`);

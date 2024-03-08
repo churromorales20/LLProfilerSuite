@@ -67,17 +67,16 @@
           color="primary" 
           variant="solid" 
           block
-        >
-          Reset password
-        </UButton>
+          :label="$t('login.reset_password')"
+        />
       </div>
     </div>
   </transition>
   <transition name="fade">
     <div class="flex flex-col items-center" v-if="showCompleted">
       <UIcon class="text-green-600 text-6xl" name="i-fa6-solid-circle-check" />
-      <p class="font-bold text-2xl text-center my-6">Crendentials recovered!</p>
-      <p>Your password has been successfully reset. You can now log in to your account using your new credentials.</p>
+      <p class="font-bold text-2xl text-center my-6">{{ $t('login.pass_successfull_reset_title') }}</p>
+      <p>{{ $t('login.pass_successfull_reset') }}</p>
       <UButton 
         @click="() => {
           navigateTo('/auth/login')
@@ -85,9 +84,9 @@
         size="md" 
         class="mt-4" 
         color="primary" 
-        variant="solid" block>
-        {{ $t('login.back_to_login') }}
-      </UButton>
+        variant="solid" block
+        :label="$t('login.back_to_login') "
+      />
     </div>
   </transition>
 </template>

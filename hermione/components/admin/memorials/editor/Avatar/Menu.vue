@@ -18,7 +18,7 @@
         shadow: '',
         divide: 'divide-y divide-gray-100 dark:divide-gray-800'
       }">
-        <h1 class="font-semibold text-xl mb-4 border-b pb-2 border-zinc-400">Avatar options</h1>
+        <h1 class="font-semibold text-xl mb-4 border-b pb-2 border-zinc-400">{{ $t('memorials.avatar_options') }}</h1>
         <UButton 
           icon="i-fa6-solid-trash" 
           size="md" 
@@ -26,7 +26,7 @@
           :disabled="typeof memorial.avatar !== 'string'" 
           color="llblue2" 
           variant="outline" 
-          label="Delete current"
+          :label="$t('memorials.delete_header_image')"
           class="mb-2" 
           block 
         />
@@ -35,7 +35,7 @@
           size="md" 
           @click="pickFile" 
           variant="outline" 
-          label="Upload new" 
+          :label="$t('memorials.upload_new')" 
           class="mb-2"
           block 
         />
@@ -47,7 +47,7 @@
           }" 
           color="orange" 
           variant="outline" 
-          label="Cancel" 
+          :label="$t('general.cancel')" 
           block />
       </UCard>
     </template>

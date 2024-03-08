@@ -64,9 +64,8 @@
       size="md" 
       color="primary" 
       variant="solid" 
-      block>
-      {{ $t('login.sign_in') }}
-    </UButton>
+      :label="$t('login.sign_in')"
+      block/>
   </div>
   <div v-if="userStore.isErrored">
     <p class="font-medium text-sm text-red-500" :class="[!isShopping ? 'mt-1' : 'mt-0']">{{ errorMessage }}</p>

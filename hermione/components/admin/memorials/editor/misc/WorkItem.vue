@@ -41,7 +41,7 @@
             <template #footer>
               <div class="flex justify-end">
                 <UButton
-                  label="Cancel"
+                  :label="$t('general.cancel')" 
                   size="sm"
                   class="mr-2"
                   variant="outline"
@@ -52,7 +52,7 @@
                   icon="i-mdi-plus"
                 />
                 <UButton 
-                  label="Save"
+                  :label="$t('general.save')" 
                   size="sm"
                   @click="() => {
                     deleteConfirmed();

@@ -17,7 +17,7 @@
               variant="outline"
               color="primary"
               square
-              label="Go to my memorials"
+              :label="$t('memorials.go_to_memorials')" 
               @click="() => {
                 shopping.setModalStatus(false)
               }"

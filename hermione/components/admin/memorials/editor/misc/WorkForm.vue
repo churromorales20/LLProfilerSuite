@@ -82,7 +82,7 @@
     <template #footer>
       <div class="flex justify-end">
         <UButton
-          label="Cancel"
+          :label="$t('general.cancel')" 
           size="sm"
           class="mr-2"
           variant="outline"

@@ -3,7 +3,7 @@
     <UButton 
       size="md"
       variant="outline"
-      label="Add video" 
+      :label="$t('memorials.add_video')" 
       icon="i-fa6-solid-film" 
     />
     <template #panel>
@@ -25,15 +25,28 @@
         }"
         >
           <template #header>
-            <h2 class="text-xl font-semibold">Add youtube video</h2>
+            <h2 class="text-xl font-semibold">{{ $t('memorials.add_youtube_video') }}</h2>
           </template> 
           
           <UInput size="md" v-model="urlVideo" placeholder="Enter youte video url" />
-          <p v-if="invalidVideoUrl" class="font-medium text-sm text-red-500 mt-1">Invalid video url</p>
+          <p v-if="invalidVideoUrl" class="font-medium text-sm text-red-500 mt-1">{{ $t('memorials.invalid_video') }}</p>
           <template #footer>
             <div class="flex justify-between">
-              <UButton icon="i-fa6-solid-ban" size="md" @click="closePopover" color="orange" variant="solid" label="Cancel" />
-              <UButton icon="i-fa6-solid-check" size="md" @click="addVideo" variant="solid" label="Confirm" />
+              <UButton 
+                icon="i-fa6-solid-ban" 
+                size="md" 
+                @click="closePopover" 
+                color="orange" 
+                variant="solid" 
+                :label="$t('general.cancel')" 
+              />
+              <UButton 
+                icon="i-fa6-solid-check" 
+                size="md" 
+                @click="addVideo" 
+                variant="solid" 
+                :label="$t('general.confirm')" 
+              />
             </div>
         
           </template>

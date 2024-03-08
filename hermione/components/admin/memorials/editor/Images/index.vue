@@ -3,8 +3,15 @@
     <input type="file" ref="fileInput" accept="image/*" @change="handleFileChange" class="hidden" />
     <div class="flex justify-between mb-4">
       <h2 class="text-neutral-950 text-2xl font-bold mb-2">Images</h2>
-      <UButton v-if="images.length > 0" size="md" variant="outline" @click="pickFile" :loading="isUploading"
-        label="Add images" icon="i-fa6-solid-file-circle-plus" />
+      <UButton 
+        v-if="images.length > 0" 
+        size="md" 
+        variant="outline" 
+        @click="pickFile" 
+        :loading="isUploading"
+        :label="$t('memorials.add_images')" 
+        icon="i-fa6-solid-file-circle-plus" 
+      />
     </div>
     <!--<UCarousel 
       id="_profile_gallery_images_"
@@ -35,8 +42,14 @@
       <UIcon name="i-fa6-solid-circle-notch" class="text-slate-400 animate-spin text-6xl" />
     </div>
     <div class="h-40 flex items-center justify-center" v-else>
-      <UButton size="md" variant="outline" :loading="isUploading" @click="pickFile" label="Add images"
-        icon="i-fa6-solid-file-circle-plus" />
+      <UButton 
+        size="md" 
+        variant="outline" 
+        :loading="isUploading" 
+        @click="pickFile" 
+        :label="$t('memorials.add_images')"
+        icon="i-fa6-solid-file-circle-plus" 
+      />
     </div>
   </div>
   <AdminMemorialsEditorImagesCropper v-if="imagesPicker.showCropper" />
@@ -62,16 +75,6 @@ const isUploading = computed(() => imagesPicker.imageWorking);
 const images = computed(() => {
   return editorStore.memorial.images
 });
-
-const items = [
-  'https://picsum.photos/600/800?random=1',
-  'https://picsum.photos/600/800?random=2',
-  'https://picsum.photos/600/800?random=3',
-  'https://picsum.photos/600/800?random=4',
-  'https://picsum.photos/600/800?random=5',
-  'https://picsum.photos/600/800?random=6'
-]
-
 
 const pickFile = () => {
   fileInput.value.click();

@@ -41,10 +41,23 @@
             <h3>Please confirm you want to continue.</h3>
             <template #footer>
               <div class="flex justify-between">
-                <UButton icon="i-fa6-solid-ban" size="md" @click="() => {
-                  isDeleteConfirmOpen = false;
-                }" color="orange" variant="solid" label="Cancel" />
-                <UButton icon="i-fa6-solid-check" size="md" @click="deleteVideo" variant="solid" label="Confirm" />
+                <UButton 
+                  icon="i-fa6-solid-ban" 
+                  size="md" 
+                  @click="() => {
+                    isDeleteConfirmOpen = false;
+                  }" 
+                  color="orange" 
+                  variant="solid" 
+                  :label="$t('general.cancel')"  
+                />
+                <UButton 
+                  icon="i-fa6-solid-check" 
+                  size="md" 
+                  @click="deleteVideo" 
+                  variant="solid" 
+                  :label="$t('general.confirm')"  
+                />
               </div>
           
             </template>

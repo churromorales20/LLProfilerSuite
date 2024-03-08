@@ -24,9 +24,9 @@
             color="primary" 
             :loading="sending"
             variant="solid" 
-            block>
-            Send recovery link
-          </UButton>
+            block
+            :label="$t('login.send_recovery')"
+          />
         </div>
         <div class="mt-6 text-right">
           <ULink
@@ -44,17 +44,18 @@
     <div class="flex flex-col items-center" v-if="showCompleted">
       <UIcon class="text-green-600 text-6xl" name="i-fa6-solid-circle-check" />
       <div class="my-8">
-        <p class="font-bold">Password Recovery Link Sent!</p>
-        <p class="text-sm">If the email is registered in our system, we will send a link to recover your credentials. Please check your spam folder.</p>
+        <p class="font-bold">{{ $t('login.pass_link_sent') }}</p>
+        <p class="text-sm">{{ $t('login.pass_link_message') }}</p>
       </div>
       <UButton 
         @click="backToLogin" 
         size="md" 
         class="mt-4" 
         color="primary" 
-        variant="solid" block>
-        {{ $t('login.back_to_login') }}
-      </UButton>
+        variant="solid" 
+        :label="$t('login.back_to_login')"
+        block
+      />
     </div>
   </transition>
 </template>

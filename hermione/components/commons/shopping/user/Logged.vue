@@ -7,7 +7,8 @@
         size="xs" 
         variant="link"
         @click="changeUser"
-      >{{ $t('general.change_user') }}</UButton>
+        :label="$t('general.change_user')"
+      />
     </div>
     <div class="p-2">
       <div class="flex items-center mb-4">

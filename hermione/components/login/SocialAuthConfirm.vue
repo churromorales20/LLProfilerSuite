@@ -17,9 +17,15 @@
     <div v-show="!socialStore.isWorking && socialStore.isErrored" class="text-center">
       <UIcon name="i-fa6-solid-triangle-exclamation text-llyellow-700" class="confirm-data-icon" />
       <h2 class="mt-4 text-center font-semibold">{{ $t('login.social_login_invalid') }}</h2>
-      <UButton @click="backToLogin" size="md" class="mt-4" color="primary" variant="solid" block>
-        {{ $t('login.back_to_login') }}
-      </UButton>
+      <UButton 
+        @click="backToLogin" 
+        size="md" 
+        class="mt-4" 
+        color="primary" 
+        variant="solid" 
+        :label="$t('login.back_to_login')"
+        block
+      />
     </div>
     <!--<div v-show="!socialStore.isWorking && !socialStore.isErrored && inited">-->
     <div v-show="!socialStore.isWorking && !socialStore.isErrored && inited" class="text-center">

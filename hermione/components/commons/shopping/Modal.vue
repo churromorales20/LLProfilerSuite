@@ -5,9 +5,8 @@
       shopping.setModalStatus(true)
     }"
     icon="i-fa6-solid-qrcode"
-  >
-    {{ $t('memorials.add_new') }}
-  </UButton>
+    :label="$t('memorials.add_new')"
+  />
   <UModal 
     v-model="isOpen" 
     :ui="{
@@ -29,7 +28,7 @@
     >
       <template #header v-if="viewport.isLessThan('md')">
         <div class="flex justify-between">
-          <h2 class="font-semibold text-xl">New memorial</h2>
+          <h2 class="font-semibold text-xl">{{ $t('memorials.new') }}</h2>
           <UButton
             icon="i-mdi-close-octagon"
             size="sm"

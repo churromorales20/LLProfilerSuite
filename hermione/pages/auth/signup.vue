@@ -104,9 +104,8 @@
           color="primary" 
           variant="solid" 
           block
-        >
-          {{ $t('login.sign_up') }}
-        </UButton>
+          :label="$t('login.sign_up')"
+        />
       </div>
       <div v-if="userStore.signUpIsErrored">
         <p class="font-medium text-sm text-red-500 mt-1">{{ errorMessage }}</p>

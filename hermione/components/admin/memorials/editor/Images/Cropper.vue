@@ -31,7 +31,7 @@
             @click="closeModal" 
             color="orange" 
             variant="outline"
-            label="Cancel" 
+            :label="$t('general.cancel')" 
           />
           <UButton 
             icon="i-fa6-solid-floppy-disk" 
@@ -39,7 +39,7 @@
             @click="cropAndSave" 
             color="llblue" 
             variant="outline"
-            label="Save" 
+            :label="$t('general.save')" 
             class="ml-2"
           />
         </div>

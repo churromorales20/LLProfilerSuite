@@ -37,7 +37,11 @@
     </template>
     <template #actions-data="{ row }">
       <div class="px-4 flex">
-        <UButton @click="editMemorial(row.id)" icon="i-fa6-solid-pen-to-square" size="sm" color="llblue" square class="mr-2" />
+        <UButton 
+          @click="editMemorial(row.id)" 
+          icon="i-fa6-solid-pen-to-square" 
+          size="sm" color="llblue" 
+          square class="mr-2" />
         <UDropdown 
           :popper="{ placement: 'bottom-start' }"
           :ui="{
