@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
-    'nuxt-viewport'
+    'nuxt-viewport',
+    '@nuxtjs/color-mode'
   ],
   viewport: {
     breakpoints: {
