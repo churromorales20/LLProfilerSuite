@@ -152,7 +152,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 definePageMeta({
-  layout: 'auth-views'
+  layout: 'auth-views',
+  colorMode: 'light',
 })
 const userStore = userAdminStore()
 const locale = useI18n()

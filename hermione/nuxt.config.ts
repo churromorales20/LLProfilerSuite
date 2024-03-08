@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/ui',
     'dayjs-nuxt',
-    'nuxt-viewport'
+    'nuxt-viewport',
+    '@nuxtjs/color-mode'
   ],
   viewport: {
     breakpoints: {

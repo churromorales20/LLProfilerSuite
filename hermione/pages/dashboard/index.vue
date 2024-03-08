@@ -3,6 +3,7 @@
 </template>
 <script setup>
 definePageMeta({
-  layout: 'admin-area'
+  layout: 'admin-area',
+  colorMode: 'light',
 })
 </script>

@@ -5,6 +5,7 @@
 </template>
 <script setup>
   definePageMeta({
-    layout: 'auth-views'
+    layout: 'auth-views',
+    colorMode: 'light',
   })
 </script>
