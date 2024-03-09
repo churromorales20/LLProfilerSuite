@@ -40,12 +40,12 @@ const isOpen = computed({
     return editorStore.isEditing;
   },
   set() {
-    editorStore.reset();
+    editorStore.closeEditor();
   }
 });
 
 const closeModal = () => {
-  editorStore.reset();
+  editorStore.closeEditor();
 }
 </script>
 <style>

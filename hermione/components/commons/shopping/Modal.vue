@@ -55,5 +55,5 @@ const isOpen = computed({
   }
 });
 const shopping = shoppingStore();
-const preventClose = computed(() => shopping.viewStep === 3);
+const preventClose = computed(() => shopping.viewStep === 3 && !shopping.completed);
 </script>

@@ -62,8 +62,8 @@ const dateFormatter = (date) => {
 const carreInfo = computed(() => profileStore.carrer)
 const educationInfo = computed(() => profileStore.education)
 
-const isEmptyInfo = !(carreInfo && Array.isArray(carreInfo) && carreInfo.length > 0) &&
-                    !(educationInfo && Array.isArray(educationInfo) && educationInfo.length > 0) &&
-                    !(!isEmptyString(profile.born_place) || !isEmptyString(profile.born_date)) &&
-                    !(!isEmptyString(profile.death_place) || !isEmptyString(profile.death_date));
+const isEmptyInfo = !(carreInfo.value && Array.isArray(carreInfo.value) && carreInfo.value.length > 0) &&
+                    !(educationInfo.value && Array.isArray(educationInfo.value) && educationInfo.value.length > 0) &&
+                    !(!isEmptyString(profile.value.born_place) || !isEmptyString(profile.value.born_date)) &&
+                    !(!isEmptyString(profile.value.death_place) || !isEmptyString(profile.value.death_date));
 </script>

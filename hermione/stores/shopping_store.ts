@@ -172,15 +172,16 @@ export const shoppingStore = defineStore('shoppingStore', {
       this.credit_card.cardholder_name = '';
       this.credit_card.expiration_date = '';
       this.credit_card.cvv = '';
+      setTimeout(() => {
+        this.completed = false;
+      }, 800);
     },
     seletedAddress(selection: number) {
       this.shipping_address_selected = selection;
     },
     setModalStatus(newStatus: boolean) {
-      if (newStatus) {
-        this.shipping_view_step = 1;
-        this.reset();
-      }
+      this.shipping_view_step = 1;
+      this.reset();
       this.modal_opened = newStatus;
     },
     shoppingMoveNextStep() {

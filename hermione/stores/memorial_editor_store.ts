@@ -20,6 +20,7 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     memorial_original: null as null | IMemorial,
     memorial_id: null as null | number,
     timeout_id: null as null | NodeJS.Timeout,
+    editor_open: false as boolean,
   }),
   getters: {
     isWorking: (state) => {
@@ -47,7 +48,7 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
       return state.memorial_original;
     },
     isEditing: (state) => {
-      return state.memorial_id !== null;
+      return state.editor_open;
     },
     isErrored: (state) => {
       return state.error_code !== null;
@@ -63,6 +64,12 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     },
   },
   actions: {
+    closeEditor() {
+      this.editor_open = false;
+      setTimeout(() => {
+        this.reset();
+      }, 800);
+    },
     reset(){
       this.memorial_id = null;
       this.memorial = null;
@@ -627,6 +634,7 @@ export const memorialEditorStore = defineStore('memorialEditorStore', {
     },
     async fetch(id: number) {
       this.error_code = null;
+      this.editor_open = true;
       this.is_working = true;
       this.memorial_id = id
       try {
