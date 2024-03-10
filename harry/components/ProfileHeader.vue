@@ -8,7 +8,7 @@
         <div class="z-10 absolute bottom-0 transform translate-y-1/2">
           <UAvatar 
             :size="viewport.isLessThan('lg') ? '3xl' : '3xl'" 
-            class="border-2 border-zinc-900"
+            class="border-2 ll-border-avatar"
             :src="`/profiles/assets/${profile.code}/${profile.avatar}`" 
             :alt="fullName" 
             :ui="{

@@ -19,6 +19,9 @@ export class BaseSheetCSS {
 .ll-border-heading {
   {{UNAME_TEXT_COLOR}}
 }
+.ll-border-avatar {
+  {{AVATAR_BORDER_COLOR}}
+}
 .ll-rounded {
   {{ROUNDED_CORNERS_SIZE}}
 }

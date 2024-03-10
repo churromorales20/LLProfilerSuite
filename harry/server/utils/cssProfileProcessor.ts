@@ -90,6 +90,7 @@ class ProfileCssProcessor {
     this.addBorderColor('UNAME_TEXT_COLOR', this.profileUI.uname_text_color!);
     this.addFontColor('BOX_TEXT_COLOR', this.profileUI.box_text_color!);
     this.addFontColor('BOX_TITLE_TEXT_COLOR', this.profileUI.box_title_text_color!);
+    this.addBorderColor('AVATAR_BORDER_COLOR', this.profileUI.box_title_text_color!);
     this.addFontSize('MAIN_TITLE_SIZE', this.profileUI.main_title_size!);
     this.addFontSize('UNAME_TEXT_SIZE', this.profileUI.uname_text_size!);
     this.addFontSize('BOX_TEXT_SIZE', this.profileUI.box_text_size!);
