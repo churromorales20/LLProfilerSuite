@@ -21,7 +21,7 @@
       </div>
     </div>
   </header>
-  <div class="mt-24 mb-10 lg:mt-0 lg:mb-0 h-20 lg:pl-48 lg:pr-6 items-center lg:flex-row flex flex-col items-center lg:justify-between">
+  <div class="mt-24 mb-10 lg:mt-0 lg:mb-0 h-16 lg:h-20 lg:pl-48 lg:pr-6 items-center lg:flex-row flex flex-col items-center lg:justify-between">
     <div>
       <h2 class="md:text-2xl text-xl font-semibold ll-title">{{ fullName }}</h2>
       <p class="lg:mb-0 lg:text-left md:text-lg text-base text-center mb-2 ll-title" v-if="!isEmptyString(profile.nickname)">{{ profile.nickname }}</p>

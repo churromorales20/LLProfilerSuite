@@ -20,8 +20,8 @@
       divide: 'divide-y divide-gray-100 dark:divide-gray-800'
     }">
       <template #header>
-        <div class="flex justify-between">
-          <h2 class="font-semibold text-xl">{{ $t('condolences.modal_title') }}</h2>
+        <div class="flex justify-between border-b-2 ll-border-heading pb-2 ll-box-title-main">
+          <h2 class="font-semibold text-md lg:text-lg">{{ $t('condolences.modal_title') }}</h2>
         </div>
       </template> 
       <CondolencesForm />
@@ -37,7 +37,7 @@
             :label="$t('condolences.modal_cancel_btn')"
           />
           <UButton 
-            class="ml-2"
+            class="ml-2 ll-btn-custom"
             icon="i-mdi-hand-heart-outline" 
             size="md"
             :loading="isSendingEntry"
