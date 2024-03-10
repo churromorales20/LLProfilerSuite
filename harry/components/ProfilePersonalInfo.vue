@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white shadow rounded-lg p-4 mb-4">
+  <div class="ll-box shadow ll-box-text rounded-lg p-4 mb-4">
     <div>
-      <h2 class="text-lg font-bold mb-2">{{ $t('profile.personal_info') }}</h2>
+      <h2 class="text-lg border-b-2 ll-border-heading pb-2 ll-box-title-main font-bold mb-4">{{ $t('profile.personal_info') }}</h2>
       <template v-if="!isEmptyInfo">
         <Carrer 
           v-if="carreInfo && Array.isArray(carreInfo) && carreInfo.length > 0" 

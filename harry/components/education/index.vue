@@ -13,7 +13,7 @@
   </div>
   <UButton 
     v-if="educationInfo.length > 3" 
-    class="pt-2"
+    class="pt-2 ll-link-custom"
     variant="link" 
     @click="() => {
       showAllItems = !showAllItems

@@ -1,5 +1,7 @@
 export class BaseSheetCSS {
-  private baseCss = `{{FONT_1_LINK}}
+  private baseCss = `
+
+{{FONT_1_LINK}}
 {{FONT_2_LINK}}
 .ll-main-custom{
   {{FONT_1_RULES}}
@@ -12,27 +14,38 @@ export class BaseSheetCSS {
 }
 .ll-title {
   {{MAIN_TITLE_COLOR}}
-  {{MAIN_TITLE_SIZE}}
   {{FONT_2_RULES}}
 }
-.ll-uname-text {
+.ll-border-heading {
   {{UNAME_TEXT_COLOR}}
-  {{UNAME_TEXT_SIZE}}
 }
 .ll-rounded {
   {{ROUNDED_CORNERS_SIZE}}
 }
+.ll-btn-custom {
+  {{LINK_MAIN_COLOR}}
+  {{LINK_SECONDARY_COLOR}}
+}
+.ll-link-custom {
+  {{LINK_CUSTOM_COLOR}}
+}
 .ll-box{
   {{BOX_BACKGROUND_COLOR}}
-}
-.ll-box-text{ 
   {{BOX_TEXT_COLOR}}
   {{BOX_TEXT_SIZE}}
 }
-.ll-box-title{
+.ll-box-title-main{
   {{BOX_TITLE_TEXT_COLOR}}
-  {{BOX_TITLE_TEXT_SIZE}}
   {{FONT_2_RULES}}
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base  {
+  .ll-box-title-size{
+    {{BOX_TITLE_TEXT_SIZE}}
+  }
 }`
 
   get(): string{

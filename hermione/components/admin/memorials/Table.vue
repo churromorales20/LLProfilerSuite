@@ -139,7 +139,6 @@ const isEmpty = (value) => {
 }
 const viewport = useViewport()
 const columnsDisplaying = computed(() => {
-  console.log(viewport.breakpoint.value);
   if (viewport.breakpoint.value === 'lg') {
     const columnsInSmall = ['avatar', 'fullname', 'actions', 'relationship', 'status']
     return columns.filter((column) => columnsInSmall.includes(column.key));

@@ -57,13 +57,16 @@ class ProfileCssProcessor {
     this.replaceText(key, this.isValueAvailable(link) ? `@import url('${link}');` : '');
   }
   private addBackgroundColor(key: string, color: string){
-    this.replaceText(key, this.isValueAvailable(color) ? `background-color: ${color};` : '');
+    this.replaceText(key, this.isValueAvailable(color) ? `background-color: ${color} !important;` : '');
   }
   private addFontColor(key: string, color: string){
-    this.replaceText(key, this.isValueAvailable(color) ? `color: ${color};` : '');
+    this.replaceText(key, this.isValueAvailable(color) ? `color: ${color} !important;` : '');
+  }
+  private addBorderColor(key: string, color: string){
+    this.replaceText(key, this.isValueAvailable(color) ? `border-color: ${color} !important;` : '');
   }
   private addFontSize(key: string, size: string){
-    this.replaceText(key, this.isValueAvailable(size) ? `font-size: ${size};` : '');
+    this.replaceText(key, this.isValueAvailable(size) ? `font-size: ${size} !important;` : '');
   }
   private addRoundedSize(size: string){
     this.replaceText('ROUNDED_CORNERS_SIZE', this.isValueAvailable(size) ? `border-radius: ${size};` : '');
@@ -81,7 +84,10 @@ class ProfileCssProcessor {
     this.addBackgroundColor('MAIN_BACKGROUND_COLOR', this.profileUI.main_background_color!);
     this.addBackgroundColor('BOX_BACKGROUND_COLOR', this.profileUI.box_background_color!);
     this.addFontColor('MAIN_TITLE_COLOR', this.profileUI.main_title_color!);
-    this.addFontColor('UNAME_TEXT_COLOR', this.profileUI.uname_text_color!);
+    this.addBackgroundColor('LINK_MAIN_COLOR', this.profileUI.link_main_color!);
+    this.addFontColor('LINK_CUSTOM_COLOR', this.profileUI.link_main_color!);
+    this.addFontColor('LINK_SECONDARY_COLOR', this.profileUI.link_secondary_color!);
+    this.addBorderColor('UNAME_TEXT_COLOR', this.profileUI.uname_text_color!);
     this.addFontColor('BOX_TEXT_COLOR', this.profileUI.box_text_color!);
     this.addFontColor('BOX_TITLE_TEXT_COLOR', this.profileUI.box_title_text_color!);
     this.addFontSize('MAIN_TITLE_SIZE', this.profileUI.main_title_size!);

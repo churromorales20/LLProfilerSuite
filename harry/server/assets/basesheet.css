@@ -28,8 +28,10 @@
   {{BOX_TEXT_COLOR}}
   {{BOX_TEXT_SIZE}}
 }
-.ll-box-title{
+.ll-box-title-main{
   {{BOX_TITLE_TEXT_COLOR}}
-  {{BOX_TITLE_TEXT_SIZE}}
   {{FONT_2_RULES}}
+}
+.ll-box-title-size{
+  {{BOX_TITLE_TEXT_SIZE}}
 }

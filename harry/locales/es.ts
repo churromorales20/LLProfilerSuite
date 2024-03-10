@@ -25,6 +25,7 @@ const es = {
     'no_personal_info': 'La información personal no ha sido compartida.',
     'view_less': 'Ver menos',
     'view_more': 'Ver mas',
+    'graveyard_directions': 'Información del cementerio'
   },
   condolences: {
     'first_name': 'Nombre',

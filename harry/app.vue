@@ -3,12 +3,12 @@
     <NuxtPage />
     <div class="lg:w-[1200px] w-screen p-6 font-semibold text-center flex-col flex h-20 items-center">
       <div>
-        <UButton color="sky" size="xs" variant="link">{{ $t('footer.report') }}</UButton>
-        <UButton color="sky" size="xs" variant="link">{{ $t('footer.terms_conditions') }}</UButton>
-        <UButton color="sky" size="xs" variant="link">{{ $t('footer.legal') }}</UButton>
-        <UButton color="sky" size="xs" variant="link">{{ $t('footer.contact') }}</UButton>
+        <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.report') }}</UButton>
+        <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.terms_conditions') }}</UButton>
+        <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.legal') }}</UButton>
+        <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.contact') }}</UButton>
       </div>
-      <h4 class="text-sm text-zinc-300 mt-2">Powered by Legacy Link Memorials 2024</h4>
+      <h4 class="text-sm text-zinc-300 mt-2 ll-title">Powered by Legacy Link Memorials 2024</h4>
     </div>
   </div>
 </template>

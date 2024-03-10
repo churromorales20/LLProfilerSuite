@@ -25,6 +25,7 @@ const en = {
     'no_personal_info': 'Personal info has not been shared',
     'view_less':'View less',
     'view_more':'View more',
+    'graveyard_directions': 'Graveyard Directions'
   },
   condolences:{
     'first_name': 'First name',

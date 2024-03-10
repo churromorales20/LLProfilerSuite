@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white shadow rounded-lg p-4 mb-4">
-    <h2 class="text-xl font-bold pb-4 border-b border-gray-300">{{ $t('profile.biography') }}</h2>
+  <div class="ll-box ll-box-text shadow rounded-lg p-2 mb-4">
+    <h2 class="text-md lg:text-lg ll-box-title-main font-bold pb-4 border-b-2 ll-border-heading">{{ $t('profile.biography') }}</h2>
     <div class="px-1 py-2 lg:p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
      <!-- <p class="font-light leading-6">
         {{ !viewAll ? biographyInfo.text :  profile.bio}}
@@ -40,7 +40,7 @@ const biographyInfo = computed(() => {
       btnText = locale.t('profile.view_more');
       bioText = `${profileStore.profile.bio?.slice(0, TEXT_LIMIT)}...`;
     }
-    const viewMoreBtn = `&nbsp;<a id="_bio_content_button_" class="cursor-pointer text-sky-600 font-semibold">${btnText}</a>`;
+    const viewMoreBtn = `&nbsp;<a id="_bio_content_button_" class="cursor-pointer ll-link-custom font-semibold">${btnText}</a>`;
     return bioText + viewMoreBtn;
   }
   return profileStore.profile.bio

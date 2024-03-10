@@ -17,4 +17,6 @@ export interface IProfileUIResponse {
   box_text_size?: string;
   box_title_text_color?: string;
   box_title_text_size?: string;
+  link_main_color?: string;
+  link_secondary_color?: string;
 }

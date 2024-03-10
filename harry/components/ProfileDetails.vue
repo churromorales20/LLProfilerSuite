@@ -15,10 +15,10 @@
       <div class="lg:w-2/3 lg:px-4 px-1 py-1">
         <div 
           v-if="!isEmptyString(profile.obituary)" 
-            class="bg-white shadow rounded-lg p-4 mb-4">
+            class="ll-box shadow rounded-lg p-4 mb-4">
           <!-- Obituario -->
           <div>
-            <h2 class="text-xl font-bold mb-2">{{ $t('profile.obituary') }}</h2>
+            <h2 class="text-md lg:text-lg border-b-2 ll-border-heading pb-2 ll-box-title-main font-bold mb-4">{{ $t('profile.obituary') }}</h2>
             <p>{{ profile.obituary }}</p>
           </div>
         </div>
