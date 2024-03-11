@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-base font-bold">{{ $t('profile.carrer_title') }}</h3>
+  <h3 class="text-base font-bold ll-box-title-main">{{ $t('profile.carrer_title') }}</h3>
   <div class="max-h-72 overflow-y-auto mb-4">
     <ul>
       <li v-for="carrerItem, index in carreInfo">

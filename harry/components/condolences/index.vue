@@ -2,7 +2,7 @@
   <CondolencesModal />
   <div v-if="wallActive" class="ll-box shadow rounded-lg p-4" :class="{'mt-4': viewport.isLessThan('lg') }">
     <div class="flex items-center justify-between border-b-2 ll-border-heading pb-2 mb-4">
-      <h2 class="text-md lg:text-lg ll-box-title-main font-bold">{{ $t('condolences.title_section') }}</h2>
+      <h2 class="text-lg ll-box-title-main font-bold">{{ $t('condolences.title_section') }}</h2>
       <UButton 
         icon="i-mdi-notebook-heart" 
         size="md"

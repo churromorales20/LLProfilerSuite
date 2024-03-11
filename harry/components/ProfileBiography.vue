@@ -1,6 +1,6 @@
 <template>
-  <div class="ll-box ll-box-text shadow rounded-lg p-2 mb-4">
-    <h2 class="text-md lg:text-lg ll-box-title-main font-bold pb-4 border-b-2 ll-border-heading">{{ $t('profile.biography') }}</h2>
+  <div class="ll-box ll-box-text shadow rounded-lg p-4 mb-4">
+    <h2 class="text-lg ll-box-title-main font-bold pb-2 border-b-2 ll-border-heading">{{ $t('profile.biography') }}</h2>
     <div class="px-1 py-2 lg:p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
      <!-- <p class="font-light leading-6">
         {{ !viewAll ? biographyInfo.text :  profile.bio}}

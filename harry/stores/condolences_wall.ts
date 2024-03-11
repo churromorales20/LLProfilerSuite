@@ -131,7 +131,8 @@ export const condolencesWallStore = defineStore('condolencesWallStore', {
         if (response.data?.status === 'APPROVED') {
           this.entries.unshift(response.data);
         }
-
+        this.is_sending_entry_form = false;
+        
         return true;
       } catch (error: any) {
         console.log('error', error.response);

@@ -35,7 +35,7 @@
     </UCard>
   </UModal>
   <div class="ll-box shadow rounded-lg p-4 mb-4 ll-box-text">
-    <h2 class="text-md lg:text-lg border-b-2 ll-border-heading pb-2 ll-box-title-main font-bold mb-4">{{ $t('profile.images') }}</h2>
+    <h2 class="text-lg border-b-2 ll-border-heading pb-2 ll-box-title-main font-bold mb-4">{{ $t('profile.images') }}</h2>
     <ImagesDisplayer />
   </div>
 </template>

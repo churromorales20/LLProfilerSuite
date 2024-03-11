@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-base font-bold">{{ $t('profile.education_title') }}</h3>
+  <h3 class="text-base font-bold ll-box-title-main">{{ $t('profile.education_title') }}</h3>
   <div class="max-h-72 overflow-y-auto">
     <ul>
     <li v-for="educationItem, index in educationInfo">
