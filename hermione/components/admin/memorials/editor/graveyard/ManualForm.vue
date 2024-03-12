@@ -24,7 +24,7 @@
     size="md" 
     :placeholder="$t('memorials.last_name')" 
   />
-  <label for="internal_steps" class="text-neutral-950 mb-1 block">{{ $t('memorials.internal_steps') }}</label>
+  <label for="internal_steps" class="text-neutral-950 mb-1 block">{{ $t('graveyard.internal') }}</label>
   <UTextarea 
     :ui="{
       form: 'form-textarea h-16',

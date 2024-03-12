@@ -21,7 +21,7 @@
           inactive: 'py-5 border-transparent hover:before:bg-llyellow-600 hover:border-llyellow-800 text-white font-bold hover:text-llblue-600'
         }" />
       </div>
-      <img style="height:110px;" src="/logoh.png" class="mx-auto mb-4 w-auto"/>
+      <img style="height:110px;" src="/logoh.png" class="absolute bottom-0 mx-auto mb-4 w-auto"/>
     </aside>
   </transition>
 </template>

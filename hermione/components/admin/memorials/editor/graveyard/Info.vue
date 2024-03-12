@@ -12,7 +12,7 @@
   </div>
   <transition name="fade" @after-leave="moveNextView">
     <div v-if="viewing == 'form'">
-      <label for="_graveyard_selector_" class="form-label text-neutral-950 mb-2 block">{{ $t('graveyar.select') }}</label>
+      <label for="_graveyard_selector_" class="form-label text-neutral-950 mb-2 block">{{ $t('graveyard.select') }}</label>
       <USelectMenu
         id="_graveyard_selector_"
         v-model="selected"

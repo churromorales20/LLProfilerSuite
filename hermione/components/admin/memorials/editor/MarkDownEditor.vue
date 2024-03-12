@@ -195,6 +195,9 @@ onMounted(() =>{
 .tiptap.ProseMirror {
   border: 1px solid #cecece;
   border-radius: 6px;
+  min-height: 20rem;
+  max-height: 30rem;
+  overflow: auto;
 }
 .ProseMirror-focused {
   outline-color: #cecece;
