@@ -1,8 +1,8 @@
 <template>
   <div class="ll-main-custom h-fit min-h-screen pb-4 flex flex-col items-center">
     <NuxtPage />
-    <div class="lg:w-[1200px] w-screen p-6 font-semibold text-center flex-col flex h-20 items-center">
-      <div>
+    <div class="lg:w-[1200px] w-screen pt-6 px-6 font-semibold text-center flex-col flex items-center">
+      <div class="">
         <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.report') }}</UButton>
         <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.terms_conditions') }}</UButton>
         <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.legal') }}</UButton>

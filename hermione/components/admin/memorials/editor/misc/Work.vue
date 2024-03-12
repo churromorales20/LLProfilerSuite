@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="border-b pb-4 border-gray-300 flex justify-between items-center">
-      <h4 class="lg:text-md mr-10 font-semibold">Carrer</h4>
+      <h4 class="lg:text-md mr-10 font-semibold">{{ $t('memorials.carrer_title') }}</h4>
       <div class="flex">
         <UButton 
           size="sm"
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div v-if="workInfo == null || (Array.isArray(workInfo) && workInfo.length < 1)" class="flex justify-center items-center h-40">
-      <h3>No work history has beem added.</h3>
+      <h3>{{ $t('memorials.no_carrer') }}</h3>
     </div>
     <div v-if="workInfo != null && Array.isArray(workInfo) && workInfo.length > 0">
       <ul class="mb-4">

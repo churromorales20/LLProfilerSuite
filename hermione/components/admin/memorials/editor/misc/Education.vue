@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="border-b pb-4 border-gray-300 flex justify-between items-center">
-      <h4 class="lg:text-md mr-10 font-semibold">Education</h4>
+      <h4 class="lg:text-md mr-10 font-semibold">{{ $t('memorials.education_title') }}</h4>
       <div class="flex">
         <UButton 
           size="sm"
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div v-if="educationInfo == null || (Array.isArray(educationInfo) && educationInfo.length < 1)" class="flex justify-center items-center h-40">
-      <h3>No education has beem added.</h3>
+      <h3>{{ $t('memorials.no_education') }}</h3>
     </div>
     <div v-if="educationInfo != null && Array.isArray(educationInfo) && educationInfo.length > 0">
       <ul class="mb-4">

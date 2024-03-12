@@ -13,33 +13,33 @@
     </template>
 
     <div class="w-[400px]">
-      <label for="_work_misc_company_name_" class="form-label text-sm text-neutral-950 mb-2 block">Company name</label>
+      <label for="_work_misc_company_name_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.carrer_company') }}</label>
       <UInput 
         id="_work_misc_company_name_" 
         v-model="workItem.company"
         :color="workStore.errors.includes('company_name') ? 'red' : 'primary'"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.carrer_company_placeholder')"
       />
-      <label for="_work_misc_position_" class="form-label text-sm text-neutral-950 mb-2 block">Position</label>
+      <label for="_work_misc_position_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.carrer_position') }}</label>
       <UInput 
         id="_work_misc_position_" 
         v-model="workItem.position"
         :color="workStore.errors.includes('work_position') ? 'red' : 'primary'"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.carrer_position_placeholder')"
       />
-      <label for="_work_misc_company_url_" class="form-label text-sm text-neutral-950 mb-2 block">Company URL</label>
+      <label for="_work_misc_company_url_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.carrer_company_url') }}</label>
       <UInput 
         id="_work_misc_company_url_" 
         v-model="workItem.company_url"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.carrer_company_url_placeholder')"
       />
-      <label for="_work_misc_start_date_" class="form-label text-sm text-neutral-950 mb-2 block">Start date</label>
+      <label for="_work_misc_start_date_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.start_date') }}</label>
       <div class="flex mb-2">
         <USelectMenu 
           class="mr-4 w-40"
@@ -58,7 +58,7 @@
           :options="years" 
         />
       </div>
-      <label for="_work_misc_end_date_" class="form-label text-sm text-neutral-950 mb-2 block">End date</label>
+      <label for="_work_misc_end_date_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.end_date') }}</label>
       <div class="flex mb-2">
         <USelectMenu 
           class="mr-4 w-40"
@@ -108,36 +108,37 @@
 import { MiscDateFields } from '@ll-interfaces/IMemorialMisc';
 import type { IEmploymentInfo } from '@ll-interfaces/IMemorialMisc';
 
+const locale = useI18n()
 const editorStore = memorialEditorStore()
 const workStore = memorialWorkStore()
 const emits = defineEmits(['close-btn-pressed']);
 const years = ref<string[]>([]);
 const months = [
-    { value: '01', title: 'January' },
-    { value: '02', title: 'February' },
-    { value: '03', title: 'March' },
-    { value: '04', title: 'April' },
-    { value: '05', title: 'May' },
-    { value: '06', title: 'June' },
-    { value: '07', title: 'July' },
-    { value: '08', title: 'August' },
-    { value: '09', title: 'September' },
-    { value: '10', title: 'October' },
-    { value: '11', title: 'November' },
-    { value: '12', title: 'December' }
+    { value: '01', title: locale.t('memorials.month_1')},
+    { value: '02', title: locale.t('memorials.month_2')},
+    { value: '03', title: locale.t('memorials.month_3')},
+    { value: '04', title: locale.t('memorials.month_4')},
+    { value: '05', title: locale.t('memorials.month_5')},
+    { value: '06', title: locale.t('memorials.month_6')},
+    { value: '07', title: locale.t('memorials.month_7')},
+    { value: '08', title: locale.t('memorials.month_8')},
+    { value: '09', title: locale.t('memorials.month_9')},
+    { value: '10', title: locale.t('memorials.month_10')},
+    { value: '11', title: locale.t('memorials.month_11')},
+    { value: '12', title: locale.t('memorials.month_12')}
 ];
 
 const titleAndLabel = computed(() => {
   if (workStore.isEditing) {
     return {
-      title: 'Edit work information',
-      label: 'Update'
+      title: locale.t('memorials.carrer_edit'),
+      label: locale.t('general.update')
     }
   }
 
   return {
-    title: 'Add work information',
-    label: 'Save'
+    title: locale.t('memorials.carrer_add'),
+    label: locale.t('general.save')
   }
 });
 

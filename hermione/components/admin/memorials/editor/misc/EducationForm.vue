@@ -12,33 +12,33 @@
       </h3>
     </template>
     <div class="w-[400px]">
-      <label for="_education_misc_institution_" class="form-label text-sm text-neutral-950 mb-2 block">Institution name</label>
+      <label for="_education_misc_institution_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.education_institution') }}</label>
       <UInput 
         id="_education_misc_institution_" 
         v-model="educationItem.institution"
         :color="educationStore.errors.includes('institution_name') ? 'red' : 'primary'"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.education_institution_placeholder')"
       />
-      <label for="_education_misc_field_" class="form-label text-sm text-neutral-950 mb-2 block">Study field</label>
+      <label for="_education_misc_field_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.education_field') }}</label>
       <UInput 
         id="_education_misc_field_" 
         v-model="educationItem.field_of_study"
         :color="educationStore.errors.includes('field_of_study') ? 'red' : 'primary'"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.education_field_placeholder')"
       />
-      <label for="_education_misc_degree_" class="form-label text-sm text-neutral-950 mb-2 block">Degree</label>
+      <label for="_education_misc_degree_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.degree') }}</label>
       <UInput 
         id="_education_misc_degree_" 
         v-model="educationItem.degree"
         class="mb-2" 
         size="sm" 
-        :placeholder="$t('memorials.last_name')"
+        :placeholder="$t('memorials.education_degree_placeholder')"
       />
-      <label for="_education_misc_start_date_" class="form-label text-sm text-neutral-950 mb-2 block">Start date</label>
+      <label for="_education_misc_start_date_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.start_date') }}</label>
       <div class="flex mb-2">
         <USelectMenu 
           class="mr-4 w-40"
@@ -57,7 +57,7 @@
           :options="years" 
         />
       </div>
-      <label for="_education_misc_end_date_" class="form-label text-sm text-neutral-950 mb-2 block">End date</label>
+      <label for="_education_misc_end_date_" class="form-label text-sm text-neutral-950 mb-2 block">{{ $t('memorials.end_date') }}</label>
       <div class="flex mb-2">
         <USelectMenu 
           class="mr-4 w-40"
@@ -107,36 +107,37 @@
 import { MiscDateFields } from '@ll-interfaces/IMemorialMisc';
 import type { IEducationInfo } from '@ll-interfaces/IMemorialMisc';
 
+const locale = useI18n()
 const editorStore = memorialEditorStore()
 const educationStore = memorialEducationStore()
 const emits = defineEmits(['close-btn-pressed']);
 const years = ref<string[]>([]);
 const months = [
-    { value: '01', title: 'January' },
-    { value: '02', title: 'February' },
-    { value: '03', title: 'March' },
-    { value: '04', title: 'April' },
-    { value: '05', title: 'May' },
-    { value: '06', title: 'June' },
-    { value: '07', title: 'July' },
-    { value: '08', title: 'August' },
-    { value: '09', title: 'September' },
-    { value: '10', title: 'October' },
-    { value: '11', title: 'November' },
-    { value: '12', title: 'December' }
+    { value: '01', title: locale.t('memorials.month_1') },
+    { value: '02', title: locale.t('memorials.month_2') },
+    { value: '03', title: locale.t('memorials.month_3') },
+    { value: '04', title: locale.t('memorials.month_4') },
+    { value: '05', title: locale.t('memorials.month_5') },
+    { value: '06', title: locale.t('memorials.month_6') },
+    { value: '07', title: locale.t('memorials.month_7') },
+    { value: '08', title: locale.t('memorials.month_8') },
+    { value: '09', title: locale.t('memorials.month_9') },
+    { value: '10', title: locale.t('memorials.month_10') },
+    { value: '11', title: locale.t('memorials.month_11') },
+    { value: '12', title: locale.t('memorials.month_12') }
 ];
 
 const titleAndLabel = computed(() => {
   if (educationStore.isEditing) {
     return {
-      title: 'Edit education',
-      label: 'Update'
+      title: locale.t('memorials.education_edit'),
+      label: locale.t('general.update')
     }
   }
 
   return {
-    title: 'Add education',
-    label: 'Save'
+    title: locale.t('memorials.education_add'),
+    label: locale.t('general.save')
   }
 });
 

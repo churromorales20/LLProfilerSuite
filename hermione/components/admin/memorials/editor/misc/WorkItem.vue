@@ -35,9 +35,9 @@
             }"
           >
             <template #header>
-              <h3 class="text-md font-semibold">Attention</h3>
+              <h3 class="text-md font-semibold">{{ $t('general.attention') }}</h3>
             </template>
-            <h3 class="text-sm py-8">Please confirm you to delete the work experience at {{ workItem.company }}</h3>
+            <h3 class="text-sm py-8">{{ $t('memorials.carrer_delete') }} {{ workItem.company }}</h3>
             <template #footer>
               <div class="flex justify-end">
                 <UButton
