@@ -127,6 +127,7 @@ const es = {
     'cancel': 'Cancelar',
     'confirm': 'Confirmar',
     'save': 'Guardar',
+    'new': 'Nuevo',
   },
   memorials: {
     'add_new': 'Agregar nuevo memorial',

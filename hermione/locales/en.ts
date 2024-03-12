@@ -127,6 +127,7 @@ const en = {
     'cancel': 'Cancel',
     'confirm': 'Confirm',
     'save': 'Save',
+    'new': 'New',
   },
   memorials: {
     'add_new': 'Add new memorial',

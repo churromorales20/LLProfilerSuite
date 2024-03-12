@@ -4,8 +4,8 @@
     @click="() => {
       shopping.setModalStatus(true)
     }"
-    icon="i-fa6-solid-qrcode"
-    :label="$t('memorials.add_new')"
+    icon="i-mdi-data-matrix-plus"
+    :label="viewport.isLessThan('md') ? $t('general.new') : $t('memorials.add_new')"
   />
   <UModal 
     v-model="isOpen" 
