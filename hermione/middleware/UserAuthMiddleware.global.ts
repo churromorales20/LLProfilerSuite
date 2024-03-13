@@ -7,16 +7,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     '/auth/social/facebook/confirm',
     '/auth/social/google/confirm',
     '/shopping',
-    '/website/',
     '/404'
   ];
 
-  console.log('to.path');
-  console.log('to.path');
-  console.log(to.path);
-  
 
-  if (!publicRoutes.includes(to.path)) {
+  if (!publicRoutes.includes(to.path) && !to.path.startsWith("/website")) {
     const result = await userStore.verifyUserToken(process.client)
 
     if (to.path === '/auth/login') {

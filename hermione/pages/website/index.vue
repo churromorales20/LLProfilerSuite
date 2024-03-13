@@ -132,19 +132,19 @@ onMounted(() => {
   }
 
   .slider-item[data-num="1"] .slider-main_img {
-    background: url("./web_bg.webp") no-repeat center center/cover;
+    background: url("/website/web_bg.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="2"] .slider-main_img {
-    background: url("./web_bg2.webp") no-repeat center center/cover;
+    background: url("/website/web_bg2.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="3"] .slider-main_img {
-    background: url("./web_bg3.webp") no-repeat center center/cover;
+    background: url("/website/web_bg3.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="4"] .slider-main_img {
-    background: url("./web_bg4.webp") no-repeat center center/cover;
+    background: url("/website/web_bg4.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="5"] .slider-main_img {
