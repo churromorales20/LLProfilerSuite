@@ -24,7 +24,7 @@
       <div class="flex justify-center items-center h-screen text-white">
         <div class="px-4 content-site">
           <div class="flex items-center mb-10">
-            <div class="p-2" style="width:fit-content"><img src="/website/logo.png" alt="LegacyLink Logo"
+            <div class="p-2" style="width:fit-content"><img src="/logo.png" alt="LegacyLink Logo"
                 class="w-40 md:w-80"></div> <!-- Agregar la imagen del logo aquí -->
             <h1 class="text-4xl md:text-6xl font-bold ml-4 text-center">Memoriales digitales</h1>
           </div>
@@ -132,19 +132,19 @@ onMounted(() => {
   }
 
   .slider-item[data-num="1"] .slider-main_img {
-    background: url("/website/web_bg.webp") no-repeat center center/cover;
+    background: url("./web_bg.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="2"] .slider-main_img {
-    background: url("/website/web_bg2.webp") no-repeat center center/cover;
+    background: url("./web_bg2.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="3"] .slider-main_img {
-    background: url("/website/web_bg3.webp") no-repeat center center/cover;
+    background: url("./web_bg3.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="4"] .slider-main_img {
-    background: url("/website/web_bg4.webp") no-repeat center center/cover;
+    background: url("./web_bg4.webp") no-repeat center center/cover;
   }
 
   .slider-item[data-num="5"] .slider-main_img {
