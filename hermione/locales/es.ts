@@ -1,7 +1,7 @@
 const es = {
   addresses: {
-    'line_1': 'Línea de dirección',
-    'line_1_placeholder': 'Ingrese la línea de dirección 1',
+    'line_1': 'Dirección',
+    'line_1_placeholder': 'Ingrese la dirección calle, Nro, lote, Mzn',
     'reference': 'Referencia',
     'reference_placeholder': 'Referencia de dirección',
     'country': 'País',

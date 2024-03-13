@@ -4,7 +4,7 @@
       ring: '',
       body: {
           background: 'bg-white',
-          base: 'll-modal-editor-body',
+          base: 'll-modal-cropper-body',
         },
         divide: 'divide-y divide-gray-300 dark:divide-gray-800'
       }"
@@ -82,3 +82,9 @@ const closeModal = () => {
 }
 
 </script>
+<style>
+.ll-modal-cropper-body{
+  max-height: 80vh;
+  overflow: auto;
+}
+</style>
