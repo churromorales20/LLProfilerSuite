@@ -23,13 +23,12 @@
       <!-- Add more shipping details as needed -->
     </div>
 
-    <!-- Credit Card Details -->
+    <!-- Credit Card Details 
     <div class="mb-6">
       <h3 class="text-md font-semibold mb-2">{{ $t('shopping.payment_details') }}:</h3>
       <p class="text-sm"><span class="font-semibold">{{ $t('shopping.credit_card') }}:</span> {{ maskCreditCard }}</p>
       <p class="text-sm"><span class="font-semibold">{{ $t('shopping.credit_card_holder_name') }}:</span> {{ orderDetails.cardholder_name }}</p>
-      <!-- Add more credit card details as needed -->
-    </div>
+    </div>-->
      <UButton
         icon="i-fa6-solid-pen-to-square"
         size="md"
@@ -46,7 +45,7 @@ const orderDetails = computed(() => shopping.orderDetails);
 
 const shippingAddressInfo = computed(() => shopping.shippingAddressInfo);
 
-const maskCreditCard = computed(() => {
+/* const maskCreditCard = computed(() => {
   // Remove any existing spaces and non-digit characters
   const cardNumber = shopping.orderDetails.card_number.replace(/\D/g, '');
   // Divide the number into groups of four digits
@@ -59,7 +58,7 @@ const maskCreditCard = computed(() => {
   let maskedCardNumber = maskedGroups + ' ' + '*' + lastGroup.slice(-3);
 
   return maskedCardNumber;
-});
+});*/
 
 
 const editOrderInfo = () => {

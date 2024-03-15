@@ -110,7 +110,7 @@
       <div v-if="userStore.signUpIsErrored">
         <p class="font-medium text-sm text-red-500 mt-1">{{ errorMessage }}</p>
       </div>
-      <div>
+      <!--<div>
         <p class="text-center text-sm text-gray-600">
           {{ $t('login.sign_up_with') }}
         </p>
@@ -119,7 +119,7 @@
       <div class="grid grid-cols-2 gap-2">
         <LoginFacebookButton />
         <LoginGoogleButton />
-      </div>
+      </div>-->
 
       <div>
         <p class="text-center text-sm text-gray-600">

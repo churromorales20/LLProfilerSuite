@@ -1,7 +1,7 @@
 <template>
   <form class="space-y-6" action="#" method="POST">
     <CommonsAuthLoginForm />
-    <div>
+    <!--<div>
       <p class="text-center text-sm text-gray-600">
         {{ $t('login.or_sign_in') }}
       </p>
@@ -10,7 +10,7 @@
     <div class="grid grid-cols-2 gap-2">
       <LoginFacebookButton />
       <LoginGoogleButton />
-    </div>
+    </div>-->
 
     <div>
       <p class="text-center text-sm text-gray-600">

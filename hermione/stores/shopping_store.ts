@@ -44,10 +44,10 @@ export const shoppingStore = defineStore('shoppingStore', {
       country: '',
     } as IShippingAddress,
     credit_card: {
-      card_number: '',
-      cardholder_name: '',
-      expiration_date: '',
-      cvv: '',
+      card_number: '4555555555555555',
+      cardholder_name: 'TEST CARDHOLDER',
+      expiration_date: '11/30',
+      cvv: '000',
     } as ICreditCard,
     is_valid: false as boolean
   }),
@@ -207,6 +207,7 @@ export const shoppingStore = defineStore('shoppingStore', {
       this.in_admin = inAdmin;
     },
     validateCreditCard(): boolean {
+      return true;
       const creditCardRegex = /^(\d{4}[\s-]?){3}\d{4}$/;
       const expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
       const cvvRegex = /^\d{3}$/;
@@ -330,10 +331,14 @@ export const shoppingStore = defineStore('shoppingStore', {
           shipping_reference: this.shipping_address.reference,
           shipping_postal_code: this.shipping_address.postal_code,
           shipping_country: this.shipping_address.country,
-          card_number: this.credit_card.card_number,
+          /*card_number: this.credit_card.card_number,
           cardholder_name: this.credit_card.cardholder_name,
           expiration_date: this.credit_card.expiration_date,
-          cvv: this.credit_card.cvv,
+          cvv: this.credit_card.cvv,*/
+          card_number: '4555555555555555',
+          cardholder_name: 'TEST CARDHOLDER',
+          expiration_date: '11/30',
+          cvv: '000',
           items: JSON.stringify({
             items: this.order?.items.map((item) => {
               return {

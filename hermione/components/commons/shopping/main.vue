@@ -37,8 +37,9 @@
 
               <CommonsShoppingShipping />
 
-              <!-- Payment method selector and card form -->
+              <!-- Payment method selector and card form 
               <CommonsShoppingPaymentMethod class="mb-20" />
+              -->
             </div>
           </transition>
           <transition name="fade" @after-leave="moveShoppingStep">

@@ -1,9 +1,9 @@
 <template>
   <AdminMemorialsEditorModal />
   <AdminMemorialsTable />
-  <div class="flex justify-end">
+  <!--<div class="flex justify-end">
     <UPagination size="lg" v-model="page" :page-count="5" :total="items.length" />
-  </div>
+  </div>-->
 </template>
 <script setup>
   import { ref, computed } from 'vue'

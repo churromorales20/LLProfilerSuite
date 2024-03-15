@@ -17,6 +17,7 @@ const en = {
     'shipping_address_title': 'Shipping address',
   },
   shopping:{
+    'item_basic_small_profile_': 'Basic web memorial',
     'item_basic_profile': 'Basic memorial plaque',
     'credit_card_holder_name': 'Cardholder Name',
     'credit_card_name_placeholder': 'Credit card holder name',
@@ -50,7 +51,8 @@ const en = {
     'shipping_total': 'Shipping',
     'discount_total': 'Discount',
     'grand_total': 'Total',
-    'terms_conditions': 'Accept our terms and conditions',
+    'terms_conditions': 'I have read and accept the ',
+    'terms_conditions2': 'Terms and conditions',
     'continue_order': 'Continue',
     'confirm_order': 'Confirm order',
     'new_address_btn': 'Add new address',

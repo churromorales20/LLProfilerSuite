@@ -49,11 +49,30 @@
         @change="() => {
           shopping.validate()
         }"
+        :ui="{
+           wrapper: 'relative flex items-center',
+        }"
         class="mb-2" 
         color="primary" 
-        :label="$t('shopping.terms_conditions')" 
         v-model="shopping.terms_conditions" 
-      />
+      >
+        <template #label>
+          <span>
+            {{ $t('shopping.terms_conditions') }}
+            <UButton 
+              :ui="{
+                padding: {
+                  sm: 'pl-0 pr-2.5 py-1.5'
+                }
+              }"
+              to="https://www.legacylink.pe/terms_and_conditions.html" 
+              target="_blank"
+              variant="link" 
+              size="sm" 
+              :label="$t('shopping.terms_conditions2')" />
+          </span>
+        </template>
+      </UCheckbox>
       <UButton
         :icon="buttonInfo.icon"
         size="md"

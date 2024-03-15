@@ -17,6 +17,7 @@ const es = {
     'shipping_address_title': 'Dirección de envío',
   },
   shopping: {
+    'item_basic_small_profile_': 'Memorial digital basico',
     'item_basic_profile': 'Placa conmemorativa básica',
     'credit_card_holder_name': 'Nombre del titular de la tarjeta',
     'credit_card_name_placeholder': 'Ingrese el nombre del titular de la tarjeta',
@@ -50,7 +51,8 @@ const es = {
     'shipping_total': 'Envío',
     'discount_total': 'Descuento',
     'grand_total': 'Total',
-    'terms_conditions': 'Acepta nuestros términos y condiciones',
+    'terms_conditions': 'He leído y acepto los ',
+    'terms_conditions2': 'Términos y condiciones',
     'continue_order': 'Continuar',
     'confirm_order': 'Confirmar pedido',
     'new_address_btn': 'Agregar nueva dirección',
