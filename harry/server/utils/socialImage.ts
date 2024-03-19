@@ -18,7 +18,7 @@ export class SocialImageHandler {
   }
 
   async validateOrCreate(socialImageExists: boolean) {
-    const cacheKey = `_profile_sossscssssial_image_${this.profileIdentifier}_`;
+    const cacheKey = `_profile_social_image_${this.profileIdentifier}_`;
     const existsCache = await this.existsImageCache(cacheKey);
     //const socialImageExists = await storageHandler.getItem(socialImage);
     console.log(existsCache, socialImageExists);
