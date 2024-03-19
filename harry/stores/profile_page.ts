@@ -20,6 +20,14 @@ export const useProfileStore = defineStore('profileStore', {
     isSubdomain: (state) => {
       return state.is_subdomain;
     },
+    haveSocialImage: (state) => {
+      return state.profile.avatar && state.profile.top_image;
+    },
+    socialImage: (state) => {
+      return `/profile/${state.profile.code}/social/image/` +
+              `${state.profile.top_image!.substring(0, state.profile.top_image!.length - 5)}/` +
+              `${state.profile.avatar!.substring(0, state.profile.avatar!.length - 5) }`;
+    },
     fullName: (state) => {
       return `${state.profile.first_name} ${state.profile.last_name}`;
     },

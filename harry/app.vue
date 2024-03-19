@@ -34,7 +34,7 @@ if (!process.client) {
           ogTitle: title,
           description: profileStore.bioText,
           ogDescription: profileStore.bioText,
-          ogImage: 'https://example.com/image.png',
+          ogImage: profileStore.haveSocialImage ? profileStore.socialImage : '/image_mini.webp',
           twitterCard: 'summary_large_image',
         })
       }

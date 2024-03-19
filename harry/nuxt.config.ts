@@ -46,7 +46,8 @@ export default defineNuxtConfig({
   },
   serverHandlers: [
     { route: '/assets/css/:uuid/stylesheet.css', handler: '~/server/assets/stylesheet.ts' },
-    { route: '/profiles/assets/:directory/:assetname', handler: '@ll-utils/profileAssets.ts' }
+    { route: '/profiles/assets/:directory/:assetname', handler: '@ll-utils/profileAssets.ts' },
+    { route: '/profile/:profile/social/image/:header/:avatar', handler: '~/server/assets/socialImage.ts' }
   ],
   alias: {
     '@ll-interfaces': path.resolve(__dirname, '../interfaces'),
