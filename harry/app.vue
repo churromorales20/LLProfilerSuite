@@ -34,7 +34,7 @@ if (!process.client) {
           ogTitle: title,
           description: profileStore.bioText,
           ogDescription: profileStore.bioText,
-          ogImage: profileStore.haveSocialImage ? `${process.env.LL_DEV_PROFILE}${profileStore.socialImage}` : '/image_mini.webp',
+          ogImage: profileStore.haveSocialImage ? `${process.env.LL_PROFILES_URL}${profileStore.socialImage}` : '/image_mini.webp',
           twitterCard: 'summary_large_image',
         })
       }
