@@ -1,7 +1,7 @@
 import { Client } from "memjs";
 import { msFetcher } from "@ll-fetchers/llMsFetcher";
 import { MsRequestType } from "@ll-interfaces/IMicroService";
-import md5 from 'crypto-js/md5';
+//import md5 from 'crypto-js/md5';
 
 export class SocialImageHandler {
 
@@ -35,9 +35,10 @@ export class SocialImageHandler {
   }
 
   private createCacheKey(): string {
-    const hashed = md5(`${this.profileIdentifier}_${this.profileAvatar}_${this.profileHeader}`);
-    
-    return `_profile_social_image_${hashed}_`;
+    //const hashed = md5(`${this.profileIdentifier}_${this.profileAvatar}_${this.profileHeader}`);
+    const sufix = `${this.profileIdentifier}_${this.profileAvatar}_${this.profileHeader}`;
+
+    return `_ps_image_${sufix}_`;
   }
 
   private async saveCacheTag(key: string){
