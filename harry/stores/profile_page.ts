@@ -17,8 +17,27 @@ export const useProfileStore = defineStore('profileStore', {
     video_viewing: null as string | null,
   }),
   getters: {
+    isEmptyInfo: (state) => {
+      return !(state.profile.misc?.carrer && Array.isArray(state.profile.misc?.carrer) && state.profile.misc?.carrer.length > 0) &&
+              !(state.profile.misc?.education && Array.isArray(state.profile.misc?.education) && state.profile.misc?.education.length > 0) &&
+              !(!isEmptyString(state.profile?.born_place!) || !isEmptyString(state.profile!.born_date?.toDateString()!)) &&
+              !(!isEmptyString(state.profile?.death_place!) || !isEmptyString(state.profile?.death_date?.toDateString()!));
+    },
     isSubdomain: (state) => {
       return state.is_subdomain;
+    },
+    imagesDisplayerLimit: (state) => {
+      let qty = 6;
+      
+      if (state.profile!.videos!.length <= 3) {
+        qty += 6;
+      }
+      
+      if (!state.profile.grave_yard_info?.name) {
+        qty += 6;
+      }
+
+      return qty;
     },
     haveSocialImage: (state) => {
       return state.profile.avatar && state.profile.top_image;

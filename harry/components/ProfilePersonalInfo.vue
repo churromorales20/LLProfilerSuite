@@ -2,7 +2,7 @@
   <div class="ll-box shadow ll-box-text rounded-lg p-4 mb-4">
     <div>
       <h2 class="text-lg border-b-2 ll-border-heading pb-2 ll-box-title-main font-bold mb-4">{{ $t('profile.personal_info') }}</h2>
-      <template v-if="!isEmptyInfo">
+      <template v-if="!profileStore.isEmptyInfo">
         <Carrer 
           v-if="carreInfo && Array.isArray(carreInfo) && carreInfo.length > 0" 
         />
@@ -62,8 +62,4 @@ const dateFormatter = (date) => {
 const carreInfo = computed(() => profileStore.carrer)
 const educationInfo = computed(() => profileStore.education)
 
-const isEmptyInfo = !(carreInfo.value && Array.isArray(carreInfo.value) && carreInfo.value.length > 0) &&
-                    !(educationInfo.value && Array.isArray(educationInfo.value) && educationInfo.value.length > 0) &&
-                    !(!isEmptyString(profile.value.born_place) || !isEmptyString(profile.value.born_date)) &&
-                    !(!isEmptyString(profile.value.death_place) || !isEmptyString(profile.value.death_date));
 </script>
