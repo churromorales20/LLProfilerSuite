@@ -21,7 +21,7 @@
         body: {
           background: 'bg-white',
           padding: 'px-2 py-5 lg:p-4',
-          base: 'overflow-y-auto h-screen lg:h-[80vh] lg:overflow-y-hidden',
+          base: `overflow-y-auto h-screen ${shopping.isSimpleMemorial ? 'simple-memorial-modal' : 'lg:h-[80vh]'} lg:overflow-y-hidden`,
         },
         divide: 'divide-y divide-gray-100 dark:divide-gray-800'
       }"
@@ -57,3 +57,8 @@ const isOpen = computed({
 const shopping = shoppingStore();
 const preventClose = computed(() => shopping.viewStep === 3 && !shopping.completed);
 </script>
+<style  >
+.simple-memorial-modal{
+  height: 40rem;
+}
+</style>

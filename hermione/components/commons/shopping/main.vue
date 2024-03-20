@@ -35,7 +35,7 @@
 
               <CommonsShoppingMemorialInfo />
 
-              <CommonsShoppingShipping />
+              <CommonsShoppingShipping v-if="!shopping.isSimpleMemorial" />
 
               <!-- Payment method selector and card form 
               <CommonsShoppingPaymentMethod class="mb-20" />

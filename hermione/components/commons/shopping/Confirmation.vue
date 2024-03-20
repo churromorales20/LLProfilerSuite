@@ -16,7 +16,7 @@
       <!-- Add more shipping details as needed -->
     </div>
 
-    <div class="mb-6">
+    <div class="mb-6" v-if="!shopping.isSimpleMemorial">
       <h3 class="text-md font-semibold mb-2">{{ $t('shopping.shipping_details') }}:</h3>
       <p class="text-sm"><span class="font-semibold">{{ $t('shopping.address') }}:</span> {{ shippingAddressInfo.address_line_1 }}, {{ shippingAddressInfo.city }}, {{ shippingAddressInfo.state }}, {{ shippingAddressInfo.postal_code }}, {{ shippingAddressInfo.country }}</p>
       <p class="text-sm"><span class="font-semibold">{{ $t('shopping.shipping_reference') }}:</span> {{ shippingAddressInfo.reference }}</p>

@@ -49,11 +49,15 @@ export const shoppingStore = defineStore('shoppingStore', {
       expiration_date: '11/30',
       cvv: '000',
     } as ICreditCard,
-    is_valid: false as boolean
+    is_valid: false as boolean,
+    is_simple_memorial: true as boolean
   }),
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    isSimpleMemorial: (state) => {
+      return state.is_simple_memorial;
     },
     modalOpened: (state) => {
       return state.modal_opened;
@@ -232,14 +236,13 @@ export const shoppingStore = defineStore('shoppingStore', {
         return;
 
       } else if (
-          (this.shipping_address_selected === 0 && this.shipping_view_step === 3) ||
+        !this.is_simple_memorial && ((this.shipping_address_selected === 0 && this.shipping_view_step === 3) ||
           (this.shipping_address_selected === 0 && (isEmptyString(this.shipping_address.address_line_1!) ||
             isEmptyString(this.shipping_address.city!) ||
             isEmptyString(this.shipping_address.state!) ||
             isEmptyString(this.shipping_address.postal_code!) ||
-            isEmptyString(this.shipping_address.country!)
-          )
-        )
+            isEmptyString(this.shipping_address.country!))
+          )) 
       ) {
         this.is_valid = false;
         return;
