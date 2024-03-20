@@ -36,13 +36,43 @@
         :label="$t('profile.btn_leave_condo')"
         class="mr-2 ll-btn-custom"
       />
-      <UButton 
-        icon="i-mdi-share-variant" 
-        size="md"
-        color="sky"
-        :label="viewport.isGreaterThan('sm') ? $t('profile.btn_share') : ''"
-        class="mr-2 ll-btn-custom"
-      />
+      <UDropdown 
+        :popper="{ placement: 'bottom-start' }"
+        :ui="{
+          item:{
+            padding: 'px-1.5 py-4'
+          }
+        }"
+        :items="[[
+          {
+            label: $t('profile.share_link_fb'),
+            to: `https://www.facebook.com/sharer/sharer.php?u=${envStore.profilesUrl}profile/${profile.code}`,
+            target: '_blank',
+            icon: 'i-mdi-facebook',
+          },
+          {
+            label: $t('profile.share_link_whatsapp'),
+            to: `https://api.whatsapp.com/send?text=${whatsappMessage(row)}`,
+            icon: 'i-mdi-whatsapp',
+            target: '_blank',
+          },
+          {
+            label: $t('profile.share_link_copy'),
+            click: () => {
+              copyLink()
+            },
+            icon: 'i-mdi-content-copy',
+          }
+        ]]"
+      >
+        <UButton 
+          icon="i-mdi-share-variant" 
+          size="md"
+          color="sky"
+          :label="viewport.isGreaterThan('sm') ? $t('profile.btn_share') : ''"
+          class="mr-2 ll-btn-custom"
+        />
+      </UDropdown>
       <UButton 
         icon="i-mdi-bell" 
         size="md"
@@ -55,12 +85,39 @@
 </template>
 
 <script setup>
+const locale = useI18n()
 const viewport = useViewport()
 const profileStore = useProfileStore()
+const envStore = environmentStore()
 const wallActive = profileStore.profile.settings.condolences_wall;
 const wallStore = condolencesWallStore()
 const profile = computed(() => profileStore.profile);
 const fullName = computed(() => profileStore.fullName);
+
+const copyLink = () => {
+  const link = `${envStore.profilesUrl}profile/${profile.value.code}`;
+  var tempTextArea = document.createElement("textarea");
+  tempTextArea.value = link;
+  tempTextArea.style.position = "fixed";
+  tempTextArea.style.top = 0;
+  tempTextArea.style.left = 0;
+  tempTextArea.style.opacity = 0;
+  
+  document.body.appendChild(tempTextArea);
+
+  tempTextArea.select();
+  
+  document.execCommand("copy");
+
+  document.body.removeChild(tempTextArea);
+}
+
+const whatsappMessage = () => {
+  return locale.t('profile.share_whatsapp_message', { 
+    profile_link: encodeURIComponent(`${envStore.profilesUrl}profile/${profile.value.code}`),
+    profile_name: `*${fullName.value}${!isEmptyString(profile.value.nickname) ? ` (${profile.value.nickname})` : ``}*`,
+  });
+}
 
 const btnSize = computed(() => {
   if (viewport.isGreaterThan('sm')) {

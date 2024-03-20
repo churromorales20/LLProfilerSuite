@@ -25,7 +25,11 @@ const en = {
     'no_personal_info': 'Personal info has not been shared',
     'view_less':'View less',
     'view_more':'View more',
-    'graveyard_directions': 'Graveyard Directions'
+    'graveyard_directions': 'Graveyard Directions',
+    'share_link_fb': 'Facebook',
+    'share_link_whatsapp': 'Whatsapp',
+    'share_link_copy': 'Copy link',
+    'share_whatsapp_message': '*Hello!* I wanted to share with you a beautiful digital memorial in honor of {profile_name}. I thought it was a lovely way to remember and celebrate their life. Here\'s the link for you to visit: { profile_link }.\n I hope you like it as much as I do. #LegacyLink'
   },
   condolences:{
     'first_name': 'First name',

@@ -17,6 +17,7 @@ if (!process.client) {
   const route = useRoute();
   const profileStore = useProfileStore();
   profileStore.setIsSubdomain(route.name !== 'profile-uuid');
+  const envStore = environmentStore();
 
   if (profileStore.isSubdomain && process.env.NODE_ENV === 'production') {
     //profileStore.fetchCodeByUname(route.href);
@@ -28,6 +29,7 @@ if (!process.client) {
         if (!response) {
           throw new Error('Hubo un error al obtener los datos');
         }
+        envStore.setProfileUrl(process.env.LL_PROFILES_URL);
         const title = `${profileStore.fullName}${profileStore.nickname ? ` - ${profileStore.nickname}` : ''} - Legacy Link Memorials`;
         useSeoMeta({
           title: title,

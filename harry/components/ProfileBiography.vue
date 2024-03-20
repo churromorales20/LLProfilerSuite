@@ -1,19 +1,9 @@
 <template>
   <div class="ll-box ll-box-text shadow rounded-lg p-4 mb-4">
     <h2 class="text-lg ll-box-title-main font-bold pb-2 border-b-2 ll-border-heading">{{ $t('profile.biography') }}</h2>
-    <div class="px-1 py-2 lg:p-4 text-base  overflow-hidden" v-if="!isEmptyString(profile.bio)">
-     <!-- <p class="font-light leading-6">
-        {{ !viewAll ? biographyInfo.text :  profile.bio}}
-        <UButton 
-          v-if="biographyInfo.truncated" 
-          color="sky" 
-          variant="link"
-          @click="viewAll = !viewAll"
-          :label="viewAll ? 'View less' : 'View more'"
-        />
-      </p>-->
-      <div class="flex">
-        <div v-html="biographyInfo"></div>
+    <div class="px-1 py-2 text-md overflow-hidden" v-if="!isEmptyString(profile.bio)">
+      <div class="flex leading-6">
+        <div class="bio-container" v-html="biographyInfo"></div>
       </div>
     </div>
     <div class="flex h-40 items-center justify-center" v-else>
@@ -65,3 +55,9 @@ onMounted(() => {
   }
 });
 </script>
+
+<style>
+.bio-container p{
+  margin-bottom: 1rem;
+}
+</style>

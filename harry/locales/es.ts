@@ -25,7 +25,11 @@ const es = {
     'no_personal_info': 'La información personal no ha sido compartida.',
     'view_less': 'Ver menos',
     'view_more': 'Ver mas',
-    'graveyard_directions': 'Información del cementerio'
+    'graveyard_directions': 'Información del cementerio',
+    'share_link_fb': 'Facebook',
+    'share_link_whatsapp': 'Whatsapp',
+    'share_link_copy': 'Copiar enlace',
+    'share_whatsapp_message': '*¡Hola!* Quería compartir contigo un hermoso memorial digital en honor a {profile_name}. Me pareció una manera hermosa de recordar y celebrar su vida. Aquí tienes el enlace para que puedas visitarlo: {profile_link} . Espero que te guste tanto como a mí. #LegacyLink'
   },
   condolences: {
     'first_name': 'Nombre',
