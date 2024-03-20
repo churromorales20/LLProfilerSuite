@@ -8,7 +8,7 @@
         <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.legal') }}</UButton>
         <UButton color="sky" class="ll-link-custom" size="xs" variant="link">{{ $t('footer.contact') }}</UButton>
       </div>
-      <h4 class="text-sm text-zinc-300 mt-2 ll-title">Powered by Legacy Link Memorials 2024</h4>
+      <h4 class="text-sm text-zinc-300 mt-2 ll-title">Powered by <a href="https://www.legacylink.pe/" target="_blank">Legacy Link Memorials</a> 2024</h4>
     </div>
   </div>
 </template>

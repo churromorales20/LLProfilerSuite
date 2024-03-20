@@ -24,6 +24,8 @@ export default defineEventHandler(async (event) => {
 
     return sendStream(event, fs.createReadStream(`${process.env.PROFILES_ASSETS_DIR}/${socialImage}`))
   } catch (error: any) {
+    console.log(error);
+    
     return {
       statusCode: 404,
       body: 'Image not found'

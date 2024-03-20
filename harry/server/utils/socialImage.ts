@@ -1,7 +1,7 @@
 import { Client } from "memjs";
 import { msFetcher } from "@ll-fetchers/llMsFetcher";
 import { MsRequestType } from "@ll-interfaces/IMicroService";
-import { storageHandler } from '@ll-utils/storageHandler'
+import md5 from 'crypto-js/md5';
 
 export class SocialImageHandler {
 
@@ -18,10 +18,10 @@ export class SocialImageHandler {
   }
 
   async validateOrCreate(socialImageExists: boolean) {
-    const cacheKey = `_profile_social_image_${this.profileIdentifier}_`;
+    const cacheKey = this.createCacheKey();
     const existsCache = await this.existsImageCache(cacheKey);
-    //const socialImageExists = await storageHandler.getItem(socialImage);
     console.log(existsCache, socialImageExists);
+
     
     if (!existsCache || !socialImageExists) {
       const processedImage = await this.getImageFromService();
@@ -32,6 +32,12 @@ export class SocialImageHandler {
 
       this.saveCacheTag(cacheKey);
     }
+  }
+
+  private createCacheKey(): string {
+    const hashed = md5(`${this.profileIdentifier}_${this.profileAvatar}_${this.profileHeader}`);
+    
+    return `_profile_social_image_${hashed}_`;
   }
 
   private async saveCacheTag(key: string){
