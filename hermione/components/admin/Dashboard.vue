@@ -4,17 +4,17 @@
       <CommonsShoppingModal />
     </template>
   </AdminTitle>
+  <AdminFirstLoginModal v-if="userStore.showTourModal"/>
   <AdminLoader v-if="memorialStore.isWorking" />
   <div v-else-if="memorialStore.isErrored">
     ERORR
   </div>
-  <AdminMemorialsList v-else />
+  <AdminMemorialsList v-else/>
+  
 </template>
 <script setup>
-import { onMounted } from 'vue';
-
-const showShoppingModal = ref(false);
 const memorialStore = memorialsStore()
+const userStore = userAdminStore()
 onMounted(() => {
   memorialStore.fetchList();
 });

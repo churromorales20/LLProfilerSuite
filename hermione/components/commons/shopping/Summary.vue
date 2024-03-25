@@ -53,6 +53,7 @@
            wrapper: 'relative flex items-center',
         }"
         class="mb-2" 
+        id="_shopping_check_terms_conditions_"
         color="primary" 
         v-model="shopping.terms_conditions" 
       >
@@ -75,6 +76,7 @@
       </UCheckbox>
       <UButton
         :icon="buttonInfo.icon"
+        id="_shopping_confirm_btn_"
         size="md"
         color="primary"
         square

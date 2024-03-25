@@ -50,11 +50,15 @@ export const shoppingStore = defineStore('shoppingStore', {
       cvv: '000',
     } as ICreditCard,
     is_valid: false as boolean,
-    is_simple_memorial: true as boolean
+    is_simple_memorial: true as boolean,
+    show_shopping_tour: true as boolean,
   }),
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    mustShowTour: (state) => {
+      return state.show_shopping_tour;
     },
     isSimpleMemorial: (state) => {
       return state.is_simple_memorial;
@@ -160,6 +164,9 @@ export const shoppingStore = defineStore('shoppingStore', {
     },
   },
   actions: {
+    hideTour() {
+      this.show_shopping_tour = false;
+    },
     reset(){
       this.view_step = 1;
       this.memorial_info.last_name = '';

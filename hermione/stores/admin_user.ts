@@ -3,7 +3,7 @@ import { internalApiFetcher } from "@ll-fetchers/internalApiFetcher";
 import { adminApiFetcher } from "@ll-fetchers/llAdminApiFetcher";
 import type { ILoginResponse } from '@ll-interfaces/ILoginResponse';
 import type { ILLApiError } from '@ll-interfaces/ILLApiError';
-import type { IUserInfo } from '@ll-interfaces/IUserInfo';
+import type { IUserExtraInfo, IUserInfo } from '@ll-interfaces/IUserInfo';
 import type { ISignUpRequest } from '@ll-interfaces/ISignUpRequest';
 //import type { IApiResponse } from '~/interfaces/IApiResponses';
 
@@ -16,6 +16,7 @@ export const userAdminStore = defineStore('userAdminStore', {
     is_working: false as boolean,
     is_subdomain: false as boolean,
     code: null as string | null,
+    extra_info: null as IUserExtraInfo | null,
     phrase: '' as string,
     token_verified: false as boolean,
     token_confirmed: false as boolean,
@@ -23,6 +24,9 @@ export const userAdminStore = defineStore('userAdminStore', {
   getters: {
     isWorking: (state) => {
       return state.is_working;
+    },
+    showTourModal: (state) => {
+      return state.extra_info!.tour_count! < 5;
     },
     dashboardPhrase: (state) => {
       return state.phrase;
@@ -58,9 +62,15 @@ export const userAdminStore = defineStore('userAdminStore', {
             throw error;
 
           }
-          
+
           this.phrase = response?.data!.phrase!;
+          this.extra_info = response?.data!.extra_info!;
           this.token_confirmed = true;
+
+          if (response?.data!.extra_info!.tour_count! >= 5) {
+            const shopping = shoppingStore();
+            shopping.hideTour();
+          }
           
         } catch (error: any) {
           console.log('error', error.response);

@@ -11,13 +11,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   ];
 
 
-
-  console.log('to.path');
-  console.log('to.path');
-  console.log(to.path);
-
-
-  if (!publicRoutes.includes(to.path) && !to.path.startsWith("/website") && !to.path.startsWith("/_nuxt")) {
+  if (!publicRoutes.includes(to.path)) {
     const result = await userStore.verifyUserToken(process.client)
 
     if (to.path === '/auth/login') {

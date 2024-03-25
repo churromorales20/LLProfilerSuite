@@ -3,6 +3,11 @@ export interface IUserInfo {
   first_name?: string;
   email?: string;
   phrase? : string;
+  extra_info?: IUserExtraInfo;
+}
+
+export interface IUserExtraInfo {
+  tour_count?: number;
 }
 
 export enum UserInfoFields {
